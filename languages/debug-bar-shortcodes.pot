@@ -1,0 +1,468 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Debug Bar Shortcodes - a WordPress Plugin\n"
+"POT-Creation-Date: 2013-12-21 10:56+0100\n"
+"PO-Revision-Date: 2013-12-21 10:56+0100\n"
+"Last-Translator: EJ Reinders Folmer <poedit_nospam@adviesenzo.nl>\n"
+"Language-Team: Juliette Reinders Folmer <wp_dbs_plugin_nospam@adviesenzo."
+"nl>\n"
+"Language: English (en_US)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: __;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_e;_n;"
+"_x;_ex;_nx;esc_html_x;esc_attr_x;_n_noop;_nx_noop\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../class-debug-bar-shortcodes-renderer.php:111
+msgid "Total Registered Shortcodes:"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:149
+msgid "Shortcode is used"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:149
+msgid "Shortcode not used"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:178
+msgid "No shortcodes found"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:195
+msgid "Shortcode"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:196
+msgid "Rendered by"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:200
+msgid "In use?"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:201
+msgid "Usage"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:223
+msgid "View more detailed information about the shortcode."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:223
+#: ../class-debug-bar-shortcodes.php:64
+msgid "View details"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:226
+msgid "Try and retrieve more detailed information about the shortcode."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:226
+msgid "Retrieve details"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:229
+msgid "Find out where this shortcode is used (if at all)"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:229
+msgid "Find uses"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:232
+msgid "View extended info about the shortcode on the web"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:232
+msgid "View online"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:253
+msgid "Name"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:261
+msgid "Description"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:268
+msgid "Syntax"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:281
+#: ../class-debug-bar-shortcodes-renderer.php:1291
+msgid "Unknown"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:289
+msgid "Info Url"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:297
+msgid "Required parameters"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:318
+msgid "Optional parameters"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:342
+msgid "Shortcode details"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:514
+msgid "Not found"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:643
+msgid "No information available"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1022
+msgid "Audio Media"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1023
+msgid ""
+"The Audio feature allows you to embed audio files and play them back. This "
+"was added as of WordPress 3.6."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1027
+msgid ""
+"The source of your audio file. If not included it will auto-populate with "
+"the first audio file attached to the post."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1028
+#: ../class-debug-bar-shortcodes-renderer.php:1029
+#: ../class-debug-bar-shortcodes-renderer.php:1030
+#: ../class-debug-bar-shortcodes-renderer.php:1031
+#: ../class-debug-bar-shortcodes-renderer.php:1032
+#: ../class-debug-bar-shortcodes-renderer.php:1062
+#: ../class-debug-bar-shortcodes-renderer.php:1063
+#: ../class-debug-bar-shortcodes-renderer.php:1064
+#: ../class-debug-bar-shortcodes-renderer.php:1065
+#: ../class-debug-bar-shortcodes-renderer.php:1066
+#: ../class-debug-bar-shortcodes-renderer.php:1067
+#, php-format
+msgid "Source of %s fallback file"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1033
+msgid "Allows for the looping of media. Defaults to \"off\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1034
+#: ../class-debug-bar-shortcodes-renderer.php:1070
+msgid ""
+"Causes the media to automatically play as soon as the media file is ready. "
+"Defaults to \"off\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1035
+msgid ""
+"Specifies if and how the audio should be loaded when the page loads. "
+"Defaults to \"none\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1052
+msgid "Video Media"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1053
+msgid ""
+"The Video feature allows you to embed video files and play them back. This "
+"was added as of WordPress 3.6."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1057
+#: ../class-debug-bar-shortcodes-renderer.php:1058
+#, php-format
+msgid ""
+"Defines %s of the media. Value is automatically detected on file upload."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1057
+#: ../class-debug-bar-shortcodes-renderer.php:1164
+msgid "height"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1058
+#: ../class-debug-bar-shortcodes-renderer.php:1163
+msgid "width"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1061
+msgid ""
+"The source of your video file. If not included it will auto-populate with "
+"the first video file attached to the post."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1068
+msgid ""
+"Defines image to show as placeholder before the media plays. Defaults to "
+"\"none\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1069
+msgid "Allows for the looping of media. Defaults to \"off\""
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1071
+msgid ""
+"Specifies if and how the video should be loaded when the page loads. "
+"Defaults to \"metadata\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1099
+msgid "Wrap captions around content"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1100
+msgid ""
+"The Caption feature allows you to wrap captions around content. This is "
+"primarily used with individual images."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1104
+msgid "The actual text of your caption."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1105
+msgid "How wide the caption should be in pixels."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1108
+msgid "A unique HTML ID that you can change to use within your CSS."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1109
+msgid ""
+"The alignment of the caption within the post. Valid values are: alignnone "
+"(default), aligncenter, alignright, and alignleft."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1126
+msgid "Image Gallery"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1127
+msgid ""
+"The Gallery feature allows you to add one or more image galleries to your "
+"posts and pages."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1131
+msgid ""
+"Specify how to sort the display thumbnails. The default is \"menu_order\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1132
+msgid "Specify the sort order used to display thumbnails. ASC or DESC."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1133
+msgid ""
+"Specify the number of columns. The gallery will include a break tag at the "
+"end of each row, and calculate the column width as appropriate. The default "
+"value is 3. If columns is set to 0, no row breaks will be included."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1134
+msgid ""
+"Specify the post ID. The gallery will display images which are attached to "
+"that post. The default behavior, if no ID is specified, is to display images "
+"attached to the current post."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1135
+msgid ""
+"specify the image size to use for the thumbnail display. Valid values "
+"include \"thumbnail\", \"medium\", \"large\", \"full\". The default value is "
+"\"thumbnail\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1136
+msgid ""
+"The name of the XHTML tag used to enclose each item in the gallery. The "
+"default is \"dl\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1137
+msgid ""
+"The name of the XHTML tag used to enclose each thumbnail icon in the "
+"gallery. The default is \"dt\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1138
+msgid ""
+"The name of the XHTML tag used to enclose each caption. The default is \"dd"
+"\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1139
+msgid ""
+"You can set it to \"file\" so each image will link to the image file. The "
+"default value links to the attachment's permalink."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1140
+msgid ""
+"Comma separated attachment IDs to show only the images from these "
+"attachments. "
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1141
+msgid ""
+"Comma separated attachment IDs excludes the images from these attachments. "
+"Please note that include and exclude cannot be used together."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1158
+msgid "Embed videos, images, and other content"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1159
+msgid ""
+"You can opt to wrap a URL in the [embed] shortcode. It will accomplish the "
+"same effect as having it on a line of it's own, but does not require the "
+"\"Auto-embeds\" setting to be enabled. It also allows you to set a maximum "
+"(but not fixed) width and height.If WordPress fails to embed your URL you "
+"will get a hyperlink to the URL."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1163
+#: ../class-debug-bar-shortcodes-renderer.php:1164
+#, php-format
+msgid "Maximum %s for the embedded object."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1240
+msgid "Shortcode found in the following posts/pages/etc:"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-renderer.php:1246
+msgid "Title"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1247
+msgid "Post Type"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1248
+msgid "Status"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-renderer.php:1250
+msgid "Author"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1251
+msgid "Shortcode usage(s)"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-renderer.php:1267
+msgid "Published"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-renderer.php:1271
+msgid "Scheduled"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-renderer.php:1275
+msgid "Private"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-renderer.php:1279
+msgid "Pending Review"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-renderer.php:1284
+msgid "Draft"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-renderer.php:1288
+msgid "Trash"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-renderer.php:1298
+msgid "Edit this item"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1298
+msgid "Edit"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-renderer.php:1304
+#, php-format
+msgid "Preview &#8220;%s&#8221;"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1304
+msgid "Preview"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-renderer.php:1309
+#, php-format
+msgid "View &#8220;%s&#8221;"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-renderer.php:1309
+msgid "View"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes.php:39
+msgid "Shortcodes"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes.php:63
+msgid "Hide details"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes.php:65
+msgid "No details found"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes.php:66
+msgid "Hide Uses"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes.php:67
+msgid "View Uses"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes.php:68
+msgid "Not Used"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes.php:69
+msgid ""
+"No proper response received. You probably have WP_DEBUG enabled and a php "
+"error occurred."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes.php:70
+msgid "Illegal request received."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes.php:71
+msgid "Ajax request failed. Please try again."
+msgstr ""

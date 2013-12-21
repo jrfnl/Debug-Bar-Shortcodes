@@ -1,0 +1,147 @@
+/* CSS for plugin: Debug Bar Shortcodes */
+/*#debug-menu-target-Debug_Bar_Shortcodes h2 a {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+#debug-menu-target-Debug_Bar_Shortcodes h2:hover {
+	text-shadow: 0 1px 1px rgba( 0, 0, 0, 0.9 );
+	background: #333;
+	-webkit-box-shadow: inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
+	-moz-box-shadow:    inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
+	box-shadow:         inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+	border: 1px solid #333;
+}
+#debug-menu-target-Debug_Bar_Shortcodes h2:hover a {
+	color: #FFFFFF !important;
+	text-shadow: 0 1px 1px rgba( 0, 0, 0, 0.9 );
+}*/
+
+
+#debug-menu-target-Debug_Bar_Shortcodes h3 {
+    font-family: georgia, times, serif;
+    font-size: 22px;
+    margin-top: 1.2em;
+    clear: both;
+}
+
+
+/*p.dbcwpc-info {
+	margin: 1em 0;
+	padding: 0.7em;
+	background-color: #D8D8D8;
+	-webkit-box-shadow: inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
+	-moz-box-shadow:    inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
+	box-shadow:         inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #333333;
+	clear: both;
+}*/
+
+table#debug-bar-shortcodes {
+    width: 100%;
+    border-collapse: collapse;
+    cell-padding: 1em;
+    clear: both;
+    line-height: 1.5;
+	font-size: 12px;
+}
+table#debug-bar-shortcodes thead tr,
+table#debug-bar-shortcodes tfoot tr {
+    background-color: #E8E8E8;
+}
+table#debug-bar-shortcodes thead th,
+table#debug-bar-shortcodes tfoot th {
+    padding: 0.7em 5px;
+    width: auto;
+    text-align: center;
+}
+table#debug-bar-shortcodes thead th {
+    border-bottom: 1px solid #ccc;
+}
+table#debug-bar-shortcodes tfoot th {
+    border-top: 1px solid #ccc;
+}
+
+
+table#debug-bar-shortcodes th {
+/*    width: 35%;*/
+    font-weight: bold;
+	padding: 2px 2em 2px 5px;
+    vertical-align: top;
+    text-align: left;
+}
+table#debug-bar-shortcodes td {
+    padding: 2px 5px;
+/*    width: 63%;*/
+    vertical-align: top;
+    border: 0 none;
+}
+/*table.debug-bar-shortcodes tr:nth-child(2n+1) {*/
+table#debug-bar-shortcodes tr.even {
+    background-color: #E8E8E8;
+}
+
+
+table#debug-bar-shortcodes div.row-actions {
+	visibility: hidden;
+}
+
+table#debug-bar-shortcodes div.row-actions .spinner {
+/*    background: url("../images/wpspin_light.gif") no-repeat scroll 0 0 / 16px 16px rgba(0, 0, 0, 0);*/
+    background: no-repeat scroll 0 0 / 16px 16px rgba(0, 0, 0, 0);
+    display: none;
+    float: right;
+    height: 16px;
+    margin: 5px 5px 0;
+    opacity: 0.7;
+    width: 16px;
+}
+
+
+table#debug-bar-shortcodes tr.debug-bar-shortcodes-details {
+	display: none;
+}
+
+table#debug-bar-shortcodes td code em {
+	color: #999999;
+}
+
+table#debug-bar-shortcodes td ul,
+table#debug-bar-shortcodes td ol {
+    margin: 0;
+    padding: 0 0 0 30px;
+}
+
+table#debug-bar-shortcodes td h4 {
+	font-size: 16px;
+	margin: 8px 0 0 0;
+}
+
+
+table#debug-bar-shortcodes tr.debug-bar-shortcodes-details table,
+table#debug-bar-shortcodes tr.debug-bar-shortcodes-uses table {
+	font-size: 11px;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+}
+table#debug-bar-shortcodes tr.debug-bar-shortcodes-uses table thead th {
+	text-align: left;
+}
+
+table#debug-bar-shortcodes tr.debug-bar-shortcodes-details table th {
+	width: 110px;
+}
+
+table#debug-bar-shortcodes tr.debug-bar-shortcodes-details table th[colspan] {
+	width: 250px;
+}
+
+table#debug-bar-shortcodes tr.debug-bar-shortcodes-details table tr.debug-bar-shortcodes-sc-parameters {
+	border-top: 1px solid #999999 !important;
+}
