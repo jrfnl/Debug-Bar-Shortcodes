@@ -1,142 +1,142 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Debug Bar Shortcodes - a WordPress Plugin\n"
+"Project-Id-Version: Debug Bar Constants - a WordPress Plugin\n"
 "POT-Creation-Date: 2013-12-22 00:39+0100\n"
-"PO-Revision-Date: 2013-12-22 00:39+0100\n"
-"Language-Team: \n"
-"Language: English (en_US)\n"
+"PO-Revision-Date: 2013-12-22 00:40+0100\n"
+"Last-Translator: EJ Reinders Folmer <poedit_nospam@adviesenzo.nl>\n"
+"Language-Team: Juliette Reinders Folmer\n"
+"Language: Dutch\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.5.7\n"
-"X-Poedit-KeywordsList: __;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_e;_n;"
-"_x;_ex;_nx;esc_html_x;esc_attr_x;_n_noop;_nx_noop\n"
+"X-Poedit-KeywordsList: __;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_e\n"
 "X-Poedit-Basepath: .\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
 #: ../class-debug-bar-shortcodes-info.php:112
 msgid "Total Registered Shortcodes:"
-msgstr ""
+msgstr "Totaal geregistreerde Shortcodes:"
 
 #: ../class-debug-bar-shortcodes-info.php:150
 msgid "Shortcode is used"
-msgstr ""
+msgstr "Shortcode wordt gebruikt"
 
 #: ../class-debug-bar-shortcodes-info.php:150
 msgid "Shortcode not used"
-msgstr ""
+msgstr "Shortcode wordt niet gebruikt"
 
 #: ../class-debug-bar-shortcodes-info.php:179
 msgid "No shortcodes found"
-msgstr ""
+msgstr "Geen shortcodes gevonden"
 
 #: ../class-debug-bar-shortcodes-info.php:196
 msgid "Shortcode"
-msgstr ""
+msgstr "Shortcode"
 
 #: ../class-debug-bar-shortcodes-info.php:197
 msgid "Rendered by"
-msgstr ""
+msgstr "Callback functie"
 
 #: ../class-debug-bar-shortcodes-info.php:201
 msgid "In use?"
-msgstr ""
+msgstr "In gebruik?"
 
 #: ../class-debug-bar-shortcodes-info.php:202
 msgid "Usage"
-msgstr ""
+msgstr "Gebruik"
 
 #: ../class-debug-bar-shortcodes-info.php:224
 msgid "View more detailed information about the shortcode."
-msgstr ""
+msgstr "Bekijk meer gedetailleerde informatie over deze shortcode."
 
 #: ../class-debug-bar-shortcodes-info.php:224
 #: ../class-debug-bar-shortcodes.php:90
 msgid "View details"
-msgstr ""
+msgstr "Bekijk details"
 
 #: ../class-debug-bar-shortcodes-info.php:227
 msgid "Try and retrieve more detailed information about the shortcode."
 msgstr ""
+"Probeer meer gedetailleerde informatie over deze shortcode op te halen."
 
 #: ../class-debug-bar-shortcodes-info.php:227
 msgid "Retrieve details"
-msgstr ""
+msgstr "Haal details op"
 
 #: ../class-debug-bar-shortcodes-info.php:230
 msgid "Find out where this shortcode is used (if at all)"
-msgstr ""
+msgstr "Vind uit waar deze shortcode gebruikt wordt (als überhaupt)"
 
 #: ../class-debug-bar-shortcodes-info.php:230
 msgid "Find uses"
-msgstr ""
+msgstr "Vind gebruik"
 
 #: ../class-debug-bar-shortcodes-info.php:247
 msgid "View extended info about the shortcode on the web"
-msgstr ""
+msgstr "Bekijk uitgebreidere informatie over de shortcode op het web"
 
 #: ../class-debug-bar-shortcodes-info.php:247
 msgid "View online"
-msgstr ""
+msgstr "Bekijk online"
 
 #: ../class-debug-bar-shortcodes-info.php:352
 msgid "Not found"
-msgstr ""
+msgstr "Niet gevonden"
 
 #: ../class-debug-bar-shortcodes-info.php:456
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #: ../class-debug-bar-shortcodes-info.php:465
 msgid "Description"
-msgstr ""
+msgstr "Omschrijving"
 
 #: ../class-debug-bar-shortcodes-info.php:473
 msgid "Syntax"
-msgstr ""
+msgstr "Syntax"
 
 #: ../class-debug-bar-shortcodes-info.php:486
 #: ../class-debug-bar-shortcodes-info.php:1076
 msgid "Unknown"
-msgstr ""
+msgstr "Onbekend"
 
 #: ../class-debug-bar-shortcodes-info.php:496
 msgid "Info Url"
-msgstr ""
+msgstr "Info Url"
 
 #: ../class-debug-bar-shortcodes-info.php:505
 msgid "Required parameters"
-msgstr ""
+msgstr "Verplichte parameters"
 
 #: ../class-debug-bar-shortcodes-info.php:527
 msgid "Optional parameters"
-msgstr ""
+msgstr "Optionele parameters"
 
 #: ../class-debug-bar-shortcodes-info.php:552
 msgid "Shortcode details"
-msgstr ""
+msgstr "Shortcode details"
 
 #: ../class-debug-bar-shortcodes-info.php:596
 msgid "No information available"
-msgstr ""
+msgstr "Geen informatie beschikbaar"
 
 #: ../class-debug-bar-shortcodes-info.php:1026
 msgid "Shortcode found in the following posts/pages/etc:"
-msgstr ""
+msgstr "Shortcode gevonden in de volgende berichten/pagina's/etc:"
 
 #: ../class-debug-bar-shortcodes-info.php:1033
 msgid "Post Type"
-msgstr ""
+msgstr "Post Type"
 
 #: ../class-debug-bar-shortcodes-info.php:1034
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../class-debug-bar-shortcodes-info.php:1037
 msgid "Shortcode usage(s)"
-msgstr ""
+msgstr "Gevonden gebruik"
 
 #: ../class-debug-bar-shortcodes-info.php:1287
 msgid "Audio Media"
@@ -206,12 +206,12 @@ msgstr ""
 #: ../class-debug-bar-shortcodes-info.php:1322
 #: ../class-debug-bar-shortcodes-info.php:1429
 msgid "height"
-msgstr ""
+msgstr "hoogte"
 
 #: ../class-debug-bar-shortcodes-info.php:1323
 #: ../class-debug-bar-shortcodes-info.php:1428
 msgid "width"
-msgstr ""
+msgstr "breedte"
 
 #: ../class-debug-bar-shortcodes-info.php:1326
 msgid ""
@@ -360,27 +360,27 @@ msgstr ""
 
 #: ../class-debug-bar-shortcodes.php:45
 msgid "Shortcodes"
-msgstr ""
+msgstr "Shortcodes"
 
 #: ../class-debug-bar-shortcodes.php:89
 msgid "Hide details"
-msgstr ""
+msgstr "Verberg details"
 
 #: ../class-debug-bar-shortcodes.php:91
 msgid "No details found"
-msgstr ""
+msgstr "Geen details gevonden"
 
 #: ../class-debug-bar-shortcodes.php:92
 msgid "Hide Uses"
-msgstr ""
+msgstr "Verberg gebruik"
 
 #: ../class-debug-bar-shortcodes.php:93
 msgid "View Uses"
-msgstr ""
+msgstr "Bekijk gebruik"
 
 #: ../class-debug-bar-shortcodes.php:94
 msgid "Not Used"
-msgstr ""
+msgstr "Niet in gebruik"
 
 #: ../class-debug-bar-shortcodes.php:95
 msgid ""
@@ -392,3 +392,61 @@ msgstr ""
 #: ../class-debug-bar-shortcodes.php:96
 msgid "Illegal request received."
 msgstr ""
+
+#~ msgid "Edit"
+#~ msgstr "Bewerk"
+
+#~ msgid "Value"
+#~ msgstr "Waarde"
+
+#~ msgid "WP Constants"
+#~ msgstr "WP Constants"
+
+#~ msgid "Constants within WP:"
+#~ msgstr "Constants binnen WP:"
+
+#~ msgid "No constants found... this is really weird..."
+#~ msgstr "Geen constants gevonden... dit is vreemd..."
+
+#~ msgid "WP Class Constants"
+#~ msgstr "WP Class Constants"
+
+#~ msgid ""
+#~ "<strong>Please note</strong>: these may be both native WordPress classes "
+#~ "as well as classes which may be declared by plugins or Themes.<br />You "
+#~ "can use these constants in your code using <code>class_name::"
+#~ "constant_name</code>."
+#~ msgstr ""
+#~ "<strong>Toelichting:</strong>: dit kunnen zowel de WordPress eigen "
+#~ "classes zijn als ook de classes welke door plugins of themes gedeclareerd "
+#~ "zijn.<br />Je kan deze constants in je eigen code gebruiken door middel "
+#~ "van <code>class_name::constant_name</code>."
+
+#~ msgid "See the <a %s>FAQ</a> for more information."
+#~ msgstr "Lees de <a %s>FAQ</a> voor meer informatie."
+
+#~ msgid "Constants:"
+#~ msgstr "Constants:"
+
+#~ msgid "No classes nor class constants found... this is kinda strange..."
+#~ msgstr "Geen classes of class constants gevonden... dit is vreemd..."
+
+#~ msgid "PHP Constants"
+#~ msgstr "PHP Constants"
+
+#~ msgid "Visit the PHP manual page about the %s constants."
+#~ msgstr "Bezoek de PHP handleiding pagina over de %s constants."
+
+#~ msgid "No PHP constants found... this is really weird..."
+#~ msgstr "Geen PHP constants gevonden... dit is vreemd..."
+
+#~ msgid ""
+#~ "Debug Bar must be activated to use the Debug Bar Constants Plugin. <a "
+#~ "href=\"%s\">Visit your plugins page to activate</a>."
+#~ msgstr ""
+#~ "Debug Bar moet geactiveerd zijn om de Debug Bar Constants Plugin te "
+#~ "kunnen gebruiken. <a href=\"%s\">Ga naar de plugins pagina om deze te "
+#~ "activeren</a>."
+
+#~ msgid "Nothing to display"
+#~ msgstr "Niets om weer te geven"

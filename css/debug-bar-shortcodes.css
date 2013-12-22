@@ -1,26 +1,4 @@
 /* CSS for plugin: Debug Bar Shortcodes */
-/*#debug-menu-target-Debug_Bar_Shortcodes h2 a {
-    text-decoration: none !important;
-    color: inherit !important;
-}
-
-#debug-menu-target-Debug_Bar_Shortcodes h2:hover {
-	text-shadow: 0 1px 1px rgba( 0, 0, 0, 0.9 );
-	background: #333;
-	-webkit-box-shadow: inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
-	-moz-box-shadow:    inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
-	box-shadow:         inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
-	border: 1px solid #333;
-}
-#debug-menu-target-Debug_Bar_Shortcodes h2:hover a {
-	color: #FFFFFF !important;
-	text-shadow: 0 1px 1px rgba( 0, 0, 0, 0.9 );
-}*/
-
-
 #debug-menu-target-Debug_Bar_Shortcodes h3 {
     font-family: georgia, times, serif;
     font-size: 22px;
@@ -28,20 +6,6 @@
     clear: both;
 }
 
-
-/*p.dbcwpc-info {
-	margin: 1em 0;
-	padding: 0.7em;
-	background-color: #D8D8D8;
-	-webkit-box-shadow: inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
-	-moz-box-shadow:    inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
-	box-shadow:         inset -3px 0 6px rgba( 0, 0, 0, 0.4 );
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	border: 1px solid #333333;
-	clear: both;
-}*/
 
 table#debug-bar-shortcodes {
     width: 100%;
@@ -70,7 +34,6 @@ table#debug-bar-shortcodes tfoot th {
 
 
 table#debug-bar-shortcodes th {
-/*    width: 35%;*/
     font-weight: bold;
 	padding: 2px 2em 2px 5px;
     vertical-align: top;
@@ -78,7 +41,6 @@ table#debug-bar-shortcodes th {
 }
 table#debug-bar-shortcodes td {
     padding: 2px 5px;
-/*    width: 63%;*/
     vertical-align: top;
     border: 0 none;
 }
@@ -92,7 +54,8 @@ table#debug-bar-shortcodes div.row-actions {
 	visibility: hidden;
 }
 
-table#debug-bar-shortcodes div.row-actions .spinner {
+/*table#debug-bar-shortcodes div.row-actions .spinner {*/
+table#debug-bar-shortcodes td.column-title .spinner {
 /*    background: url("../images/wpspin_light.gif") no-repeat scroll 0 0 / 16px 16px rgba(0, 0, 0, 0);*/
     background: no-repeat scroll 0 0 / 16px 16px rgba(0, 0, 0, 0);
     display: none;
@@ -139,7 +102,7 @@ table#debug-bar-shortcodes tr.debug-bar-shortcodes-details table th {
 }
 
 table#debug-bar-shortcodes tr.debug-bar-shortcodes-details table th[colspan] {
-	width: 250px;
+	width: 200px;
 }
 
 table#debug-bar-shortcodes tr.debug-bar-shortcodes-details table tr.debug-bar-shortcodes-sc-parameters {
