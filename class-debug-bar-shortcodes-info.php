@@ -1191,16 +1191,18 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		/* ************** HELPER METHODS ************** */
 
 		/**
-		 * Function if a callback is a closure
+		 * Check if a callback is a closure
 		 *
 		 * @param   mixed	$arg	Function name
 		 * @return  boolean
 		 */
 		public function is_closure( $arg ) {
-			$test = function() {
-			};
-			$is_closure = ( $arg instanceof $test );
-			return $is_closure;
+			if( version_compare( PHP_VERSION, '5.3', '<' ) ) {
+				return false;
+			}
+
+		    include_once( plugin_dir_path( __FILE__ ) . 'php5.3-closure-test.php' );
+		    return debug_bar_shortcodes_is_closure( $arg );
 		}
 
 
