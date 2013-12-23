@@ -80,8 +80,8 @@ jQuery(document).ready(function () {
 					var resData = wpAjax.parseAjaxResponse(response, 'ajax-response');
 
 					if( !resData.responses || 1 > resData.responses.length || resData.errors ) {
+						// Didn't receive a proper response or received a WP error response
 						console.log( 'Received response: ' + response  );
-						// Didn't receive a proper response
 						alert( i18n_db_shortcodes.error );
 					}
 					else if( '1' != resData.responses[0].id || !resData.responses[0].data || 0 === resData.responses[0].data.length ) {
@@ -114,16 +114,7 @@ jQuery(document).ready(function () {
 				}
 				spinner.hide();
 			},
-			error: function() {
-				/* Triggered by http errors and by various jQuery errors such as:
-				   - 'junk after document element'
-				   - 'not well-formed'
-				   - 'undefined entity'
-				*/
-				if( 'undefined' !== typeof( response ) ) { console.log( 'Received response: ' + response  ); }
-				spinner.hide();
-				alert( i18n_db_shortcodes.error );
-			}
+			error: handleAjaxError
 		});
 	});
 
@@ -157,8 +148,8 @@ jQuery(document).ready(function () {
 					var resData = wpAjax.parseAjaxResponse(response, 'ajax-response');
 
 					if( !resData.responses || 1 > resData.responses.length || resData.errors ) {
+						// Didn't receive a proper response or received a WP error response
 						console.log( 'Received response: ' + response  );
-						// Didn't receive a proper response
 						alert( i18n_db_shortcodes.error );
 					}
 					else if( '1' != resData.responses[0].id || !resData.responses[0].data || 0 === resData.responses[0].data.length ) {
@@ -193,16 +184,18 @@ jQuery(document).ready(function () {
 
 				spinner.hide();
 			},
-			error: function() {
-				/* Triggered by http errors and by various jQuery errors such as:
-				   - 'junk after document element'
-				   - 'not well-formed'
-				   - 'undefined entity'
-				*/
-				if( 'undefined' !== typeof( response ) ) { console.log( 'Received response: ' + response  ); }
-				spinner.hide();
-				alert( i18n_db_shortcodes.error );
-			}
+			error: handleAjaxError
 		});
 	});
+	
+	function handleAjaxError( response ) {
+		/* Triggered by http errors and by various jQuery errors such as:
+		   - 'junk after document element'
+		   - 'not well-formed'
+		   - 'undefined entity'
+		*/
+		if( 'undefined' !== typeof( response ) ) { console.log( 'Received response: ' + response  ); }
+		dbsTable.find('span.spinner').hide();
+		alert( i18n_db_shortcodes.error );
+	}
 });

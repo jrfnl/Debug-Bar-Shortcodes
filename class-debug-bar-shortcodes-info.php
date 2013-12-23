@@ -6,7 +6,7 @@
  * @author		Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link		https://github.com/jrfnl/Debug-Bar-Shortcodes
  * @since		1.0
- * @version		1.0
+ * @version		1.0.1
  *
  * @copyright	2013 Juliette Reinders Folmer
  * @license		http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
@@ -160,7 +160,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 						$output .= '
 						<tr' . $class . '>
 							<td>&nbsp;</td>
-							<td colspan="' . ( $is_singular === true ? 5 : 3 ) . '">
+							<td colspan="' . ( $is_singular === true ? 4 : 2 ) . '">
 								' . $this->render_details_table( $shortcode, $info ) . '
 							</td>
 						</tr>
@@ -190,8 +190,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 * @return	string
 		 */
 		public function render_table_header( $is_singular ) {
-			$output = '
-						<tr>
+			$output = '<tr>
 							<th>#</th>
 							<th>' . esc_html__( 'Shortcode', self::$name ) . '</th>
 							<th>' . esc_html__( 'Rendered by', self::$name ) . '</th>';
@@ -202,8 +201,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 							<th>' . esc_html__( 'Usage', self::$name ) . '</th>';
 			}
 
-			$output .= '
-						</tr>';
+			$output .= '</tr>';
 
 			return $output;
 		}
@@ -452,26 +450,26 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			if ( $info['name'] !== '' ) {
 				$rows['name'] = '
-						<tr>
-							<th colspan="2">' . esc_html__( 'Name', self::$name ) . '</th>
-							<td>' . esc_html( $info['name'] ) . '</td>
-						</tr>';
+								<tr>
+									<th colspan="2">' . esc_html__( 'Name', self::$name ) . '</th>
+									<td>' . esc_html( $info['name'] ) . '</td>
+								</tr>';
 			}
 
 
 			if ( $info['description'] !== '' ) {
 				$rows['description'] = '
-						<tr>
-							<th colspan="2">' . esc_html__( 'Description', self::$name ) . '</th>
-							<td>' . $info['description'] . '</td>
-						</tr>';
+								<tr>
+									<th colspan="2">' . esc_html__( 'Description', self::$name ) . '</th>
+									<td>' . $info['description'] . '</td>
+								</tr>';
 			}
 
 
 			$rows['syntax'] = '
-						<tr>
-							<th colspan="2">' . esc_html__( 'Syntax', self::$name ) . '</th>
-							<td>';
+								<tr>
+									<th colspan="2">' . esc_html__( 'Syntax', self::$name ) . '</th>
+									<td>';
 
 			if ( isset( $info['self_closing'] ) ) {
 				$param = ( ( $info['parameters']['required'] !== array() || $info['parameters']['optional'] !== array() ) ? ' <em>[parameters]</em> ' : '' );
@@ -487,35 +485,35 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			}
 
 			$rows['syntax'] .=	'</td>
-						</tr>';
+								</tr>';
 
 
 			if ( $info['info_url'] !== '' ) {
 				$rows['info_url'] = '
-						<tr>
-							<th colspan="2">' . esc_html__( 'Info Url', self::$name ) . '</th>
-							<td>' . '<a href="' . esc_url( $info['info_url'] ) . '" target="_blank" class="' . esc_attr( self::$name . '-external-link' ) . '">' . esc_html( $info['info_url'] ) . '</a> ' . '</td>
-						</tr>';
+								<tr>
+									<th colspan="2">' . esc_html__( 'Info Url', self::$name ) . '</th>
+									<td>' . '<a href="' . esc_url( $info['info_url'] ) . '" target="_blank" class="' . esc_attr( self::$name . '-external-link' ) . '">' . esc_html( $info['info_url'] ) . '</a> ' . '</td>
+								</tr>';
 			}
 
 
 			if ( $info['parameters']['required'] !== array() ) {
 				$rows['rp'] = '
-						<tr class="' . esc_attr( self::$name . '-sc-parameters' ) . '">
-							<th rowspan="' . count( $info['parameters']['required'] ) . '">' . esc_html__( 'Required parameters', self::$name ) . '</th>';
+								<tr class="' . esc_attr( self::$name . '-sc-parameters' ) . '">
+									<th rowspan="' . count( $info['parameters']['required'] ) . '">' . esc_html__( 'Required parameters', self::$name ) . '</th>';
 				$first   = true;
 				foreach ( $info['parameters']['required'] as $pm => $explain ) {
 					if ( $first !== true ) {
 						$rows['rp'] .= '
-						<tr>';
+								<tr>';
 					}
 					else {
 						$first = false;
 					}
 					$rows['rp'] .= '
-							<td>' . esc_html( $pm ) . '</td>
-							<td>' . esc_html( $explain ) . '</td>
-						</tr>';
+									<td>' . esc_html( $pm ) . '</td>
+									<td>' . esc_html( $explain ) . '</td>
+								</tr>';
 				}
 				unset( $pm, $explain, $first );
 			}
@@ -523,21 +521,21 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			if ( $info['parameters']['optional'] !== array() ) {
 				$rows['op'] = '
-						<tr class="' . esc_attr( self::$name . '-sc-parameters' ) . '">
-							<th rowspan="' . count( $info['parameters']['optional'] ) . '">' . esc_html__( 'Optional parameters', self::$name ) . '</th>';
+								<tr class="' . esc_attr( self::$name . '-sc-parameters' ) . '">
+									<th rowspan="' . count( $info['parameters']['optional'] ) . '">' . esc_html__( 'Optional parameters', self::$name ) . '</th>';
 				$first   = true;
 				foreach ( $info['parameters']['optional'] as $pm => $explain ) {
 					if ( $first !== true ) {
 						$rows['op'] .= '
-						<tr>';
+								<tr>';
 					}
 					else {
 						$first = false;
 					}
 					$rows['op'] .= '
-							<td>' . esc_html( $pm ) . '</td>
-							<td>' . esc_html( $explain ) . '</td>
-						</tr>';
+									<td>' . esc_html( $pm ) . '</td>
+									<td>' . esc_html( $explain ) . '</td>
+								</tr>';
 				}
 				unset( $pm, $explain, $first );
 			}
@@ -549,9 +547,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			}
 			else {
 				$output = '
-						<h4>' . __( 'Shortcode details', self::$name ) . '</h4>
-						<table>' . implode( $rows ) . '
-						</table>';
+								<h4>' . __( 'Shortcode details', self::$name ) . '</h4>
+								<table>' . implode( $rows ) . '
+								</table>';
 			}
 			return $output;
 		}
