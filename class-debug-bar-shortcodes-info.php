@@ -998,11 +998,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			// '_' is a wildcard in mysql, so escape it
 			$query = $GLOBALS['wpdb']->prepare(
-				'select * from ' . $GLOBALS['wpdb']->posts . '
-					where post_status <> "inherit"
-						and post_type <> "attachment"
-						and post_content like %s
-					order by post_type ASC, post_date DESC;',
+				'select * from `' . $GLOBALS['wpdb']->posts . '`
+					where `post_status` <> "inherit"
+						and `post_type` <> "attachment"
+						and `post_content` like %s
+					order by `post_type` ASC, `post_date` DESC;',
 				'%[' . str_replace( '_', '\_', $shortcode ) . '%'
 			);
 			$posts = $GLOBALS['wpdb']->get_results( $query );
