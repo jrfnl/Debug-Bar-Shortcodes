@@ -358,7 +358,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			}
 
 			$shortcode = preg_quote( $shortcode );
-			$regex     = '`(?:^|[^\[])(\[' . $shortcode . '[^\]]*\])(?:.*?(\[/' . $shortcode . '\])(?:[^\]]|$))?`';
+			$regex     = '`(?:^|[^\[])(\[' . $shortcode . '[^\]]*\])(?:.*?(\[/' . $shortcode . '\])(?:[^\]]|$))?`s';
 			$count     = preg_match_all( $regex, $content, $matches, PREG_SET_ORDER );
 
 
@@ -1259,7 +1259,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			foreach ( $arrays as $array ) {
 				foreach ( $array as $key => $value ) {
-					if ( is_array( $value ) && is_array( $merged[$key] ) ) {
+					if ( is_array( $value ) && ( isset( $merged[$key] ) && is_array( $merged[$key] ) ) ) {
 						$merged[$key] = self::array_merge_recursive_distinct( $merged[$key], $value );
 					}
 					else {
