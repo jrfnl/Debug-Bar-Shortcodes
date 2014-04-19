@@ -3,7 +3,7 @@ Contributors: jrf
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=995SSNDTCVBJG
 Tags: debugbar, debug-bar, Debug Bar, Shortcodes, Debug Bar Shortcodes, shortcode list, list shortcodes, shortcodes reference
 Requires at least: 3.5
-Tested up to: 3.8
+Tested up to: 3.9
 Stable tag: 1.0.1
 Depends: debug-bar
 License: GPLv2
@@ -135,8 +135,10 @@ Have you read what it says in the beautifully red bar at the top of your plugins
 
 == Changelog ==
 
-= 1.0.1 (tbd) =
+= 1.0.1 (2014-04-19) =
+* Fixed: better finding of shortcodes within post content
 * Fixed: minor html error
+* Fixed: minor PHP error
 
 = 1.0 (2013-12-22) =
 * Initial release
