@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Debug Bar Constants - a WordPress Plugin\n"
-"POT-Creation-Date: 2013-12-22 00:39+0100\n"
-"PO-Revision-Date: 2013-12-22 00:40+0100\n"
+"POT-Creation-Date: 2014-12-18 18:48+0100\n"
+"PO-Revision-Date: 2014-12-18 18:50+0100\n"
 "Last-Translator: EJ Reinders Folmer <poedit_nospam@adviesenzo.nl>\n"
 "Language-Team: Juliette Reinders Folmer\n"
 "Language: Dutch\n"
@@ -15,19 +15,19 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: ..\n"
 
-#: ../class-debug-bar-shortcodes-info.php:112
+#: ../class-debug-bar-shortcodes-info.php:113
 msgid "Total Registered Shortcodes:"
 msgstr "Totaal geregistreerde Shortcodes:"
 
-#: ../class-debug-bar-shortcodes-info.php:150
+#: ../class-debug-bar-shortcodes-info.php:151
 msgid "Shortcode is used"
 msgstr "Shortcode wordt gebruikt"
 
-#: ../class-debug-bar-shortcodes-info.php:150
+#: ../class-debug-bar-shortcodes-info.php:151
 msgid "Shortcode not used"
 msgstr "Shortcode wordt niet gebruikt"
 
-#: ../class-debug-bar-shortcodes-info.php:179
+#: ../class-debug-bar-shortcodes-info.php:180
 msgid "No shortcodes found"
 msgstr "Geen shortcodes gevonden"
 
@@ -47,303 +47,376 @@ msgstr "In gebruik?"
 msgid "Usage"
 msgstr "Gebruik"
 
-#: ../class-debug-bar-shortcodes-info.php:224
+#: ../class-debug-bar-shortcodes-info.php:223
 msgid "View more detailed information about the shortcode."
 msgstr "Bekijk meer gedetailleerde informatie over deze shortcode."
 
-#: ../class-debug-bar-shortcodes-info.php:224
+#: ../class-debug-bar-shortcodes-info.php:223
 #: ../class-debug-bar-shortcodes.php:90
 msgid "View details"
 msgstr "Bekijk details"
 
-#: ../class-debug-bar-shortcodes-info.php:227
+#: ../class-debug-bar-shortcodes-info.php:226
 msgid "Try and retrieve more detailed information about the shortcode."
 msgstr ""
 "Probeer meer gedetailleerde informatie over deze shortcode op te halen."
 
-#: ../class-debug-bar-shortcodes-info.php:227
+#: ../class-debug-bar-shortcodes-info.php:226
 msgid "Retrieve details"
 msgstr "Haal details op"
 
-#: ../class-debug-bar-shortcodes-info.php:230
+#: ../class-debug-bar-shortcodes-info.php:229
 msgid "Find out where this shortcode is used (if at all)"
 msgstr "Vind uit waar deze shortcode gebruikt wordt (als überhaupt)"
 
-#: ../class-debug-bar-shortcodes-info.php:230
+#: ../class-debug-bar-shortcodes-info.php:229
 msgid "Find uses"
 msgstr "Vind gebruik"
 
-#: ../class-debug-bar-shortcodes-info.php:247
+#: ../class-debug-bar-shortcodes-info.php:246
 msgid "View extended info about the shortcode on the web"
 msgstr "Bekijk uitgebreidere informatie over de shortcode op het web"
 
-#: ../class-debug-bar-shortcodes-info.php:247
+#: ../class-debug-bar-shortcodes-info.php:246
 msgid "View online"
 msgstr "Bekijk online"
 
-#: ../class-debug-bar-shortcodes-info.php:352
+#: ../class-debug-bar-shortcodes-info.php:351
 msgid "Not found"
 msgstr "Niet gevonden"
 
-#: ../class-debug-bar-shortcodes-info.php:456
+#: ../class-debug-bar-shortcodes-info.php:455
 msgid "Name"
 msgstr "Naam"
 
-#: ../class-debug-bar-shortcodes-info.php:465
+#: ../class-debug-bar-shortcodes-info.php:464
 msgid "Description"
 msgstr "Omschrijving"
 
-#: ../class-debug-bar-shortcodes-info.php:473
+#: ../class-debug-bar-shortcodes-info.php:472
 msgid "Syntax"
 msgstr "Syntax"
 
-#: ../class-debug-bar-shortcodes-info.php:486
-#: ../class-debug-bar-shortcodes-info.php:1076
+#: ../class-debug-bar-shortcodes-info.php:485
+#: ../class-debug-bar-shortcodes-info.php:1075
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: ../class-debug-bar-shortcodes-info.php:496
+#: ../class-debug-bar-shortcodes-info.php:495
 msgid "Info Url"
 msgstr "Info Url"
 
-#: ../class-debug-bar-shortcodes-info.php:505
+#: ../class-debug-bar-shortcodes-info.php:504
 msgid "Required parameters"
 msgstr "Verplichte parameters"
 
-#: ../class-debug-bar-shortcodes-info.php:527
+#: ../class-debug-bar-shortcodes-info.php:526
 msgid "Optional parameters"
 msgstr "Optionele parameters"
 
-#: ../class-debug-bar-shortcodes-info.php:552
+#: ../class-debug-bar-shortcodes-info.php:551
 msgid "Shortcode details"
 msgstr "Shortcode details"
 
-#: ../class-debug-bar-shortcodes-info.php:596
+#: ../class-debug-bar-shortcodes-info.php:595
 msgid "No information available"
 msgstr "Geen informatie beschikbaar"
 
-#: ../class-debug-bar-shortcodes-info.php:1026
+#: ../class-debug-bar-shortcodes-info.php:1025
 msgid "Shortcode found in the following posts/pages/etc:"
 msgstr "Shortcode gevonden in de volgende berichten/pagina's/etc:"
 
-#: ../class-debug-bar-shortcodes-info.php:1033
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1031
+msgid "Title"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1032
 msgid "Post Type"
 msgstr "Post Type"
 
-#: ../class-debug-bar-shortcodes-info.php:1034
+#: ../class-debug-bar-shortcodes-info.php:1033
 msgid "Status"
 msgstr "Status"
 
-#: ../class-debug-bar-shortcodes-info.php:1037
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1035
+msgid "Author"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1036
 msgid "Shortcode usage(s)"
 msgstr "Gevonden gebruik"
 
-#: ../class-debug-bar-shortcodes-info.php:1287
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1051
+msgid "Published"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1055
+msgid "Scheduled"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1059
+msgid "Private"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1063
+msgid "Pending Review"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1068
+msgid "Draft"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1072
+msgid "Trash"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1082
+msgid "Edit this item"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1084
+msgid "Edit"
+msgstr "Bewerk"
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1090
+#, php-format
+msgid "Preview &#8220;%s&#8221;"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1093
+msgid "Preview"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1099
+#, php-format
+msgid "View &#8220;%s&#8221;"
+msgstr ""
+
+#. TRANSLATORS: no need to translate, WP standard translation will be used
+#: ../class-debug-bar-shortcodes-info.php:1101
+#, fuzzy
+msgid "View"
+msgstr "Bekijk gebruik"
+
+#: ../class-debug-bar-shortcodes-info.php:1288
 msgid "Audio Media"
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1288
+#: ../class-debug-bar-shortcodes-info.php:1289
 msgid ""
 "The Audio feature allows you to embed audio files and play them back. This "
 "was added as of WordPress 3.6."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1292
+#: ../class-debug-bar-shortcodes-info.php:1293
 msgid ""
 "The source of your audio file. If not included it will auto-populate with "
 "the first audio file attached to the post."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1293
 #: ../class-debug-bar-shortcodes-info.php:1294
 #: ../class-debug-bar-shortcodes-info.php:1295
 #: ../class-debug-bar-shortcodes-info.php:1296
 #: ../class-debug-bar-shortcodes-info.php:1297
-#: ../class-debug-bar-shortcodes-info.php:1327
+#: ../class-debug-bar-shortcodes-info.php:1298
 #: ../class-debug-bar-shortcodes-info.php:1328
 #: ../class-debug-bar-shortcodes-info.php:1329
 #: ../class-debug-bar-shortcodes-info.php:1330
 #: ../class-debug-bar-shortcodes-info.php:1331
 #: ../class-debug-bar-shortcodes-info.php:1332
+#: ../class-debug-bar-shortcodes-info.php:1333
 #, php-format
 msgid "Source of %s fallback file"
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1298
+#: ../class-debug-bar-shortcodes-info.php:1299
 msgid "Allows for the looping of media. Defaults to \"off\"."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1299
-#: ../class-debug-bar-shortcodes-info.php:1335
+#: ../class-debug-bar-shortcodes-info.php:1300
+#: ../class-debug-bar-shortcodes-info.php:1336
 msgid ""
 "Causes the media to automatically play as soon as the media file is ready. "
 "Defaults to \"off\"."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1300
+#: ../class-debug-bar-shortcodes-info.php:1301
 msgid ""
 "Specifies if and how the audio should be loaded when the page loads. "
 "Defaults to \"none\"."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1317
+#: ../class-debug-bar-shortcodes-info.php:1318
 msgid "Video Media"
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1318
+#: ../class-debug-bar-shortcodes-info.php:1319
 msgid ""
 "The Video feature allows you to embed video files and play them back. This "
 "was added as of WordPress 3.6."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1322
 #: ../class-debug-bar-shortcodes-info.php:1323
+#: ../class-debug-bar-shortcodes-info.php:1324
 #, php-format
 msgid ""
 "Defines %s of the media. Value is automatically detected on file upload."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1322
-#: ../class-debug-bar-shortcodes-info.php:1429
+#: ../class-debug-bar-shortcodes-info.php:1323
+#: ../class-debug-bar-shortcodes-info.php:1430
 msgid "height"
 msgstr "hoogte"
 
-#: ../class-debug-bar-shortcodes-info.php:1323
-#: ../class-debug-bar-shortcodes-info.php:1428
+#: ../class-debug-bar-shortcodes-info.php:1324
+#: ../class-debug-bar-shortcodes-info.php:1429
 msgid "width"
 msgstr "breedte"
 
-#: ../class-debug-bar-shortcodes-info.php:1326
+#: ../class-debug-bar-shortcodes-info.php:1327
 msgid ""
 "The source of your video file. If not included it will auto-populate with "
 "the first video file attached to the post."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1333
+#: ../class-debug-bar-shortcodes-info.php:1334
 msgid ""
 "Defines image to show as placeholder before the media plays. Defaults to "
 "\"none\"."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1334
+#: ../class-debug-bar-shortcodes-info.php:1335
 msgid "Allows for the looping of media. Defaults to \"off\""
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1336
+#: ../class-debug-bar-shortcodes-info.php:1337
 msgid ""
 "Specifies if and how the video should be loaded when the page loads. "
 "Defaults to \"metadata\"."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1364
+#: ../class-debug-bar-shortcodes-info.php:1365
 msgid "Wrap captions around content"
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1365
+#: ../class-debug-bar-shortcodes-info.php:1366
 msgid ""
 "The Caption feature allows you to wrap captions around content. This is "
 "primarily used with individual images."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1369
+#: ../class-debug-bar-shortcodes-info.php:1370
 msgid "The actual text of your caption."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1370
+#: ../class-debug-bar-shortcodes-info.php:1371
 msgid "How wide the caption should be in pixels."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1373
+#: ../class-debug-bar-shortcodes-info.php:1374
 msgid "A unique HTML ID that you can change to use within your CSS."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1374
+#: ../class-debug-bar-shortcodes-info.php:1375
 msgid ""
 "The alignment of the caption within the post. Valid values are: alignnone "
 "(default), aligncenter, alignright, and alignleft."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1391
+#: ../class-debug-bar-shortcodes-info.php:1392
 msgid "Image Gallery"
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1392
+#: ../class-debug-bar-shortcodes-info.php:1393
 msgid ""
 "The Gallery feature allows you to add one or more image galleries to your "
 "posts and pages."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1396
+#: ../class-debug-bar-shortcodes-info.php:1397
 msgid ""
 "Specify how to sort the display thumbnails. The default is \"menu_order\"."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1397
+#: ../class-debug-bar-shortcodes-info.php:1398
 msgid "Specify the sort order used to display thumbnails. ASC or DESC."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1398
+#: ../class-debug-bar-shortcodes-info.php:1399
 msgid ""
 "Specify the number of columns. The gallery will include a break tag at the "
 "end of each row, and calculate the column width as appropriate. The default "
 "value is 3. If columns is set to 0, no row breaks will be included."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1399
+#: ../class-debug-bar-shortcodes-info.php:1400
 msgid ""
 "Specify the post ID. The gallery will display images which are attached to "
 "that post. The default behavior, if no ID is specified, is to display images "
 "attached to the current post."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1400
+#: ../class-debug-bar-shortcodes-info.php:1401
 msgid ""
 "specify the image size to use for the thumbnail display. Valid values "
 "include \"thumbnail\", \"medium\", \"large\", \"full\". The default value is "
 "\"thumbnail\"."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1401
+#: ../class-debug-bar-shortcodes-info.php:1402
 msgid ""
 "The name of the XHTML tag used to enclose each item in the gallery. The "
 "default is \"dl\"."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1402
+#: ../class-debug-bar-shortcodes-info.php:1403
 msgid ""
 "The name of the XHTML tag used to enclose each thumbnail icon in the "
 "gallery. The default is \"dt\"."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1403
+#: ../class-debug-bar-shortcodes-info.php:1404
 msgid ""
 "The name of the XHTML tag used to enclose each caption. The default is \"dd"
 "\"."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1404
+#: ../class-debug-bar-shortcodes-info.php:1405
 msgid ""
 "You can set it to \"file\" so each image will link to the image file. The "
 "default value links to the attachment's permalink."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1405
+#: ../class-debug-bar-shortcodes-info.php:1406
 msgid ""
 "Comma separated attachment IDs to show only the images from these "
 "attachments. "
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1406
+#: ../class-debug-bar-shortcodes-info.php:1407
 msgid ""
 "Comma separated attachment IDs excludes the images from these attachments. "
 "Please note that include and exclude cannot be used together."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1423
+#: ../class-debug-bar-shortcodes-info.php:1424
 msgid "Embed videos, images, and other content"
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1424
+#: ../class-debug-bar-shortcodes-info.php:1425
 msgid ""
 "You can opt to wrap a URL in the [embed] shortcode. It will accomplish the "
 "same effect as having it on a line of it's own, but does not require the "
@@ -352,10 +425,82 @@ msgid ""
 "will get a hyperlink to the URL."
 msgstr ""
 
-#: ../class-debug-bar-shortcodes-info.php:1428
 #: ../class-debug-bar-shortcodes-info.php:1429
+#: ../class-debug-bar-shortcodes-info.php:1430
 #, php-format
 msgid "Maximum %s for the embedded object."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1447
+msgid "Media Playlist"
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1448
+msgid ""
+"The playlist shortcode implements the functionality of displaying a "
+"collection of WordPress audio or video files in a post using a simple "
+"Shortcode."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1452
+msgid ""
+"Type of playlist to display. Accepts \"audio\" or \"video\". Defaults to "
+"\"audio\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1453
+msgid ""
+"Designates ascending or descending order of items in the playlist. Accepts "
+"\"ASC\", \"DESC\". Defaults to \"ASC\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1454
+msgid ""
+"Any column, or columns, to sort the playlist by. Accepts \"rand\" to play "
+"the list in random order. Defaults to \"menu_order ID\". If `$ids` are "
+"passed, this defaults to the order of the $ids array ('post__in')."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1455
+msgid ""
+"If an explicit `$ids` array is not present, this parameter will determine "
+"which attachments are used for the playlist. Defaults to the current post ID."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1456
+msgid ""
+"Create a playlist out of these explicit attachment IDs. If empty, a playlist "
+"will be created from all `$type` attachments of `$id`."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1457
+msgid "List of specific attachment IDs to exclude from the playlist."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1458
+msgid ""
+"Playlist style to use. Accepts \"light\" or \"dark\". Defaults to \"light\"."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1459
+msgid "Whether to show or hide the playlist. Defaults to (bool) true."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1460
+msgid ""
+"Whether to show or hide the numbers next to entries in the playlist. "
+"Defaults to (bool) true."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1461
+msgid ""
+"Show or hide the video or audio thumbnail (Featured Image/post thumbnail). "
+"Defaults to (bool) true."
+msgstr ""
+
+#: ../class-debug-bar-shortcodes-info.php:1462
+msgid ""
+"Whether to show or hide artist name in the playlist. Defaults to (bool) true."
 msgstr ""
 
 #: ../class-debug-bar-shortcodes.php:45
@@ -392,9 +537,6 @@ msgstr ""
 #: ../class-debug-bar-shortcodes.php:96
 msgid "Illegal request received."
 msgstr ""
-
-#~ msgid "Edit"
-#~ msgstr "Bewerk"
 
 #~ msgid "Value"
 #~ msgstr "Waarde"
