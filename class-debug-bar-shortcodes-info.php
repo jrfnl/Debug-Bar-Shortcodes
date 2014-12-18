@@ -6,9 +6,9 @@
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link        https://github.com/jrfnl/Debug-Bar-Shortcodes
  * @since       1.0
- * @version     1.0.2
+ * @version     1.0.3
  *
- * @copyright   2013-2014 Juliette Reinders Folmer
+ * @copyright   2013-2015 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  */
 
@@ -70,6 +70,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			'wp_caption',
 			'gallery',
 			'embed',
+			'playlist',
 		);
 		
 		/**
@@ -1430,6 +1431,38 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 					),
 				),
 				'info_url'		=> 'http://codex.wordpress.org/Embed_Shortcode',
+			);
+			return self::array_merge_recursive_distinct( $info, $additional );
+		}
+		
+		
+		/**
+		 * Enrich the information for the standard WP [playlist] shortcode
+		 *
+		 * @param	array	$info	Shortcode info
+		 * @return	array			Updated shortcode info
+		 */
+		public function enrich_sc_playlist( $info ) {
+			$additional = array(
+				'name'			=> __( 'Media Playlist', Debug_Bar_Shortcodes::DBS_NAME ),
+				'description'	=> __( 'The playlist shortcode implements the functionality of displaying a collection of WordPress audio or video files in a post using a simple Shortcode.', Debug_Bar_Shortcodes::DBS_NAME ),
+				'self_closing'	=> true,
+				'parameters'	=> array(
+					'optional'		=> array(
+						'type'			=> __( 'Type of playlist to display. Accepts "audio" or "video". Defaults to "audio".', Debug_Bar_Shortcodes::DBS_NAME ),
+						'order'			=> __( 'Designates ascending or descending order of items in the playlist. Accepts "ASC", "DESC". Defaults to "ASC".', Debug_Bar_Shortcodes::DBS_NAME ),
+						'orderby'		=> __( 'Any column, or columns, to sort the playlist by. Accepts "rand" to play the list in random order. Defaults to "menu_order ID". If `$ids` are passed, this defaults to the order of the $ids array (\'post__in\').', Debug_Bar_Shortcodes::DBS_NAME ),
+						'id'			=> __( 'If an explicit `$ids` array is not present, this parameter will determine which attachments are used for the playlist. Defaults to the current post ID.', Debug_Bar_Shortcodes::DBS_NAME ),
+						'ids'			=> __( 'Create a playlist out of these explicit attachment IDs. If empty, a playlist will be created from all `$type` attachments of `$id`.', Debug_Bar_Shortcodes::DBS_NAME ),
+						'exclude'		=> __( 'List of specific attachment IDs to exclude from the playlist.', Debug_Bar_Shortcodes::DBS_NAME ),
+						'style'			=> __( 'Playlist style to use. Accepts "light" or "dark". Defaults to "light".', Debug_Bar_Shortcodes::DBS_NAME ),
+						'tracklist'		=> __( 'Whether to show or hide the playlist. Defaults to (bool) true.', Debug_Bar_Shortcodes::DBS_NAME ),
+						'tracknumbers'	=> __( 'Whether to show or hide the numbers next to entries in the playlist. Defaults to (bool) true.', Debug_Bar_Shortcodes::DBS_NAME ),
+						'images'		=> __( 'Show or hide the video or audio thumbnail (Featured Image/post thumbnail). Defaults to (bool) true.', Debug_Bar_Shortcodes::DBS_NAME ),
+						'artists'		=> __( 'Whether to show or hide artist name in the playlist. Defaults to (bool) true.', Debug_Bar_Shortcodes::DBS_NAME ),
+					),
+				),
+				'info_url'		=> 'http://codex.wordpress.org/Playlist_Shortcode',
 			);
 			return self::array_merge_recursive_distinct( $info, $additional );
 		}
