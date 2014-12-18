@@ -6,9 +6,9 @@
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link        https://github.com/jrfnl/Debug-Bar-Shortcodes
  * @since       1.0
- * @version     1.0.2
+ * @version     1.0.3
  *
- * @copyright   2013-2014 Juliette Reinders Folmer
+ * @copyright   2013-2015 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  */
 
