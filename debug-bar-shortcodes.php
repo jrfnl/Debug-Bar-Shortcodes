@@ -76,21 +76,20 @@ if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
 	 */
 	function debug_bar_shortcodes_do_ajax() {
 		// Verify this is a valid ajax request
-		if ( wp_verify_nonce( $_POST['dbs-nonce'], 'debug-bar-shortcodes' ) === false ) {
-			exit('-1');
+		if ( ! isset( $_POST['dbs-nonce'] ) || wp_verify_nonce( $_POST['dbs-nonce'], 'debug-bar-shortcodes' ) === false ) {
+			exit( '-1' );
 		}
 
 		// Verify we have received the data needed to do anything
 		if ( ! isset( $_POST['shortcode'] ) || $_POST['shortcode'] === '' ) {
-			exit('-1');
+			exit( '-1' );
 		}
 
 
-		include_once( plugin_dir_path( __FILE__ ) . 'class-debug-bar-shortcodes-info.php' );
+		include_once ( plugin_dir_path( __FILE__ ) . 'class-debug-bar-shortcodes-info.php' );
 		$info = new Debug_Bar_Shortcodes_Info();
 
-		$shortcode = $_POST['shortcode'];
-		$shortcode = trim( $shortcode );
+		$shortcode = trim( $_POST['shortcode'] );
 
 		// Exit early if this is a non-existent shortcode - shouldn't happen, but hack knows ;-)
 		if ( shortcode_exists( $shortcode ) === false ) {
@@ -107,6 +106,7 @@ if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
 			case 'debug-bar-shortcodes-find':
 				$info->ajax_find_shortcode_uses( $shortcode );
 				break;
+
 			case 'debug-bar-shortcodes-retrieve':
 				$info->ajax_retrieve_details( $shortcode );
 				break;

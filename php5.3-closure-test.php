@@ -12,7 +12,7 @@
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  */
 
-if( ! function_exists( 'debug_bar_shortcodes_is_closure' ) ) {
+if ( ! function_exists( 'debug_bar_shortcodes_is_closure' ) ) {
 	/**
 	 * Check if a callback is a closure
 	 *

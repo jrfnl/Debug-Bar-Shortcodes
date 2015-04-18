@@ -30,7 +30,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 	class Debug_Bar_Shortcodes extends Debug_Bar_Panel {
 
 		const DBS_STYLES_VERSION = '1.0';
-		
+
 		const DBS_SCRIPT_VERSION = '1.0.1';
 
 		const DBS_NAME = 'debug-bar-shortcodes';
@@ -53,7 +53,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 		 * Enqueue our scripts and styles
 		 */
 		public function dbs_enqueue_scripts() {
-			$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min' );
+			$suffix = ( ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min' );
 
 			wp_enqueue_style(
 				self::DBS_NAME,
@@ -83,7 +83,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 		 * @return  array
 		 */
 		public function dbs_get_javascript_i18n() {
-			
+
 			$strings = array(
 				'ajaxurl'			=> admin_url( 'admin-ajax.php' ),
 				'hide_details'		=> __( 'Hide details', self::DBS_NAME ),
@@ -114,7 +114,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 		 * Render the panel
 		 */
 		public function render() {
-			include_once( plugin_dir_path( __FILE__ ) . 'class-debug-bar-shortcodes-info.php' );
+			include_once ( plugin_dir_path( __FILE__ ) . 'class-debug-bar-shortcodes-info.php' );
 			$info = new Debug_Bar_Shortcodes_Info();
 			$info->display();
 		}

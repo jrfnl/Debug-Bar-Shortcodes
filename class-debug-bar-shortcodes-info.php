@@ -28,12 +28,12 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 	 * Debug Bar Shortcodes - Debug Bar Panel Renderer
 	 */
 	class Debug_Bar_Shortcodes_Info {
-		
+
 		/**
 		 * @var	string	$name	Plugin name for use in localization, class names etc
 		 */
 		public static $name = 'debug-bar-shortcodes';
-		
+
 		/**
 		 * @var	array	$info_defaults
 		 *				[name]			=>	string	Friendly name for the shortcode
@@ -72,7 +72,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			'embed',
 			'playlist',
 		);
-		
+
 		/**
 		 * @var	int		The amount of shortcodes before the table header will be doubled at the bottom of the table
 		 */
@@ -80,14 +80,14 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 
-		
+
 		/**
 		 * Register our shortcode info filters
 		 */
 		public function __construct() {
 			add_filter( 'db_shortcodes_info', array( $this, 'parse_lhr_shortcode_info' ), 8, 2 ); // Low priority to allow override by better data
-			
-			
+
+
 			foreach ( $this->wp_shortcodes as $shortcode ) {
 				if ( method_exists( __CLASS__, 'enrich_sc_' . $shortcode ) ) {
 					add_filter( 'db_shortcodes_info_' . $shortcode, array( $this, 'enrich_sc_' . $shortcode ) );
@@ -96,7 +96,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			unset( $shortcode );
 
 			// Better to run via ajax if and when needed as slow
-			//add_filter( 'db_shortcodes_info', array( $this, 'reflection_retrieve_shortcode_info' ), 12, 2 ); // Last option, will only run if info is bare
+			// add_filter( 'db_shortcodes_info', array( $this, 'reflection_retrieve_shortcode_info' ), 12, 2 ); // Last option, will only run if info is bare
 		}
 
 
@@ -105,27 +105,27 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 */
 		public function display() {
 			$shortcodes = $GLOBALS['shortcode_tags'];
-			
+
 			$count  = count( $shortcodes );
-			$double = ( $count >= $this->double_min ? true : false ); // whether to repeat the row labels at the bottom of the table
+			$double = ( ( $count >= $this->double_min ) ? true : false ); // whether to repeat the row labels at the bottom of the table
 
 			echo '
-		<h2><span>' . esc_html__( 'Total Registered Shortcodes:', self::$name ) . '</span>' . $count . '</h2>';
+		<h2><span>', esc_html__( 'Total Registered Shortcodes:', self::$name ), '</span>', absint( $count ), '</h2>';
 
 
 			$output = '';
 
 			if ( is_array( $shortcodes ) && $shortcodes !== array() ) {
-				
+
 				uksort( $shortcodes, 'strnatcasecmp' );
-				
+
 				$is_singular = ( is_main_query() && is_singular() );
 				$header_row  = $this->render_table_header( $is_singular );
 
 				$output .= '
 				<table id="' . esc_attr( self::$name ) . '">
 					<thead>' . $header_row . '</thead>
-					'. ( $double === true ? '<tfoot>' . $header_row . '</tfoot>' : '' ) . '
+					'. ( ( $double === true ) ? '<tfoot>' . $header_row . '</tfoot>' : '' ) . '
 					<tbody>';
 
 
@@ -134,7 +134,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 					$info = $this->retrieve_shortcode_info( $shortcode );
 					$has_details = ( $info !== $this->info_defaults );
-					$class = ( $i % 2 ? '' : ' class="even"' );
+					$class = ( ( $i % 2 ) ? '' : ' class="even"' );
 
 					$output .= '
 						<tr' . $class . '>
@@ -148,20 +148,20 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 					if ( $is_singular === true ) {
 						$in_use  = $this->has_shortcode( $shortcode );
 						$output .= '
-							<td>' . $this->render_image_based_on_bool( array( 'true' => __( 'Shortcode is used', self::$name ), 'false' => __( 'Shortcode not used', self::$name ) ), $in_use, true ) . '</td>
-							<td>' . ( $in_use === true ? $this->find_shortcode_usage( $shortcode ) : '&nbsp;' ) . '</td>';
+							<td>' . $this->render_image_based_on_bool( array( 'true' => esc_html__( 'Shortcode is used', self::$name ), 'false' => esc_html__( 'Shortcode not used', self::$name ) ), $in_use, true ) . '</td>
+							<td>' . ( ( $in_use === true ) ? $this->find_shortcode_usage( $shortcode ) : '&nbsp;' ) . '</td>';
 						unset( $in_use );
 					}
 
 					$output .= '
 						</tr>';
-						
+
 					if ( $has_details === true ) {
-						$class   = ( $i % 2 ? ' class="' . esc_attr( self::$name . '-details' ) . '"' : ' class="even ' . esc_attr( self::$name . '-details' ) . '"' );
+						$class   = ( ( $i % 2 ) ? ' class="' . esc_attr( self::$name . '-details' ) . '"' : ' class="even ' . esc_attr( self::$name . '-details' ) . '"' );
 						$output .= '
 						<tr' . $class . '>
 							<td>&nbsp;</td>
-							<td colspan="' . ( $is_singular === true ? 4 : 2 ) . '">
+							<td colspan="' . ( ( $is_singular === true ) ? 4 : 2 ) . '">
 								' . $this->render_details_table( $shortcode, $info ) . '
 							</td>
 						</tr>
@@ -177,10 +177,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			}
 			else {
-				$output = '<p>' . __( 'No shortcodes found', self::$name ) . '</p>';
+				$output = '<p>' . esc_html__( 'No shortcodes found', self::$name ) . '</p>';
 			}
-			
-			echo $output;
+
+			echo $output; // xss: ok
 		}
 
 
@@ -206,8 +206,8 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			return $output;
 		}
-		
-		
+
+
 		/**
 		 * Generate the action links for a shortcode
 		 *
@@ -231,10 +231,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			if ( $has_details === true && $info['info_url'] !== '' ) {
 				$links[] = $this->render_view_online_link( $info['info_url'] );
 			}
-			
+
 			return '<span class="spinner"></span><div class="row-actions">' . implode( ' | ', $links ) . '</div>';
 		}
-		
+
 		/**
 		 * Generate 'View online' link
 		 * @internal separated from render_action_links() to also be able to use it as supplemental for ajax retrieve
@@ -323,14 +323,14 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			/* Otherwise use adjusted copy of the native function (WP < 3.6) */
 			/* Cache retrieved shortcode matches for efficiency */
 			$post_id = $GLOBALS['post']->ID;
-			if ( ! isset( $matches ) || ( is_array( $matches ) && ! isset( $matches[$post_id] ) ) ) {
-				preg_match_all( '/' . get_shortcode_regex() . '/s', $content, $matches[$post_id], PREG_SET_ORDER );
+			if ( ! isset( $matches ) || ( is_array( $matches ) && ! isset( $matches[ $post_id ] ) ) ) {
+				preg_match_all( '/' . get_shortcode_regex() . '/s', $content, $matches[ $post_id ], PREG_SET_ORDER );
 			}
 
-			if ( empty( $matches[$post_id] ) ) {
+			if ( empty( $matches[ $post_id ] ) ) {
 				return false;
 			}
-			foreach ( $matches[$post_id] as $found ) {
+			foreach ( $matches[ $post_id ] as $found ) {
 				if ( $shortcode === $found[2] ) {
 					return true;
 				}
@@ -416,7 +416,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				);
 			}
 
-			$img = ( isset( $bool ) ? ( $bool === true ? $images['true'] : $images['false'] ) : $images['null'] );
+			$img = ( ( isset( $bool ) ) ? ( ( $bool === true ) ? $images['true'] : $images['false'] ) : $images['null'] );
 
 			$alt_tag = '';
 			if ( isset( $bool ) && ( $bool === true && isset( $alt['true'] ) ) ) {
@@ -485,7 +485,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				$rows['syntax'] .= '<em>' . __( 'Unknown', self::$name ) . '</em>';
 			}
 
-			$rows['syntax'] .=	'</td>
+			$rows['syntax'] .= '</td>
 								</tr>';
 
 
@@ -493,7 +493,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				$rows['info_url'] = '
 								<tr>
 									<th colspan="2">' . esc_html__( 'Info Url', self::$name ) . '</th>
-									<td>' . '<a href="' . esc_url( $info['info_url'] ) . '" target="_blank" class="' . esc_attr( self::$name . '-external-link' ) . '">' . esc_html( $info['info_url'] ) . '</a> ' . '</td>
+									<td><a href="' . esc_url( $info['info_url'] ) . '" target="_blank" class="' . esc_attr( self::$name . '-external-link' ) . '">' . esc_html( $info['info_url'] ) . '</a></td>
 								</tr>';
 			}
 
@@ -593,7 +593,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				'scTag'		=> $shortcode,
 				'scName'	=> $shortcode,
 				'scDesc'	=> __( 'No information available', self::$name ),
-				'scSelfCls'	=> 'u', //unknown
+				'scSelfCls'	=> 'u', // unknown
 				'scReqP'	=> array(),
 				'scOptP'	=> array(),
 			);
@@ -654,12 +654,12 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		public function retrieve_shortcode_info_from_file( $info, $shortcode ) {
 			$shortcodes = $GLOBALS['shortcode_tags'];
 
-			if ( ! isset( $shortcodes[$shortcode] ) ) {
+			if ( ! isset( $shortcodes[ $shortcode ] ) ) {
 				// Not a registered shortcode
 				return $info;
 			}
 
-			$callback = $shortcodes[$shortcode];
+			$callback = $shortcodes[ $shortcode ];
 
 			if ( ! is_string( $callback ) && ( ! is_array( $callback ) || ( is_array( $callback ) && ( ! is_string( $callback[0] ) && ! is_object( $callback[0] ) ) ) ) ) {
 				// Not a valid callback
@@ -846,7 +846,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			curl_setopt( $curl, CURLOPT_NOBODY, true );
 			// Follow any redirects
 			$open_basedir = ini_get( 'open_basedir' );
-			if ( false === $this->ini_get_bool( 'safe_mode' ) && ( ( is_null( $open_basedir ) || empty( $open_basedir ) ) || $open_basedir == 'none' ) ) {
+			if ( false === $this->ini_get_bool( 'safe_mode' ) && ( ( ! isset( $open_basedir ) || empty( $open_basedir ) ) || $open_basedir == 'none' ) ) {
 				curl_setopt( $curl, CURLOPT_FOLLOWLOCATION, true );
 				curl_setopt( $curl, CURLOPT_MAXREDIRS, 5 );
 			}
@@ -857,7 +857,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			curl_setopt( $curl, CURLOPT_CONNECTTIMEOUT, 5 );
 			curl_setopt( $curl, CURLOPT_TIMEOUT, 10 );
 			// Stop as soon as an error occurs
-			//curl_setopt( $this->curl, CURLOPT_FAILONERROR, true );
+			// curl_setopt( $this->curl, CURLOPT_FAILONERROR, true );
 
 
 			/* Figure out what the repo should be called */
@@ -910,24 +910,24 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				switch ( $key ) {
 					case 'name':
 					case 'description':
-						if ( isset( $info[$key] ) && is_string( $info[$key] ) && trim( $info[$key] ) !== '' ) {
-							$clean[$key] = sanitize_text_field( trim( $info[$key] ) );
+						if ( isset( $info[ $key ] ) && is_string( $info[ $key ] ) && trim( $info[ $key ] ) !== '' ) {
+							$clean[ $key ] = sanitize_text_field( trim( $info[ $key ] ) );
 						}
 						break;
 
 					case 'self_closing':
-						if ( isset( $info[$key] ) ) {
-							$clean[$key] = filter_var( $info[$key], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
+						if ( isset( $info[ $key ] ) ) {
+							$clean[ $key ] = filter_var( $info[ $key ], FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
 						}
 						break;
 
 					case 'parameters':
-						if ( isset( $info[$key] ) && is_array( $info[$key] ) && $info[$key] !== array() ) {
-							foreach ( $clean[$key] as $k => $v ) {
-								if ( isset( $info[$key][$k] ) && is_array( $info[$key][$k] ) && $info[$key][$k] !== array() ) {
-									foreach ( $info[$key][$k] as $attr => $explanation ) {
+						if ( isset( $info[ $key ] ) && is_array( $info[ $key ] ) && $info[ $key ] !== array() ) {
+							foreach ( $clean[ $key ] as $k => $v ) {
+								if ( isset( $info[ $key ][ $k ] ) && is_array( $info[ $key ][ $k ] ) && $info[ $key ][ $k ] !== array() ) {
+									foreach ( $info[ $key ][ $k ] as $attr => $explanation ) {
 										if ( ( ( is_string( $attr ) && trim( $attr ) !== '' ) || ( is_int( $attr ) && $attr >= 0 ) ) && ( is_string( $explanation ) && trim( $explanation ) !== '' ) ) {
-											$clean[$key][$k][sanitize_key( trim( $attr ) )] = sanitize_text_field( trim( $explanation ) );
+											$clean[ $key ][ $k ][ sanitize_key( trim( $attr ) ) ] = sanitize_text_field( trim( $explanation ) );
 										}
 									}
 									unset( $attr, $explanation );
@@ -936,10 +936,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 							unset( $k, $v );
 						}
 						break;
-						
+
 					case 'info_url':
-						if ( ( isset( $info[$key] ) && is_string( $info[$key] ) && preg_match( '`http(s?)://(.+)`i', $info[$key] ) ) ) {
-							$clean[$key] = esc_url_raw( trim( $info[$key] ) );
+						if ( ( isset( $info[ $key ] ) && is_string( $info[ $key ] ) && preg_match( '`http(s?)://(.+)`i', $info[ $key ] ) ) ) {
+							$clean[ $key ] = esc_url_raw( trim( $info[ $key ] ) );
 						}
 						break;
 				};
@@ -958,7 +958,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 * @param   string  $shortcode  Validated shortcode
 		 * @return  void
 		 */
-		function ajax_retrieve_details( $shortcode ) {
+		public function ajax_retrieve_details( $shortcode ) {
 			$info = $this->info_defaults;
 			$info = $this->reflection_retrieve_shortcode_info( $info, $shortcode );
 
@@ -995,7 +995,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 * @param   string  $shortcode  Validated shortcode
 		 * @return  void
 		 */
-		function ajax_find_shortcode_uses( $shortcode ) {
+		public function ajax_find_shortcode_uses( $shortcode ) {
 
 			// '_' is a wildcard in mysql, so escape it
 			$query = $GLOBALS['wpdb']->prepare(
@@ -1050,27 +1050,33 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 						/* TRANSLATORS: no need to translate, WP standard translation will be used */
 						$post_status = __( 'Published' );
 						break;
+
 					case 'future':
 						/* TRANSLATORS: no need to translate, WP standard translation will be used */
 						$post_status = __( 'Scheduled' );
 						break;
+
 					case 'private':
 						/* TRANSLATORS: no need to translate, WP standard translation will be used */
 						$post_status = __( 'Private' );
 						break;
+
 					case 'pending':
 						/* TRANSLATORS: no need to translate, WP standard translation will be used */
 						$post_status = __( 'Pending Review' );
 						break;
+
 					case 'draft':
 					case 'auto-draft':
 						/* TRANSLATORS: no need to translate, WP standard translation will be used */
 						$post_status = __( 'Draft' );
 						break;
+
 					case 'trash':
 						/* TRANSLATORS: no need to translate, WP standard translation will be used */
 						$post_status = __( 'Trash' );
 						break;
+
 					default:
 						$post_status = __( 'Unknown', self::$name );
 						break;
@@ -1143,7 +1149,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 * @param   array   $response   Part response in the format:
 		 *                              [id]        	=> 0 = no result, 1 = result
 		 *                              [data]      	=> html string (can be empty if no result)
- 		 *                              [supplemental]  => (optional) supplemental info to pass
+		 *                              [supplemental]  => (optional) supplemental info to pass
 		 *                              [tr_class]  	=> (optional) class for the wrapping row
 		 * @return  void
 		 */
@@ -1196,11 +1202,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 * @return  boolean
 		 */
 		public function is_closure( $arg ) {
-			if( version_compare( PHP_VERSION, '5.3', '<' ) ) {
+			if ( version_compare( PHP_VERSION, '5.3', '<' ) ) {
 				return false;
 			}
 
-		    include_once( plugin_dir_path( __FILE__ ) . 'php5.3-closure-test.php' );
+		    include_once ( plugin_dir_path( __FILE__ ) . 'php5.3-closure-test.php' );
 		    return debug_bar_shortcodes_is_closure( $arg );
 		}
 
@@ -1241,7 +1247,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 *
 		 * Freely based on information found on http://www.php.net/manual/en/function.array-merge-recursive.php
 		 *
-		 * @param	array	2 or more arrays to merge
+		 * @param	array	$arrays  2 or more arrays to merge
 		 * @return	array
 		 */
 		public static function array_merge_recursive_distinct() {
@@ -1260,11 +1266,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			foreach ( $arrays as $array ) {
 				foreach ( $array as $key => $value ) {
-					if ( is_array( $value ) && ( isset( $merged[$key] ) && is_array( $merged[$key] ) ) ) {
-						$merged[$key] = self::array_merge_recursive_distinct( $merged[$key], $value );
+					if ( is_array( $value ) && ( isset( $merged[ $key ] ) && is_array( $merged[ $key ] ) ) ) {
+						$merged[ $key ] = self::array_merge_recursive_distinct( $merged[ $key ], $value );
 					}
 					else {
-						$merged[$key] = $value;
+						$merged[ $key ] = $value;
 					}
 				}
 				unset( $key, $value );
@@ -1434,8 +1440,8 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			);
 			return self::array_merge_recursive_distinct( $info, $additional );
 		}
-		
-		
+
+
 		/**
 		 * Enrich the information for the standard WP [playlist] shortcode
 		 *
