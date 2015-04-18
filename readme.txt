@@ -3,7 +3,7 @@ Contributors: jrf
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=995SSNDTCVBJG
 Tags: debugbar, debug-bar, Debug Bar, Shortcodes, Debug Bar Shortcodes, shortcode list, list shortcodes, shortcodes reference
 Requires at least: 3.5
-Tested up to: 4.1
+Tested up to: 4.2
 Stable tag: 1.0.3
 Depends: Debug Bar
 License: GPLv2
@@ -91,7 +91,7 @@ To determine whether a shortcode is used in a page, only the _**post content**_ 
 = Can I use these shortcodes in the theme I'm building ? =
 Generally speaking you can. However, don't forget to always [check whether the shortcode is registered](http://codex.wordpress.org/Function_Reference/shortcode_exists) before you use it! It may not be available on all pages and surely not on all WP installs.
 `
-if( shortcode_exists( 'shortcode' ) ) {
+if ( shortcode_exists( 'shortcode' ) ) {
 	/* Your code here */
 	// echo do_shortcode( 'some content containing a [shortcode /]' );
 }
