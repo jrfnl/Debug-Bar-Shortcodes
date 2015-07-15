@@ -1,6 +1,6 @@
 <?php
 /**
- * Debug Bar Shortcodes - Shortcodes Info
+ * Debug Bar Shortcodes - Shortcodes Info.
  *
  * @package     WordPress\Plugins\Debug Bar Shortcodes
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
@@ -12,7 +12,7 @@
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  */
 
-// Avoid direct calls to this file
+// Avoid direct calls to this file.
 if ( ! function_exists( 'add_action' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
@@ -24,17 +24,22 @@ if ( ! function_exists( 'add_action' ) ) {
  * The classes in this file extend the functionality provided by the parent plugin "Debug Bar".
  */
 if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_Shortcodes' ) ) {
+
 	/**
-	 * Debug Bar Shortcodes - Debug Bar Panel Renderer
+	 * Debug Bar Shortcodes - Debug Bar Panel Renderer.
 	 */
 	class Debug_Bar_Shortcodes_Info {
 
 		/**
-		 * @var	string	$name	Plugin name for use in localization, class names etc
+		 * Plugin name for use in localization, class names etc.
+		 *
+		 * @var	string	$name
 		 */
 		public static $name = 'debug-bar-shortcodes';
 
 		/**
+		 * Defaults.
+		 *
 		 * @var	array	$info_defaults
 		 *				[name]			=>	string	Friendly name for the shortcode
 		 *				[description]	=>	string	Longer description of what the shortcode is for
@@ -61,7 +66,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		);
 
 		/**
-		 * @var	array	The names of the shortcodes which are included with WP by default
+		 * The names of the shortcodes which are included with WP by default.
+		 *
+		 * @var	array
 		 */
 		public $wp_shortcodes = array(
 			'audio',
@@ -74,18 +81,18 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		);
 
 		/**
-		 * @var	int		The amount of shortcodes before the table header will be doubled at the bottom of the table
+		 * The amount of shortcodes before the table header will be doubled at the bottom of the table.
+		 *
+		 * @var	int
 		 */
 		public $double_min = 8;
 
 
-
-
 		/**
-		 * Register our shortcode info filters
+		 * Register our shortcode info filters.
 		 */
 		public function __construct() {
-			add_filter( 'db_shortcodes_info', array( $this, 'parse_lhr_shortcode_info' ), 8, 2 ); // Low priority to allow override by better data
+			add_filter( 'db_shortcodes_info', array( $this, 'parse_lhr_shortcode_info' ), 8, 2 ); // Low priority to allow override by better data.
 
 
 			foreach ( $this->wp_shortcodes as $shortcode ) {
@@ -95,19 +102,19 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			}
 			unset( $shortcode );
 
-			// Better to run via ajax if and when needed as slow
-			// add_filter( 'db_shortcodes_info', array( $this, 'reflection_retrieve_shortcode_info' ), 12, 2 ); // Last option, will only run if info is bare
+			// Better to run via ajax if and when needed as slow.
+			// add_filter( 'db_shortcodes_info', array( $this, 'reflection_retrieve_shortcode_info' ), 12, 2 ); // Last option, will only run if info is bare.
 		}
 
 
 		/**
-		 * Render the actual panel
+		 * Render the actual panel.
 		 */
 		public function display() {
 			$shortcodes = $GLOBALS['shortcode_tags'];
 
 			$count  = count( $shortcodes );
-			$double = ( ( $count >= $this->double_min ) ? true : false ); // whether to repeat the row labels at the bottom of the table
+			$double = ( ( $count >= $this->double_min ) ? true : false ); // Whether to repeat the row labels at the bottom of the table.
 
 			echo '
 		<h2><span>', esc_html__( 'Total Registered Shortcodes:', self::$name ), '</span>', absint( $count ), '</h2>';
@@ -180,12 +187,12 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				$output = '<p>' . esc_html__( 'No shortcodes found', self::$name ) . '</p>';
 			}
 
-			echo $output; // xss: ok
+			echo $output; // XSS: ok.
 		}
 
 
 		/**
-		 * Generate the table header/footer row html
+		 * Generate the table header/footer row html.
 		 *
 		 * @param	bool	$is_singular	Whether we are viewing a singular page/post/post type
 		 * @return	string
@@ -209,7 +216,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Generate the action links for a shortcode
+		 * Generate the action links for a shortcode.
 		 *
 		 * @param	string	$shortcode		Current shortcode
 		 * @param	bool	$has_details	Whether or not the $info is equal to the defaults
@@ -235,11 +242,13 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			return '<span class="spinner"></span><div class="row-actions">' . implode( ' | ', $links ) . '</div>';
 		}
 
+
 		/**
-		 * Generate 'View online' link
+		 * Generate 'View online' link.
+		 *
 		 * @internal separated from render_action_links() to also be able to use it as supplemental for ajax retrieve
 		 *
-		 * @param	string	$url
+		 * @param	string	$url  The url to link to.
 		 * @return	string
 		 */
 		public function render_view_online_link( $url ) {
@@ -248,53 +257,53 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Function to retrieve a displayable string representing the callback
+		 * Function to retrieve a displayable string representing the callback.
 		 *
 		 * @internal similar to callback determination in the Debug Bar Actions and Filters plugin,
 		 * keep them in line with each other.
 		 *
-		 * @param	mixed	$callback
+		 * @param	mixed	$callback  A callback.
 		 * @return	string
 		 */
 		public function determine_callback_type( $callback ) {
 
 			if ( ( ! is_string( $callback ) && ! is_object( $callback ) ) && ( ! is_array( $callback ) || ( is_array( $callback ) && ( ! is_string( $callback[0] ) && ! is_object( $callback[0] ) ) ) ) ) {
-				// Type 1 - not a callback
+				// Type 1 - not a callback.
 				return '';
 			}
 			else if ( $this->is_closure( $callback ) ) {
-				// Type 2 - closure
+				// Type 2 - closure.
 				return '[<em>closure</em>]';
 			}
 			else if ( ( is_array( $callback ) || is_object( $callback ) ) && $this->is_closure( $callback[0] ) ) {
-				// Type 3 - closure within an array/object
+				// Type 3 - closure within an array/object.
 				return '[<em>closure</em>]';
 			}
 			else if ( is_string( $callback ) && strpos( $callback, '::' ) === false ) {
-				// Type 4 - simple string function (includes lambda's)
+				// Type 4 - simple string function (includes lambda's).
 				return sanitize_text_field( $callback ) . '()';
 			}
 			else if ( is_string( $callback ) && strpos( $callback, '::' ) !== false ) {
-				// Type 5 - static class method calls - string
+				// Type 5 - static class method calls - string.
 				return '[<em>class</em>] ' . str_replace( '::', ' :: ', sanitize_text_field( $callback ) ) . '()';
 			}
 			else if ( is_array( $callback ) && ( is_string( $callback[0] ) && is_string( $callback[1] ) ) ) {
-				// Type 6 - static class method calls - array
+				// Type 6 - static class method calls - array.
 				return '[<em>class</em>] ' . sanitize_text_field( $callback[0] ) . ' :: ' . sanitize_text_field( $callback[1] ) . '()';
 			}
 			else if ( is_array( $callback ) && ( is_object( $callback[0] ) && is_string( $callback[1] ) ) ) {
-				// Type 7 - object method calls
+				// Type 7 - object method calls.
 				return '[<em>object</em>] ' . get_class( $callback[0] ) . ' -> ' . sanitize_text_field( $callback[1] ) . '()';
 			}
 			else {
-				// Type 8 - undetermined
+				// Type 8 - undetermined.
 				return '<pre>' . var_export( $callback, true ) . '</pre>';
 			}
 		}
 
 
 		/**
-		 * Whether the current (singular) post contains the specified shortcode
+		 * Whether the current (singular) post contains the specified shortcode.
 		 *
 		 * Freely based on WP native implementation:
 		 * Source	http://core.trac.wordpress.org/browser/trunk/src/wp-includes/shortcodes.php#L144
@@ -312,17 +321,18 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				return false;
 			}
 
-			$content = $GLOBALS['post']->post_content; // Current post
+			$content = $GLOBALS['post']->post_content; // Current post.
 
-			/* Use WP native function if available (WP 3.6+) */
+			/* Use WP native function if available (WP 3.6+). */
 			if ( function_exists( 'has_shortcode' ) ) {
 				return has_shortcode( $content, $shortcode );
 			}
 
 
-			/* Otherwise use adjusted copy of the native function (WP < 3.6) */
-			/* Cache retrieved shortcode matches for efficiency */
+			/* Otherwise use adjusted copy of the native function (WP < 3.6). */
 			$post_id = $GLOBALS['post']->ID;
+
+			// Cache retrieved shortcode matches in a static for efficiency.
 			if ( ! isset( $matches ) || ( is_array( $matches ) && ! isset( $matches[ $post_id ] ) ) ) {
 				preg_match_all( '/' . get_shortcode_regex() . '/s', $content, $matches[ $post_id ], PREG_SET_ORDER );
 			}
@@ -340,9 +350,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Find the uses of a shortcode within the current post
+		 * Find the uses of a shortcode within the current post.
 		 *
-		 * @param	string	$shortcode
+		 * @param	string	$shortcode  The requested shortcode.
 		 * @param	string	$content	(optional) Content to search through for the shortcode.
 		 *								Defaults to the content of the current post/page/etc
 		 * @return	string
@@ -364,7 +374,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 			if ( $count > 0 ) {
-				// Only one result, keep it simple
+				// Only one result, keep it simple.
 				if ( $count === 1 ) {
 					$result = '<code>' . esc_html( $matches[0][1] );
 					if ( isset( $matches[0][2] ) && $matches[0][2] !== '' ) {
@@ -372,7 +382,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 					}
 					$result .= '</code>';
 				}
-				// More results, let's make it a neat list
+				// More results, let's make it a neat list.
 				else {
 					$result = '<ol>';
 
@@ -394,7 +404,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Retrieve a html image tag based on a value
+		 * Retrieve a html image tag based on a value.
 		 *
 		 * @param	array		$alt			Array with only three allowed keys:
 		 *										['true']	=>	Alt value for true image
@@ -440,7 +450,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Generate the html for a shortcode detailed info table
+		 * Generate the html for a shortcode detailed info table.
 		 *
 		 * @param	string	$shortcode		Current shortcode
 		 * @param	array	$info			Shortcode info
@@ -542,7 +552,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			}
 
 
-			/* Ignore the result if syntax is the only info row (as it's always there) */
+			/* Ignore the result if syntax is the only info row (as it's always there). */
 			if ( 1 >= count( $rows ) && isset( $rows['syntax'] ) ) {
 				$output = '';
 			}
@@ -557,11 +567,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 
-
 		/* ************** METHODS TO RETRIEVE SHORTCODE INFO ************** */
 
 		/**
-		 * Try and enrich the shortcode with additional information
+		 * Try and enrich the shortcode with additional information.
 		 *
 		 * @param	string	$shortcode	Current shortcode
 		 * @return	array				Shortcode info
@@ -576,15 +585,15 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Get potentially provided info for a shortcode in the lhr shortcode plugin format
+		 * Get potentially provided info for a shortcode in the lhr shortcode plugin format.
 		 *
 		 * @param	array	$info		Shortcode info
 		 * @param	string	$shortcode	Current shortcode
 		 * @return	array				Updated shortcode info
 		 */
 		public function parse_lhr_shortcode_info( $info, $shortcode ) {
-			/* If the current shortcode is one of the wp standards, don't use the lhr info
-			   as the info in this plugin is better */
+			// If the current shortcode is native to WP Core, don't use the lhr info as the info
+			// in this plugin is better.
 			if ( in_array( $shortcode, $this->wp_shortcodes, true ) || has_filter( 'sim_' . $shortcode ) === false ) {
 				return $info;
 			}
@@ -593,7 +602,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				'scTag'		=> $shortcode,
 				'scName'	=> $shortcode,
 				'scDesc'	=> __( 'No information available', self::$name ),
-				'scSelfCls'	=> 'u', // unknown
+				'scSelfCls'	=> 'u', // Unknown.
 				'scReqP'	=> array(),
 				'scOptP'	=> array(),
 			);
@@ -626,7 +635,8 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 		/**
 		 * Conditionally retrieve additional info about a shortcode using Reflection on the function/method
-		 * @internal Extra method so as to enable this functionality to be used in a filter and not just from ajax, but as it is expensive to check the url this way, ajax is preferred
+		 * @internal Extra method so as to enable this functionality to be used in a filter and not
+		 * just from ajax, but as it is expensive to check the url this way, ajax is preferred.
 		 *
 		 * @param	array	$info		Shortcode info
 		 * @param	string	$shortcode	Current shortcode
@@ -634,7 +644,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 */
 		public function reflection_retrieve_shortcode_info( $info, $shortcode ) {
 			if ( $info !== $this->info_defaults ) {
-				// We already have enriched info, no need for expensive operations
+				// We already have enriched info, no need for expensive operations.
 				return $info;
 			}
 			else {
@@ -654,19 +664,19 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			$shortcodes = $GLOBALS['shortcode_tags'];
 
 			if ( ! isset( $shortcodes[ $shortcode ] ) ) {
-				// Not a registered shortcode
+				// Not a registered shortcode.
 				return null;
 			}
 
 			$callback = $shortcodes[ $shortcode ];
 
 			if ( ! is_string( $callback ) && ( ! is_array( $callback ) || ( is_array( $callback ) && ( ! is_string( $callback[0] ) && ! is_object( $callback[0] ) ) ) ) && ( ! is_object( $callback ) || ( is_object( $callback ) && ! $this->is_closure( $callback ) ) ) ) {
-				// Not a valid callback
+				// Not a valid callback.
 				return null;
 			}
 
 
-			/* Set up reflection */
+			/* Set up reflection. */
 			if ( ( is_string( $callback ) && strpos( $callback, '::' ) === false ) || ( is_object( $callback ) && $this->is_closure( $callback ) ) ) {
 				$reflection = new ReflectionFunction( $callback );
 			}
@@ -679,10 +689,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 			if ( ! isset( $reflection ) || $reflection->isUserDefined() === false ) {
-				// Not a user defined callback, i.e. native PHP, nothing to find out about it (shouldn't ever happen)
+				// Not a user defined callback, i.e. native PHP, nothing to find out about it (shouldn't ever happen).
 				return null;
 			}
-			
+
 			return $reflection;
 		}
 
@@ -722,14 +732,14 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 * - carriage returns (\r) from the end of a line
 		 * - merges any combination of spaces and tabs into one space
 		 *
-		 * @param   string  $comment
+		 * @param   string  $comment  The comment string to examine.
 		 * @return  string
 		 */
 		public function strip_comment_markers( $comment ) {
 			static $search  = array( '`(^[\s]*(/\*+[\s]*(?:\*[ \t]*)?)|[\s]*(\*+/)[\s]*$|^[\s]*(\*+[ \t]*)|^[\s]*(/{2,})[\s]*|^[\s]*(#+)[\s]*)`m', '`^([ \t]+)`m', '`(\r)+[\n]?$`m', '`([ \t\r]{2,})`' );
 			static $replace = array( '', '', '', ' ' );
 
-			// Parse out all the line endings and comment delimiters
+			// Parse out all the line endings and comment delimiters.
 			$comment = trim( preg_replace( $search, $replace, trim( $comment ) ) );
 			return $comment;
 		}
@@ -738,25 +748,25 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		/**
 		 * Get the URL where you can find more information about the shortcode.
 		 *
-		 * Inspired by Shortcode reference, heavily adjusted to work more accurately
+		 * Inspired by Shortcode reference, heavily adjusted to work more accurately.
 		 * Source: http://wordpress.org/plugins/shortcode-reference/
 		 *
-		 * @param   string  $path_to_file
-		 * @param   string  $shortcode
-		 * @return  string  url
+		 * @param   string  $path_to_file  Path to file containing the callback function
+		 * @param	string	$shortcode	   Current shortcode
+		 * @return  string                 URL
 		 */
 		public function get_plugin_url_from_file( $path_to_file, $shortcode ) {
 
-			/* Make sure the paths use the same slashing to make them comparable */
+			/* Make sure the paths use the same slashing to make them comparable. */
 			$path_to_file       = str_replace( array( '/', '\\' ), DIRECTORY_SEPARATOR, $path_to_file );
 			$wp_abs_path        = str_replace( array( '/', '\\' ), DIRECTORY_SEPARATOR, ABSPATH );
 			$wp_includes_path   = str_replace( array( '/', '\\' ), DIRECTORY_SEPARATOR, ABSPATH . WPINC ) . DIRECTORY_SEPARATOR;
 			$wp_plugins_path    = str_replace( array( '/', '\\' ), DIRECTORY_SEPARATOR, WP_PLUGIN_DIR ) . DIRECTORY_SEPARATOR;
 			$wp_mu_plugins_path = str_replace( array( '/', '\\' ), DIRECTORY_SEPARATOR, WPMU_PLUGIN_DIR ) . DIRECTORY_SEPARATOR;
 
-			/* Check what type of file this is */
+			/* Check what type of file this is. */
 			if ( strpos( $path_to_file, $wp_includes_path ) !== false ) {
-				// WP native
+				// WP native.
 				return 'http://codex.wordpress.org/index.php?title=Special:Search&search=' . urlencode( $shortcode ) . '_Shortcode';
 			}
 
@@ -768,26 +778,31 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			/* Is this a plugin in the normal plugin directory ? */
 			if ( $is_plugin !== false ) {
-				// Plugin in the plugins directory
+				// Plugin in the plugins directory.
 				$relative_path = substr( $path_to_file, ( $is_plugin + strlen( $wp_plugins_path ) ) );
 
 				if ( function_exists( 'get_plugins' ) && strpos( $relative_path, DIRECTORY_SEPARATOR ) !== false ) {
-					// Subdirectory plugin
+					// Subdirectory plugin.
 					$folder  = substr( $relative_path, 0, strpos( $relative_path, DIRECTORY_SEPARATOR ) );
 					$folder  = DIRECTORY_SEPARATOR . $folder . DIRECTORY_SEPARATOR;
 					$plugins = get_plugins( $folder );
 
-					/* We'd expect only one file in the directory to have plugin data, otherwise we have
-					   a problem as we won't know which file is the parent of the one containing the shortcode */
+					/*
+					   We'd expect only one file in the directory to have plugin data, otherwise we have
+					   a problem as we won't know which file is the parent of the one containing the shortcode.
+					 */
 					if ( is_array( $plugins ) && count( $plugins ) === 1 ) {
-						// Only one item, but we don't know the key, use foreach to set the variables we need
+						// Only one item, but we don't know the key, use foreach to set the variables we need.
 						foreach ( $plugins as $plugin_basename => $plugin_data ) {
 							break;
 						}
 					}
-					/* So in the case of several plugins within a directory - check if the file containing the
+
+					/*
+					   So in the case of several plugins within a directory - check if the file containing the
 					   shortcode callback is one of the plugin main files. If so, accept.
-					   Otherwise, ignore altogether. */
+					   Otherwise, ignore altogether.
+					*/
 					else {
 						$found = false;
 						foreach ( $plugins as $plugin_basename => $plugin_data ) {
@@ -804,19 +819,18 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 					unset( $plugins, $folder );
 				}
 				else if ( function_exists( 'get_plugin_data' ) ) {
-					// File directly in the plugins dir, just get straight plugin_data
+					// File directly in the plugins dir, just get straight plugin_data.
 					$plugin_basename = $relative_path;
 					$plugin_data     = get_plugin_data( $path_to_file, false, false );
 				}
 				unset( $relative_path );
 			}
-			/* Is this a plugin in the mu plugin directory ? */
-			// get_plugin_data only available on admin side
+			/* Is this a plugin in the mu plugin directory ? (get_plugin_data() only available on admin side). */
 			else if ( function_exists( 'get_plugin_data' ) && $is_mu_plugin !== false ) {
 				$relative_path = substr( $path_to_file, ( $is_mu_plugin + strlen( $wp_mu_plugins_path ) ) );
 
 				if ( strpos( $relative_path, DIRECTORY_SEPARATOR ) !== false ) {
-					// Subdirectory file, presume the mu-dir plugin bootstrap file is called directory-name.php
+					// Subdirectory file, presume the mu-dir plugin bootstrap file is called directory-name.php.
 					$relative_path = substr( $relative_path, 0, strpos( $relative_path, DIRECTORY_SEPARATOR ) ) . '.php';
 				}
 				$plugin_basename = $relative_path;
@@ -824,7 +838,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				unset( $relative_path );
 			}
 
-			/* Let's see if we've got some results */
+			/* Let's see if we've got some results. */
 			if ( is_array( $plugin_data ) && $plugin_data !== array() ) {
 				if ( isset( $plugin_data['PluginURI'] ) && trim( $plugin_data['PluginURI'] ) !== '' ) {
 					return trim( $plugin_data['PluginURI'] );
@@ -834,7 +848,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				}
 			}
 
-			/* Not exited yet ? Ok, then we didn't have either or the info items, let's try another way */
+			/* Not exited yet ? Ok, then we didn't have either or the info items, let's try another way. */
 			if ( $plugin_basename !== '' ) {
 				$uri = $this->wp_repo_exists( $plugin_basename );
 				if ( $uri !== false ) {
@@ -846,7 +860,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			}
 
 			/**
-			 * If all else fails, Google is your friend, but let's try not to reveal our server path
+			 * If all else fails, Google is your friend, but let's try not to reveal our server path.
 			 */
 			$is_wp = strpos( $path_to_file, $wp_abs_path );
 			if ( $is_wp !== false ) {
@@ -858,41 +872,39 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Try to check if a wp plugin repository exists for a given plugin
+		 * Try to check if a wp plugin repository exists for a given plugin.
 		 *
 		 * @param	string	$plugin_basename	Plugin basename in the format dir/file.php
 		 * @return	mixed						Url or false if unsuccessful
 		 */
 		public function wp_repo_exists( $plugin_basename ) {
 			if ( ! extension_loaded( 'curl' ) || $plugin_basename === '' ) {
-				// May be check using another method ? Nah, google is good enough
+				// May be check using another method ? Nah, google is good enough.
 				return false;
 			}
 
-			/* Set up curl */
+			/* Set up curl. */
 			$curl = curl_init();
 
-			// Issue a HEAD request
+			// Issue a HEAD request.
 			curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
 			curl_setopt( $curl, CURLOPT_HEADER, true );
 			curl_setopt( $curl, CURLOPT_NOBODY, true );
-			// Follow any redirects
+			// Follow any redirects.
 			$open_basedir = ini_get( 'open_basedir' );
 			if ( false === $this->ini_get_bool( 'safe_mode' ) && ( ( ! isset( $open_basedir ) || empty( $open_basedir ) ) || $open_basedir == 'none' ) ) {
 				curl_setopt( $curl, CURLOPT_FOLLOWLOCATION, true );
 				curl_setopt( $curl, CURLOPT_MAXREDIRS, 5 );
 			}
 			unset( $open_basedir );
-			// Bypass servers which refuse curl
+			// Bypass servers which refuse curl.
 			curl_setopt( $curl, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0)' );
-			// Set a time-out
+			// Set a time-out.
 			curl_setopt( $curl, CURLOPT_CONNECTTIMEOUT, 5 );
 			curl_setopt( $curl, CURLOPT_TIMEOUT, 10 );
-			// Stop as soon as an error occurs
-			// curl_setopt( $this->curl, CURLOPT_FAILONERROR, true );
 
 
-			/* Figure out what the repo should be called */
+			/* Figure out what the repo should be called. */
 			if ( strpos( $plugin_basename, DIRECTORY_SEPARATOR ) ) {
 				$plugin_basename = substr( $plugin_basename, 0, strpos( $plugin_basename, DIRECTORY_SEPARATOR ) );
 			}
@@ -900,15 +912,15 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				$plugin_basename = substr( $plugin_basename, 0, strpos( $plugin_basename, '.php' ) );
 			}
 
-			/* Check if it exists */
+			/* Check if it exists. */
 			if ( $plugin_basename !== '' ) {
 				$plugin_uri = 'http://wordpress.org/plugins/' . urlencode( $plugin_basename );
 
-				/* Get the http headers for the given url */
+				/* Get the http headers for the given url. */
 				curl_setopt( $curl, CURLOPT_URL, $plugin_uri );
 				$header = curl_exec( $curl );
 
-				/* If we didn't get an error, interpret the headers */
+				/* If we didn't get an error, interpret the headers. */
 				if ( ( false !== $header && ! empty( $header ) ) && ( 0 === curl_errno( $curl ) ) ) {
 					/* Get the http status */
 					$statuscode = curl_getinfo( $curl, CURLINFO_HTTP_CODE );
@@ -916,7 +928,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 						$statuscode = (int) $matches[1];
 					}
 
-					/* No http error response, so presume valid uri */
+					/* No http error response, so presume valid uri. */
 					if ( 400 > $statuscode ) {
 						curl_close( $curl );
 						return $plugin_uri;
@@ -930,7 +942,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Validate the shortcode info before using it to make sure that it's still in a usable form
+		 * Validate the shortcode info before using it to make sure that it's still in a usable form.
 		 *
 		 * @param	array	$info	Shortcode info
 		 * @return	array			Validated shortcode info
@@ -981,11 +993,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 
-
 		/* ************** METHODS TO HANDLE AJAX REQUESTS ************** */
 
 		/**
-		 * Try and retrieve more information about the shortcode from the actual php code
+		 * Try and retrieve more information about the shortcode from the actual php code.
 		 *
 		 * @param   string  $shortcode  Validated shortcode
 		 * @return  void
@@ -1018,9 +1029,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Find out if a shortcode is used anywhere
+		 * Find out if a shortcode is used anywhere.
 		 *
-		 * Liberally nicked from TR All Shortcodes plugin & adjusted based on WP posts-list-table code
+		 * Liberally nicked from TR All Shortcodes plugin & adjusted based on WP posts-list-table code.
 		 * Source: http://wordpress.org/plugins/tr-all-shortcodes/
 		 * Source: http://core.trac.wordpress.org/browser/trunk/src/wp-admin/includes/class-wp-posts-list-table.php#L473
 		 *
@@ -1029,7 +1040,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 */
 		public function ajax_find_shortcode_uses( $shortcode ) {
 
-			// '_' is a wildcard in mysql, so escape it
+			// '_' is a wildcard in mysql, so escape it.
 			$query = $GLOBALS['wpdb']->prepare(
 				'select * from `' . $GLOBALS['wpdb']->posts . '`
 					where `post_status` <> "inherit"
@@ -1052,18 +1063,18 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			}
 
 
-			/* Ok, we've found some posts using the shortcode */
+			/* Ok, we've found some posts using the shortcode. */
 			$output = '
 						<h4>' . __( 'Shortcode found in the following posts/pages/etc:', self::$name ) . '</h4>
 						<table>
 							<thead>
 								<tr>
 									<th>#</th>' .
-									/* TRANSLATORS: no need to translate, WP standard translation will be used */ '
+									/* TRANSLATORS: no need to translate, WP standard translation will be used. */ '
 									<th>' . esc_html__( 'Title' ) . '</th>
 									<th>' . esc_html__( 'Post Type', self::$name ) . '</th>
 									<th>' . esc_html__( 'Status' ) . '</th>' .
-									/* TRANSLATORS: no need to translate, WP standard translation will be used */ '
+									/* TRANSLATORS: no need to translate, WP standard translation will be used. */ '
 									<th>' . esc_html__( 'Author' ) . '</th>
 									<th>' . esc_html__( 'Shortcode usage(s)', self::$name ) . '</th>
 								</tr>
@@ -1079,33 +1090,33 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 				switch ( $post->post_status ) {
 					case 'publish':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used */
+						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
 						$post_status = __( 'Published' );
 						break;
 
 					case 'future':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used */
+						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
 						$post_status = __( 'Scheduled' );
 						break;
 
 					case 'private':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used */
+						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
 						$post_status = __( 'Private' );
 						break;
 
 					case 'pending':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used */
+						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
 						$post_status = __( 'Pending Review' );
 						break;
 
 					case 'draft':
 					case 'auto-draft':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used */
+						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
 						$post_status = __( 'Draft' );
 						break;
 
 					case 'trash':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used */
+						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
 						$post_status = __( 'Trash' );
 						break;
 
@@ -1116,26 +1127,26 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 				$actions = array();
 				if ( $can_edit_post && 'trash' != $post->post_status ) {
-					/* TRANSLATORS: no need to translate, WP standard translation will be used */
+					/* TRANSLATORS: no need to translate, WP standard translation will be used. */
 					$actions['edit'] = '<a href="' . $edit_link . '" title="' . esc_attr( __( 'Edit this item' ) ) . '">';
-					/* TRANSLATORS: no need to translate, WP standard translation will be used */
+					/* TRANSLATORS: no need to translate, WP standard translation will be used. */
 					$actions['edit'] .= __( 'Edit' ) . '</a>';
 				}
 				if ( $post_type_object->public ) {
 					if ( in_array( $post->post_status, array( 'pending', 'draft', 'future' ) ) ) {
 						if ( $can_edit_post ) {
-							/* TRANSLATORS: no need to translate, WP standard translation will be used */
+							/* TRANSLATORS: no need to translate, WP standard translation will be used. */
 							$actions['view'] = '<a href="' . esc_url( apply_filters( 'preview_post_link', set_url_scheme( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ) ) . '" title="' . esc_attr( sprintf( __( 'Preview &#8220;%s&#8221;' ), $title ) ) . '" rel="permalink">';
-							/* TRANSLATORS: no need to translate, WP standard translation will be used */
+							/* TRANSLATORS: no need to translate, WP standard translation will be used. */
 
 							$actions['view'] .= __( 'Preview' ) . '</a>';
 
 						}
 					}
 					else if ( 'trash' != $post->post_status ) {
-						/* TRANSLATORS: no need to translate, WP standard translation will be used */
+						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
 						$actions['view'] = '<a href="' . get_permalink( $post->ID ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $title ) ) . '" rel="permalink">';
-						/* TRANSLATORS: no need to translate, WP standard translation will be used */
+						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
 						$actions['view'] .= __( 'View' ) . '</a>';
 					}
 				}
@@ -1176,7 +1187,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Send ajax response
+		 * Send ajax response.
 		 *
 		 * @param   array   $response   Part response in the format:
 		 *                              [id]        	=> 0 = no result, 1 = result
@@ -1202,17 +1213,17 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			}
 
 			$supplemental = array();
-			// Only accounts for the expected new view online link, everything else will be buggered
+			// Only accounts for the expected new view online link, everything else will be buggered.
 			if ( isset( $response['supplemental'] ) && $response['supplemental'] !== '' ) {
 				$supplemental['url_link'] = ' | ' . $response['supplemental'];
 			}
 
-			/* Send the response */
+			/* Send the response. */
 			$ajax_response = new WP_Ajax_Response();
 			$ajax_response->add(
 				array(
 					'what'			=> self::$name,
-					'action'		=> $_POST['action'],
+					'action'		=> $_POST['action'], // WPCS: CSRF OK.
 					'id'			=> $response['id'],
 					'data'			=> $data,
 					'supplemental'	=> $supplemental,
@@ -1224,11 +1235,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 
-
 		/* ************** HELPER METHODS ************** */
 
 		/**
-		 * Check if a callback is a closure
+		 * Check if a callback is a closure.
 		 *
 		 * @param   mixed	$arg	Function name
 		 * @return  boolean
@@ -1244,7 +1254,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Test a boolean PHP ini value
+		 * Test a boolean PHP ini value.
 		 *
 		 * @since 3.0
 		 * @param string	$a	key of the value you want to get
@@ -1277,9 +1287,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 * Matching keys' values in the second array overwrite those in the first array, as is the
 		 * case with array_merge.
 		 *
-		 * Freely based on information found on http://www.php.net/manual/en/function.array-merge-recursive.php
+		 * Freely based on information found on http://www.php.net/manual/en/function.array-merge-recursive.php.
 		 *
-		 * @param	array	$arrays  2 or more arrays to merge
+		 * @params	array	$arrays  2 or more arrays to merge
 		 * @return	array
 		 */
 		public static function array_merge_recursive_distinct() {
@@ -1312,11 +1322,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 
-
 		/* ************** METHODS TO ENRICH INFO ABOUT WP STANDARD SHORTCODES ************** */
 
 		/**
-		 * Enrich the information for the standard WP [audio] shortcode
+		 * Enrich the information for the standard WP [audio] shortcode.
 		 *
 		 * @param	array	$info	Shortcode info
 		 * @return	array			Updated shortcode info
@@ -1346,7 +1355,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Enrich the information for the standard WP [video] shortcode
+		 * Enrich the information for the standard WP [video] shortcode.
 		 *
 		 * @param	array	$info	Shortcode info
 		 * @return	array			Updated shortcode info
@@ -1382,7 +1391,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Enrich the information for the standard WP [wp_caption] shortcode
+		 * Enrich the information for the standard WP [wp_caption] shortcode.
 		 *
 		 * @param	array	$info	Shortcode info
 		 * @return	array			Updated shortcode info
@@ -1393,7 +1402,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Enrich the information for the standard WP [caption] shortcode
+		 * Enrich the information for the standard WP [caption] shortcode.
 		 *
 		 * @param	array	$info	Shortcode info
 		 * @return	array			Updated shortcode info
@@ -1420,7 +1429,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Enrich the information for the standard WP [gallery] shortcode
+		 * Enrich the information for the standard WP [gallery] shortcode.
 		 *
 		 * @param	array	$info	Shortcode info
 		 * @return	array			Updated shortcode info
@@ -1452,7 +1461,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Enrich the information for the standard WP [embed] shortcode
+		 * Enrich the information for the standard WP [embed] shortcode.
 		 *
 		 * @param	array	$info	Shortcode info
 		 * @return	array			Updated shortcode info
@@ -1475,7 +1484,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Enrich the information for the standard WP [playlist] shortcode
+		 * Enrich the information for the standard WP [playlist] shortcode.
 		 *
 		 * @param	array	$info	Shortcode info
 		 * @return	array			Updated shortcode info
@@ -1506,4 +1515,5 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		}
 
 	} // End of class Debug_Bar_Shortcodes_Info
+
 } // End of if class_exists wrapper

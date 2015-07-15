@@ -1,6 +1,6 @@
 <?php
 /**
- * Debug Bar Shortcodes - Debug Bar Panel
+ * Debug Bar Shortcodes - Debug Bar Panel.
  *
  * @package     WordPress\Plugins\Debug Bar Shortcodes
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
@@ -12,7 +12,7 @@
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  */
 
-// Avoid direct calls to this file
+// Avoid direct calls to this file.
 if ( ! function_exists( 'add_action' ) ) {
 	header( 'Status: 403 Forbidden' );
 	header( 'HTTP/1.1 403 Forbidden' );
@@ -24,8 +24,9 @@ if ( ! function_exists( 'add_action' ) ) {
  * The classes in this file extend the functionality provided by the parent plugin "Debug Bar".
  */
 if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel' ) ) {
+
 	/**
-	 * Debug Bar Shortcodes - Debug Bar Panel
+	 * Debug Bar Shortcodes - Debug Bar Panel.
 	 */
 	class Debug_Bar_Shortcodes extends Debug_Bar_Panel {
 
@@ -37,7 +38,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 
 
 		/**
-		 * Set up our panel
+		 * Set up our panel.
 		 */
 		public function init() {
 			load_plugin_textdomain( self::DBS_NAME, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
@@ -50,7 +51,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 
 
 		/**
-		 * Enqueue our scripts and styles
+		 * Enqueue our scripts and styles.
 		 */
 		public function dbs_enqueue_scripts() {
 			$suffix = ( ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min' );
@@ -68,7 +69,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 				self::DBS_SCRIPT_VERSION,
 				true
 			);
-			// reminder for js @todo jquery-effects-highlight
+			// Reminder for js @todo jquery-effects-highlight.
 			wp_localize_script(
 				self::DBS_NAME,
 				'i18n_db_shortcodes',
@@ -78,7 +79,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 
 
 		/**
-		 * Retrieve the strings for use in our javascript
+		 * Retrieve the strings for use in our javascript.
 		 *
 		 * @return  array
 		 */
@@ -102,8 +103,8 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 
 
 		/**
-		 * Show only if there are registered shortcodes
-		 * Unless someone de-registers the wp standard shortcodes, should always evaluate to true
+		 * Show only if there are registered shortcodes.
+		 * Unless someone de-registers the wp standard shortcodes, should always evaluate to true.
 		 */
 		public function prerender() {
 			$this->set_visible( is_array( $GLOBALS['shortcode_tags'] ) && $GLOBALS['shortcode_tags'] !== array() );
@@ -111,7 +112,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 
 
 		/**
-		 * Render the panel
+		 * Render the panel.
 		 */
 		public function render() {
 			include_once ( plugin_dir_path( __FILE__ ) . 'class-debug-bar-shortcodes-info.php' );
@@ -120,4 +121,5 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 		}
 
 	} // End of class Debug_Bar_Shortcodes
+
 } // End of if class_exists wrapper

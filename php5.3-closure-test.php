@@ -1,6 +1,6 @@
 <?php
 /**
- * Debug Bar Shortcodes - is_closure test
+ * Debug Bar Shortcodes - is_closure test.
  *
  * @package     WordPress\Plugins\Debug Bar Shortcodes
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
@@ -14,7 +14,7 @@
 
 if ( ! function_exists( 'debug_bar_shortcodes_is_closure' ) ) {
 	/**
-	 * Check if a callback is a closure
+	 * Check if a callback is a closure.
 	 *
 	 * @param   mixed	$arg	Function name
 	 * @return  boolean
