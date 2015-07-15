@@ -659,7 +659,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 * Get a Reflection object for the file a shortcode is in.
 		 *
 		 * @param	string	$shortcode	Current shortcode
-		 * @return  null|object
+		 * @return  object|null         Reflection object or null if no valid callback was found.
 		 */
 		public function get_reflection_object( $shortcode ) {
 			$shortcodes = $GLOBALS['shortcode_tags'];
@@ -1251,8 +1251,8 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				return false;
 			}
 
-		    include_once ( plugin_dir_path( __FILE__ ) . 'php5.3-closure-test.php' );
-		    return debug_bar_shortcodes_is_closure( $arg );
+			include_once ( plugin_dir_path( __FILE__ ) . 'php5.3-closure-test.php' );
+			return debug_bar_shortcodes_is_closure( $arg );
 		}
 
 
