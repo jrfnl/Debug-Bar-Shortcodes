@@ -645,30 +645,29 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Try and retrieve additional information about a shortcode using Reflection on the function/method
+		 * Get a Reflection object for the file a shortcode is in.
 		 *
-		 * @param	array	$info		Shortcode info
 		 * @param	string	$shortcode	Current shortcode
-		 * @return	array				Updated shortcode info
+		 * @return  null|object
 		 */
-		public function retrieve_shortcode_info_from_file( $info, $shortcode ) {
+		public function get_reflection_object( $shortcode ) {
 			$shortcodes = $GLOBALS['shortcode_tags'];
 
 			if ( ! isset( $shortcodes[ $shortcode ] ) ) {
 				// Not a registered shortcode
-				return $info;
+				return null;
 			}
 
 			$callback = $shortcodes[ $shortcode ];
 
-			if ( ! is_string( $callback ) && ( ! is_array( $callback ) || ( is_array( $callback ) && ( ! is_string( $callback[0] ) && ! is_object( $callback[0] ) ) ) ) ) {
+			if ( ! is_string( $callback ) && ( ! is_array( $callback ) || ( is_array( $callback ) && ( ! is_string( $callback[0] ) && ! is_object( $callback[0] ) ) ) ) && ( ! is_object( $callback ) || ( is_object( $callback ) && ! $this->is_closure( $callback ) ) ) ) {
 				// Not a valid callback
-				return $info;
+				return null;
 			}
 
 
 			/* Set up reflection */
-			if ( is_string( $callback ) && strpos( $callback, '::' ) === false ) {
+			if ( ( is_string( $callback ) && strpos( $callback, '::' ) === false ) || ( is_object( $callback ) && $this->is_closure( $callback ) ) ) {
 				$reflection = new ReflectionFunction( $callback );
 			}
 			else if ( is_string( $callback ) && strpos( $callback, '::' ) !== false ) {
@@ -681,6 +680,24 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			if ( ! isset( $reflection ) || $reflection->isUserDefined() === false ) {
 				// Not a user defined callback, i.e. native PHP, nothing to find out about it (shouldn't ever happen)
+				return null;
+			}
+			
+			return $reflection;
+		}
+
+
+		/**
+		 * Try and retrieve additional information about a shortcode using Reflection on the function/method.
+		 *
+		 * @param	array	$info		Shortcode info
+		 * @param	string	$shortcode	Current shortcode
+		 * @return	array				Updated shortcode info
+		 */
+		public function retrieve_shortcode_info_from_file( $info, $shortcode ) {
+			$reflection = $this->get_reflection_object( $shortcode );
+
+			if ( ! isset( $reflection ) ) {
 				return $info;
 			}
 
@@ -696,7 +713,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 		/**
-		 * Strip all comment markings and extra whitespace from a comment string
+		 * Strip all comment markings and extra whitespace from a comment string.
 		 *
 		 * Strips for each line of the comment:
 		 * - '/*[*]', '//', '#', '*' from the beginning of a line
@@ -737,7 +754,6 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			$wp_plugins_path    = str_replace( array( '/', '\\' ), DIRECTORY_SEPARATOR, WP_PLUGIN_DIR ) . DIRECTORY_SEPARATOR;
 			$wp_mu_plugins_path = str_replace( array( '/', '\\' ), DIRECTORY_SEPARATOR, WPMU_PLUGIN_DIR ) . DIRECTORY_SEPARATOR;
 
-
 			/* Check what type of file this is */
 			if ( strpos( $path_to_file, $wp_includes_path ) !== false ) {
 				// WP native
@@ -768,6 +784,22 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 						foreach ( $plugins as $plugin_basename => $plugin_data ) {
 							break;
 						}
+					}
+					/* So in the case of several plugins within a directory - check if the file containing the
+					   shortcode callback is one of the plugin main files. If so, accept.
+					   Otherwise, ignore altogether. */
+					else {
+						$found = false;
+						foreach ( $plugins as $plugin_basename => $plugin_data ) {
+							if ( strpos( $relative_path, DIRECTORY_SEPARATOR . $plugin_basename ) !== false ) {
+								$found = true;
+								break;
+							}
+						}
+						if ( $found === false ) {
+							unset( $plugin_basename, $plugin_data );
+						}
+						unset( $found );
 					}
 					unset( $plugins, $folder );
 				}
