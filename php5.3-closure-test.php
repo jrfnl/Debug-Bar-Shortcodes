@@ -20,7 +20,7 @@ if ( ! function_exists( 'debug_bar_shortcodes_is_closure' ) ) {
 	 * @return  boolean
 	 */
 	function debug_bar_shortcodes_is_closure( $arg ) {
-		$test = function() {
+		$test       = function() {
 		};
 		$is_closure = ( $arg instanceof $test );
 		return $is_closure;
