@@ -23,7 +23,7 @@ table#debug-bar-shortcodes thead th,
 table#debug-bar-shortcodes tfoot th {
     padding: 0.7em 5px;
     width: auto;
-    text-align: center;
+    text-align: left;
 }
 table#debug-bar-shortcodes thead th {
     border-bottom: 1px solid #ccc;
