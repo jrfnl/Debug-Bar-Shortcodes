@@ -147,7 +147,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 						<tr' . $class . '>
 							<td>' . $i . '</td>
 							<td class="column-title">
-								[<strong><code>' . esc_html( $shortcode ) . '</code></strong>]
+								<strong>[<code>' . esc_html( $shortcode ) . '</code>]</strong>
 								' . $this->render_action_links( $shortcode, $has_details, $info ) . '
 							</td>
 							<td>' . $this->determine_callback_type( $callback ) . '</td>';
