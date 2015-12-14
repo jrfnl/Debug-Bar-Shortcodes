@@ -3,8 +3,8 @@ Contributors: jrf
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=995SSNDTCVBJG
 Tags: debugbar, debug-bar, Debug Bar, Shortcodes, Debug Bar Shortcodes, shortcode list, list shortcodes, shortcodes reference
 Requires at least: 3.5
-Tested up to: 4.2
-Stable tag: 1.0.3
+Tested up to: 4.4
+Stable tag: 2.0
 Depends: Debug Bar
 License: GPLv2
 
@@ -22,21 +22,23 @@ Additionally it will show you:
   _Want to control the additional information displayed about your own shortcodes ? You can! See the [FAQ](http://wordpress.org/plugins/debug-bar-shortcodes/faq/) for more info._
 * Find out all pages/posts/etc on which a shortcode is used
 
+This plugin is compatible with the [LRH-Shortcode list](http://wordpress.org/plugins/lrh-shortcode-list/) and the [Shortcake/Shortcode UI](https://wordpress.org/plugins/shortcode-ui/) plugins. Additional information about a shortcode provided to these plugins will be taken into account and made available through this plugin too.
+
 
 = Why is it useful to have insight into the shortcodes ? =
 
 There are a number of typical uses I can think of:
 
-* If you are a blog author:
+* If you are a **_blog author_**:
 	- to know which shortcodes you can use in your posts/pages.
 	- if you switch plugins or remove a plugin, to know in which posts/pages you need to remove/replace old shortcodes
 
-* If you are a web designer / web master:
+* If you are a **_web designer / web master_**:
 	- if you switch plugins or remove a plugin, to know in which posts/pages you need to remove/replace old shortcodes.
 	- to know which shortcodes you can use in theme files.
 	- to avoid name conflicts for website specific shortcodes.
 
-* If you are a developer: 
+* If you are a **_developer_**:
 	- to avoid name conflicts with shortcodes registered by other plugins/themes.
 	- to check whether your shortcode registers properly and whether the conditionals are applied correctly.
 
@@ -50,7 +52,7 @@ This plugin requires the [Debug Bar](http://wordpress.org/extend/plugins/debug-b
 * The finding of shortcode uses throughout the site is inspired by [TR All Shortcodes](http://wordpress.org/plugins/tr-all-shortcodes/)
 
 
-***********************************
+------------------
 
 If you like this plugin, please [rate and/or review](http://wordpress.org/support/view/plugin-reviews/debug-bar-shortcodes) it. If you have ideas on how to make the plugin even better or if you have found any bugs, please report these in the [Support Forum](http://wordpress.org/support/plugin/debug-bar-shortcodes) or in the [GitHub repository](https://github.com/jrfnl/Debug-Bar-Shortcodes/issues).
 
@@ -104,17 +106,19 @@ Just add a filter to enrich the information this plugin has about your shortcode
 `
 add_filter( 'db_shortcodes_info_{your_shortcode}', 'filter_my_shortcode_info' );
 function filter_my_shortcode_info( $info ) {
-	// enrich the array
+	// enrich the object
 	return $info;
 }
 `
 
-The $info array expects to receive (a selection of) the following information:
-`array(
-	'name'			=> (string) 'Friendly name for your shortcode',
-	'description'	=> (string) 'Description of your shortcode',
-	'self_closing'	=> (bool) true/bool, // whether the shortcode is self-closing
-	'parameters'	=> array(
+The `$info` object you receive and are expected to return will contain the currently known information about the shortcode.
+
+`$info` is expected to contain (a selection of) the following parameters:
+`stdClass(
+	$name         = (string) 'Friendly name for your shortcode',
+	$description  = (string) 'Description of your shortcode',
+	$self_closing = (bool) true/bool, // whether the shortcode is self-closing
+	$parameters   = array(
 		'required'		=> array(
 			(string) 'attribute_name'		=> (string) 'attribute description',
 		),
@@ -122,11 +126,41 @@ The $info array expects to receive (a selection of) the following information:
 			(string) 'attribute_name'		=> (string) 'attribute description',
 		),
 	),
-	'info_url'		=> '',
+	$info_url     = '',
 )
 `
 
-If you happen to already provide similar information for the [LHR-Shortcode list](http://wordpress.org/plugins/lrh-shortcode-list/) plugin, no need to do anything extra, that information will be picked up by this plugin.
+If you happen to already provide similar information using the `sim_{shortcode}` filter for the [LHR-Shortcode list](http://wordpress.org/plugins/lrh-shortcode-list/) plugin, no need to do anything extra, that information will be picked up by this plugin.
+
+Similarly, if you provide information for the [Shortcake/Shortcode UI](https://wordpress.org/plugins/shortcode-ui/) feature plugin, that information will be used automatically to enrich the available information.
+
+
+= Hang on - the filter behaviour has changed ?!? =
+In version 1.0 of the plugin `$info` variable passed to the filter was an array. This has changed in version 2.0.
+
+I'm aware that this is a backward compatibility break, but I've done some quite extensive searches and considering I did not find any plugin using the filter (yet), I decided this backward compatibility break would have little to no effect and therefore would be safe to implement.
+
+If you *did* already have a filter in place, sorry I didn't find your plugin/theme! Not to worry though, I've tried to make it really easy to upgrade your code.
+First off, you'll need to change the `add_filter()` hook in code and your function signature to now received two variables. The first variable will be the new object, but the second variable will still be an array in the format which was passed in 1.0 so you can continue to use that in your function to enrich the information.
+Secondly, as all this plugin uses are the properties of the object, you can just cast your array to an object in the return and it'll work again.
+
+Old code for v1.0:
+`
+add_filter( 'db_shortcodes_info_{your_shortcode}', 'filter_my_shortcode_info' );
+function filter_my_shortcode_info( $info ) {
+	// enrich the array
+	return $info;
+}
+`
+
+Updated code for v2.0:
+`
+add_filter( 'db_shortcodes_info_{your_shortcode}', 'filter_my_shortcode_info', 10, 2 );
+function filter_my_shortcode_info( $info_object, $info ) {
+	// enrich the array
+	return (object) $info;
+}
+`
 
 
 = Why won't the plugin activate ? =
@@ -135,27 +169,43 @@ Have you read what it says in the beautifully red bar at the top of your plugins
 
 == Changelog ==
 
+= 2.0 (2015-12-xx) =
+IMPORTANT: if you are a plugin/theme developer and you were using the `'db_shortcodes_info_{your_shortcode}'` filter: the behaviour of this filter has changed from passing an array, to passing an object. Please read the [FAQ](http://wordpress.org/plugins/debug-bar-shortcodes/faq/) for information on how to deal with this change !
+
+* Enhancement: Added support for shortcode information available through [Shortcake](https://wordpress.org/plugins/shortcode-ui/).
+* Enhancement: At least try and detect the plugin url if more than one plugin was found in the same directory.
+* Bug Fix: Information was not obtained for shortcodes with a closure as callback. (Reflection object was not obtained for closures.)
+* Compatibility fix: Minor html change to fix layout for WP 4.4.
+* Usability: Improved table header alignment.
+* Usability: Row actions now visible on hover over row, not just title.
+* Usability: Improved compatibility with Glotpress / WP translations.
+* Minor housekeeping.
+* Tested & found compatible WP 4.4
+
 = 1.0.3 (2014-12-18) =
-* Added: more detailed information about the WP native `playlist` shortcode
-* Tested & found compatible WP 4.1
+* Added: more detailed information about the WP native `playlist` shortcode.
+* Tested & found compatible WP 4.1.
 
 = 1.0.2 (2014-09-05) =
-* Fix compatibility with the [Plugin Dependencies](http://wordpress.org/plugins/plugin-dependencies/) plugin
-* Tested & found compatible WP 4.0
+* Fix compatibility with the [Plugin Dependencies](http://wordpress.org/plugins/plugin-dependencies/) plugin.
+* Tested & found compatible WP 4.0.
 
 = 1.0.1 (2014-04-19) =
-* Fixed: better finding of shortcodes within post content
-* Fixed: minor html error
-* Fixed: minor PHP error
+* Fixed: better finding of shortcodes within post content.
+* Fixed: minor html error.
+* Fixed: minor PHP error.
 
 = 1.0 (2013-12-22) =
-* Initial release
+* Initial release.
 
 
 == Upgrade Notice ==
 
+= 2.0 =
+* Added ShortCake support.
+
 = 1.0 =
-* Initial release
+* Initial release.
 
 
 == Installation ==

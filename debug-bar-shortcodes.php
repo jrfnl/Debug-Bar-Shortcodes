@@ -6,7 +6,7 @@
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link        https://github.com/jrfnl/Debug-Bar-Shortcodes
  * @since       1.0
- * @version     1.0.3
+ * @version     2.0
  *
  * @copyright   2013-2015 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
@@ -14,8 +14,8 @@
  * @wordpress-plugin
  * Plugin Name:	Debug Bar Shortcodes
  * Plugin URI:	http://wordpress.org/extend/plugins/debug-bar-shortcodes/
- * Description:	Debug Bar Shortcodes adds a new panel to Debug Bar that display all the registered shortcodes for the current request. Requires "Debug Bar" plugin.
- * Version:		1.0.3
+ * Description:	Debug Bar Shortcodes adds a new panel to Debug Bar that displays all the registered shortcodes for the current request. Requires "Debug Bar" plugin.
+ * Version:		2.0
  * Author:		Juliette Reinders Folmer
  * Author URI:	http://www.adviesenzo.nl/
  * Depends:     Debug Bar
@@ -50,18 +50,57 @@ if ( ! function_exists( 'debug_bar_shortcodes_has_parent_plugin' ) ) {
 }
 
 
+if ( ! function_exists( 'debug_bar_shortcodes_autoload' ) ) {
+	/**
+	 * Auto load our class files.
+	 *
+	 * @param string $class Class name.
+	 *
+	 * @return void
+	 */
+	function debug_bar_shortcodes_autoload( $class ) {
+		static $classes = null;
+
+		if ( null === $classes ) {
+			$classes = array(
+				'debug_bar_shortcodes'                => 'class-debug-bar-shortcodes.php',
+				'debug_bar_shortcodes_render'         => 'class-debug-bar-shortcodes-render.php',
+				'debug_bar_shortcode_info'            => 'shortcode-info/class-shortcode-info.php',
+				'debug_bar_shortcode_info_defaults'   => 'shortcode-info/class-shortcode-info-defaults.php',
+				'debug_bar_shortcode_info_audio'      => 'shortcode-info/class-shortcode-info-audio.php',
+				'debug_bar_shortcode_info_caption'    => 'shortcode-info/class-shortcode-info-caption.php',
+				'debug_bar_shortcode_info_embed'      => 'shortcode-info/class-shortcode-info-embed.php',
+				'debug_bar_shortcode_info_gallery'    => 'shortcode-info/class-shortcode-info-gallery.php',
+				'debug_bar_shortcode_info_playlist'   => 'shortcode-info/class-shortcode-info-playlist.php',
+				'debug_bar_shortcode_info_video'      => 'shortcode-info/class-shortcode-info-video.php',
+				'debug_bar_shortcode_info_wp_caption' => 'shortcode-info/class-shortcode-info-wp-caption.php',
+				'debug_bar_shortcode_info_lhr'        => 'shortcode-info/class-shortcode-info-lhr.php',
+				'debug_bar_shortcode_info_reflection' => 'shortcode-info/class-shortcode-info-reflection.php',
+				'debug_bar_shortcode_info_from_file'  => 'shortcode-info/class-shortcode-info-from-file.php',
+				'debug_bar_shortcode_info_shortcake'  => 'shortcode-info/class-shortcode-info-shortcake.php',
+				'debug_bar_shortcode_info_validator'  => 'shortcode-info/class-shortcode-info-validator.php',
+			);
+		}
+
+		$classname = strtolower( $class );
+
+		if ( isset( $classes[ $classname ] ) ) {
+			include_once plugin_dir_path( __FILE__ ) . $classes[ $classname ];
+		}
+	}
+	spl_autoload_register( 'debug_bar_shortcodes_autoload' );
+}
+
 
 if ( ! function_exists( 'debug_bar_shortcodes_panel' ) ) {
 	/**
 	 * Add the Debug Bar Shortcodes panel to the Debug Bar.
 	 *
-	 * @param   array   $panels     Existing debug bar panels
-	 * @return  array
+	 * @param array $panels Existing debug bar panels.
+	 *
+	 * @return array
 	 */
 	function debug_bar_shortcodes_panel( $panels ) {
-		if ( ! class_exists( 'Debug_Bar_Shortcodes' ) ) {
-			require_once 'class-debug-bar-shortcodes.php';
-		}
 		$panels[] = new Debug_Bar_Shortcodes();
 		return $panels;
 	}
@@ -76,47 +115,49 @@ if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
 	 */
 	function debug_bar_shortcodes_do_ajax() {
 		// Verify this is a valid ajax request.
-		if ( ! isset( $_POST['dbs-nonce'] ) || wp_verify_nonce( $_POST['dbs-nonce'], 'debug-bar-shortcodes' ) === false ) {
+		if ( ! isset( $_POST['dbs-nonce'] ) || false === wp_verify_nonce( $_POST['dbs-nonce'], 'debug-bar-shortcodes' ) ) {
 			exit( '-1' );
 		}
 
 		// Verify we have received the data needed to do anything.
-		if ( ! isset( $_POST['shortcode'] ) || $_POST['shortcode'] === '' ) {
+		if ( ! isset( $_POST['shortcode'] ) || '' === $_POST['shortcode'] ) {
 			exit( '-1' );
 		}
 
 
-		include_once ( plugin_dir_path( __FILE__ ) . 'class-debug-bar-shortcodes-info.php' );
-		$info = new Debug_Bar_Shortcodes_Info();
-
-		$shortcode = trim( $_POST['shortcode'] );
+		$output_rendering = new Debug_Bar_Shortcodes_Render();
+		$shortcode        = trim( $_POST['shortcode'] );
 
 		// Exit early if this is a non-existent shortcode - shouldn't happen, but hack knows ;-).
-		if ( shortcode_exists( $shortcode ) === false ) {
+		if ( false === shortcode_exists( $shortcode ) ) {
 			$response = array(
 				'id'    => 0,
 				'data'  => '',
 			);
-			$info->send_ajax_response( $response );
+			$output_rendering->send_ajax_response( $response );
 			exit;
 		}
 
 		// Send the request to our handler.
 		switch ( $_POST['action'] ) {
 			case 'debug-bar-shortcodes-find':
-				$info->ajax_find_shortcode_uses( $shortcode );
+				$output_rendering->ajax_find_shortcode_uses( $shortcode );
 				break;
 
 			case 'debug-bar-shortcodes-retrieve':
-				$info->ajax_retrieve_details( $shortcode );
+				$output_rendering->ajax_retrieve_details( $shortcode );
+				break;
+
+			default:
+				// Intentionally empty.
 				break;
 		}
 
 		/*
-		   No valid action received (redundancy, can't really happen as wp wouldn't then call this
+		   No valid action received (redundancy, can't really happen as WP wouldn't then call this
 		   function, but would return 0 and exit already.
 		 */
-		exit('-1');
+		exit( '-1' );
 	}
 
 	/* Add our ajax actions. */
