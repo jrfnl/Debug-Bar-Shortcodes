@@ -14,7 +14,7 @@
  * @wordpress-plugin
  * Plugin Name:	Debug Bar Shortcodes
  * Plugin URI:	http://wordpress.org/extend/plugins/debug-bar-shortcodes/
- * Description:	Debug Bar Shortcodes adds a new panel to Debug Bar that display all the registered shortcodes for the current request. Requires "Debug Bar" plugin.
+ * Description:	Debug Bar Shortcodes adds a new panel to Debug Bar that displays all the registered shortcodes for the current request. Requires "Debug Bar" plugin.
  * Version:		1.0.3
  * Author:		Juliette Reinders Folmer
  * Author URI:	http://www.adviesenzo.nl/
@@ -55,8 +55,9 @@ if ( ! function_exists( 'debug_bar_shortcodes_panel' ) ) {
 	/**
 	 * Add the Debug Bar Shortcodes panel to the Debug Bar.
 	 *
-	 * @param   array   $panels     Existing debug bar panels
-	 * @return  array
+	 * @param array $panels Existing debug bar panels.
+	 *
+	 * @return array
 	 */
 	function debug_bar_shortcodes_panel( $panels ) {
 		if ( ! class_exists( 'Debug_Bar_Shortcodes' ) ) {
@@ -86,7 +87,7 @@ if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
 		}
 
 
-		include_once ( plugin_dir_path( __FILE__ ) . 'class-debug-bar-shortcodes-info.php' );
+		include_once plugin_dir_path( __FILE__ ) . 'class-debug-bar-shortcodes-info.php';
 		$info = new Debug_Bar_Shortcodes_Info();
 
 		$shortcode = trim( $_POST['shortcode'] );
@@ -110,13 +111,17 @@ if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
 			case 'debug-bar-shortcodes-retrieve':
 				$info->ajax_retrieve_details( $shortcode );
 				break;
+
+			default:
+				// Intentionally empty.
+				break;
 		}
 
 		/*
-		   No valid action received (redundancy, can't really happen as wp wouldn't then call this
+		   No valid action received (redundancy, can't really happen as WP wouldn't then call this
 		   function, but would return 0 and exit already.
 		 */
-		exit('-1');
+		exit( '-1' );
 	}
 
 	/* Add our ajax actions. */

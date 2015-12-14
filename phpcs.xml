@@ -2,10 +2,6 @@
 <ruleset name="Debug Bar Shortcodes">
 	<description>The code standard for Debug Bar Shortcodes is WordPress.</description>
 
-	<!-- Exclude the codesniffer itself from checks. -->
-	<exclude-pattern>phpcs/*</exclude-pattern>
-	<exclude-pattern>wpcs/*</exclude-pattern>
-
 	<rule ref="WordPress">
 		<exclude name="WordPress.VIP" />
 		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines" />
@@ -18,20 +14,12 @@
 
 	</rule>
 
-	<rule ref="WordPress-Docs">
-		<!-- Exclude a number of rules for being over-zealous IMHO. -->
-		<exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"/>
-		<exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"/>
-	</rule>
 
 	<!-- exclude the 'empty' index files from some documentation checks -->
 	<rule ref="Squiz.Commenting.FileComment.WrongStyle">
 		<exclude-pattern>*/index.php</exclude-pattern>
 	</rule>
 	<rule ref="Squiz.Commenting.InlineComment.SpacingAfter">
-		<exclude-pattern>*/index.php</exclude-pattern>
-	</rule>
-	<rule ref="Generic.Files.EndFileNewline.NotFound">
 		<exclude-pattern>*/index.php</exclude-pattern>
 	</rule>
 

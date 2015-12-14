@@ -81,29 +81,30 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 		/**
 		 * Retrieve the strings for use in our javascript.
 		 *
-		 * @return  array
+		 * @return array
 		 */
 		public function dbs_get_javascript_i18n() {
 
 			$strings = array(
-				'ajaxurl'			=> admin_url( 'admin-ajax.php' ),
-				'hide_details'		=> __( 'Hide details', self::DBS_NAME ),
-				'view_details'		=> __( 'View details', self::DBS_NAME ),
-				'no_details'		=> __( 'No details found', self::DBS_NAME ),
-				'hide_use'			=> __( 'Hide Uses', self::DBS_NAME ),
-				'view_use'			=> __( 'View Uses', self::DBS_NAME ),
-				'not_in_use'		=> __( 'Not Used', self::DBS_NAME ),
-				'error'				=> __( 'Ajax request failed or no proper response received. If you have WP_DEBUG enabled, this might be caused by a php error. The js error console might contain more information.', self::DBS_NAME ),
-				'illegal'			=> __( 'Illegal request received.', self::DBS_NAME ),
-				'nonce'				=> wp_create_nonce( self::DBS_NAME ),
-				'spinner'			=> admin_url( 'images/wpspin_light.gif' ),
+				'ajaxurl'      => admin_url( 'admin-ajax.php' ),
+				'hide_details' => __( 'Hide details', self::DBS_NAME ),
+				'view_details' => __( 'View details', self::DBS_NAME ),
+				'no_details'   => __( 'No details found', self::DBS_NAME ),
+				'hide_use'     => __( 'Hide Uses', self::DBS_NAME ),
+				'view_use'     => __( 'View Uses', self::DBS_NAME ),
+				'not_in_use'   => __( 'Not Used', self::DBS_NAME ),
+				'error'        => __( 'Ajax request failed or no proper response received. If you have WP_DEBUG enabled, this might be caused by a php error. The js error console might contain more information.', self::DBS_NAME ),
+				'illegal'      => __( 'Illegal request received.', self::DBS_NAME ),
+				'nonce'        => wp_create_nonce( self::DBS_NAME ),
+				'spinner'      => admin_url( 'images/wpspin_light.gif' ),
 			);
-			return array_merge( $strings );
+			return $strings;
 		}
 
 
 		/**
 		 * Show only if there are registered shortcodes.
+		 *
 		 * Unless someone de-registers the wp standard shortcodes, should always evaluate to true.
 		 */
 		public function prerender() {
@@ -115,11 +116,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 		 * Render the panel.
 		 */
 		public function render() {
-			include_once ( plugin_dir_path( __FILE__ ) . 'class-debug-bar-shortcodes-info.php' );
+			include_once plugin_dir_path( __FILE__ ) . 'class-debug-bar-shortcodes-info.php';
 			$info = new Debug_Bar_Shortcodes_Info();
 			$info->display();
 		}
+	} // End of class Debug_Bar_Shortcodes.
 
-	} // End of class Debug_Bar_Shortcodes
+} // End of if class_exists wrapper.
 
-} // End of if class_exists wrapper
