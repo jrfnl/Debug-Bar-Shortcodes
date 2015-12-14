@@ -9,9 +9,6 @@
 		<!-- else on new line is perfectly fine -->
 		<exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace" />
 
-		<!-- Demanding Yoda conditions is stupid. -->
-		<exclude name="WordPress.PHP.YodaConditions"/>
-
 	</rule>
 
 

@@ -41,9 +41,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 		 * Set up our panel.
 		 */
 		public function init() {
-			load_plugin_textdomain( self::DBS_NAME, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+			load_plugin_textdomain( 'debug-bar-shortcodes', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 
-			$this->title( __( 'Shortcodes', self::DBS_NAME ) );
+			$this->title( __( 'Shortcodes', 'debug-bar-shortcodes' ) );
 
 			add_action( 'wp_enqueue_scripts', array( $this, 'dbs_enqueue_scripts' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'dbs_enqueue_scripts' ) );
@@ -87,14 +87,14 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 
 			$strings = array(
 				'ajaxurl'      => admin_url( 'admin-ajax.php' ),
-				'hide_details' => __( 'Hide details', self::DBS_NAME ),
-				'view_details' => __( 'View details', self::DBS_NAME ),
-				'no_details'   => __( 'No details found', self::DBS_NAME ),
-				'hide_use'     => __( 'Hide Uses', self::DBS_NAME ),
-				'view_use'     => __( 'View Uses', self::DBS_NAME ),
-				'not_in_use'   => __( 'Not Used', self::DBS_NAME ),
-				'error'        => __( 'Ajax request failed or no proper response received. If you have WP_DEBUG enabled, this might be caused by a php error. The js error console might contain more information.', self::DBS_NAME ),
-				'illegal'      => __( 'Illegal request received.', self::DBS_NAME ),
+				'hide_details' => __( 'Hide details', 'debug-bar-shortcodes' ),
+				'view_details' => __( 'View details', 'debug-bar-shortcodes' ),
+				'no_details'   => __( 'No details found', 'debug-bar-shortcodes' ),
+				'hide_use'     => __( 'Hide Uses', 'debug-bar-shortcodes' ),
+				'view_use'     => __( 'View Uses', 'debug-bar-shortcodes' ),
+				'not_in_use'   => __( 'Not Used', 'debug-bar-shortcodes' ),
+				'error'        => __( 'Ajax request failed or no proper response received. If you have WP_DEBUG enabled, this might be caused by a php error. The js error console might contain more information.', 'debug-bar-shortcodes' ),
+				'illegal'      => __( 'Illegal request received.', 'debug-bar-shortcodes' ),
 				'nonce'        => wp_create_nonce( self::DBS_NAME ),
 				'spinner'      => admin_url( 'images/wpspin_light.gif' ),
 			);
@@ -108,7 +108,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 		 * Unless someone de-registers the wp standard shortcodes, should always evaluate to true.
 		 */
 		public function prerender() {
-			$this->set_visible( is_array( $GLOBALS['shortcode_tags'] ) && $GLOBALS['shortcode_tags'] !== array() );
+			$this->set_visible( is_array( $GLOBALS['shortcode_tags'] ) && ! empty( $GLOBALS['shortcode_tags'] ) );
 		}
 
 

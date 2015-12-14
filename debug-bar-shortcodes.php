@@ -77,12 +77,12 @@ if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
 	 */
 	function debug_bar_shortcodes_do_ajax() {
 		// Verify this is a valid ajax request.
-		if ( ! isset( $_POST['dbs-nonce'] ) || wp_verify_nonce( $_POST['dbs-nonce'], 'debug-bar-shortcodes' ) === false ) {
+		if ( ! isset( $_POST['dbs-nonce'] ) || false === wp_verify_nonce( $_POST['dbs-nonce'], 'debug-bar-shortcodes' ) ) {
 			exit( '-1' );
 		}
 
 		// Verify we have received the data needed to do anything.
-		if ( ! isset( $_POST['shortcode'] ) || $_POST['shortcode'] === '' ) {
+		if ( ! isset( $_POST['shortcode'] ) || '' === $_POST['shortcode'] ) {
 			exit( '-1' );
 		}
 
@@ -93,7 +93,7 @@ if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
 		$shortcode = trim( $_POST['shortcode'] );
 
 		// Exit early if this is a non-existent shortcode - shouldn't happen, but hack knows ;-).
-		if ( shortcode_exists( $shortcode ) === false ) {
+		if ( false === shortcode_exists( $shortcode ) ) {
 			$response = array(
 				'id'    => 0,
 				'data'  => '',

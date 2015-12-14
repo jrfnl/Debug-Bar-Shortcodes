@@ -118,12 +118,12 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			$double = ( ( $count >= $this->double_min ) ? true : false ); // Whether to repeat the row labels at the bottom of the table.
 
 			echo '
-		<h2><span>', esc_html__( 'Total Registered Shortcodes:', self::$name ), '</span>', absint( $count ), '</h2>';
+		<h2><span>', esc_html__( 'Total Registered Shortcodes:', 'debug-bar-shortcodes' ), '</span>', absint( $count ), '</h2>';
 
 
 			$output = '';
 
-			if ( is_array( $shortcodes ) && $shortcodes !== array() ) {
+			if ( is_array( $shortcodes ) && ! empty( $shortcodes ) ) {
 
 				uksort( $shortcodes, 'strnatcasecmp' );
 
@@ -133,7 +133,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				$output .= '
 				<table id="' . esc_attr( self::$name ) . '">
 					<thead>' . $header_row . '</thead>
-					'. ( ( $double === true ) ? '<tfoot>' . $header_row . '</tfoot>' : '' ) . '
+					'. ( ( true === $double ) ? '<tfoot>' . $header_row . '</tfoot>' : '' ) . '
 					<tbody>';
 
 
@@ -153,23 +153,23 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 							</td>
 							<td>' . $this->determine_callback_type( $callback ) . '</td>';
 
-					if ( $is_singular === true ) {
+					if ( true === $is_singular ) {
 						$in_use  = $this->has_shortcode( $shortcode );
 						$output .= '
-							<td>' . $this->render_image_based_on_bool( array( 'true' => esc_html__( 'Shortcode is used', self::$name ), 'false' => esc_html__( 'Shortcode not used', self::$name ) ), $in_use, true ) . '</td>
-							<td>' . ( ( $in_use === true ) ? $this->find_shortcode_usage( $shortcode ) : '&nbsp;' ) . '</td>';
+							<td>' . $this->render_image_based_on_bool( array( 'true' => esc_html__( 'Shortcode is used', 'debug-bar-shortcodes' ), 'false' => esc_html__( 'Shortcode not used', 'debug-bar-shortcodes' ) ), $in_use, true ) . '</td>
+							<td>' . ( ( true === $in_use ) ? $this->find_shortcode_usage( $shortcode ) : '&nbsp;' ) . '</td>';
 						unset( $in_use );
 					}
 
 					$output .= '
 						</tr>';
 
-					if ( $has_details === true ) {
+					if ( true === $has_details ) {
 						$class   = ( ( $i % 2 ) ? ' class="' . esc_attr( self::$name . '-details' ) . '"' : ' class="even ' . esc_attr( self::$name . '-details' ) . '"' );
 						$output .= '
 						<tr' . $class . '>
 							<td>&nbsp;</td>
-							<td colspan="' . ( ( $is_singular === true ) ? 4 : 2 ) . '">
+							<td colspan="' . ( ( true === $is_singular ) ? 4 : 2 ) . '">
 								' . $this->render_details_table( $shortcode, $info ) . '
 							</td>
 						</tr>
@@ -185,7 +185,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			}
 			else {
-				$output = '<p>' . esc_html__( 'No shortcodes found', self::$name ) . '</p>';
+				$output = '<p>' . esc_html__( 'No shortcodes found.', 'debug-bar-shortcodes' ) . '</p>';
 			}
 
 			echo $output; // WPCS: xss ok.
@@ -202,13 +202,13 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		public function render_table_header( $is_singular ) {
 			$output = '<tr>
 							<th>#</th>
-							<th>' . esc_html__( 'Shortcode', self::$name ) . '</th>
-							<th>' . esc_html__( 'Rendered by', self::$name ) . '</th>';
+							<th>' . esc_html__( 'Shortcode', 'debug-bar-shortcodes' ) . '</th>
+							<th>' . esc_html__( 'Rendered by', 'debug-bar-shortcodes' ) . '</th>';
 
-			if ( $is_singular === true ) {
+			if ( true === $is_singular ) {
 				$output .= '
-							<th>' . esc_html__( 'In use?', self::$name ) . '</th>
-							<th>' . esc_html__( 'Usage', self::$name ) . '</th>';
+							<th>' . esc_html__( 'In use?', 'debug-bar-shortcodes' ) . '</th>
+							<th>' . esc_html__( 'Usage', 'debug-bar-shortcodes' ) . '</th>';
 			}
 
 			$output .= '</tr>';
@@ -229,16 +229,16 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		public function render_action_links( $shortcode, $has_details, $info ) {
 			$links = array();
 
-			if ( $has_details === true ) {
-				$links[] = '<a href="#" class="' . esc_attr( self::$name . '-view-details' ) . '" title="' . __( 'View more detailed information about the shortcode.', self::$name ) . '">' . esc_html__( 'View details', self::$name ) . '</a>';
+			if ( true === $has_details ) {
+				$links[] = '<a href="#" class="' . esc_attr( self::$name . '-view-details' ) . '" title="' . esc_html__( 'View more detailed information about the shortcode.', 'debug-bar-shortcodes' ) . '">' . esc_html__( 'View details', 'debug-bar-shortcodes' ) . '</a>';
 			}
 			else {
-				$links[] = '<a href="#' . esc_attr( $shortcode ) . '" class="' . esc_attr( self::$name . '-get-details' ) . '" title="' . __( 'Try and retrieve more detailed information about the shortcode.', self::$name ) . '">' . esc_html__( 'Retrieve details', self::$name ) . '</a>';
+				$links[] = '<a href="#' . esc_attr( $shortcode ) . '" class="' . esc_attr( self::$name . '-get-details' ) . '" title="' . esc_html__( 'Try and retrieve more detailed information about the shortcode.', 'debug-bar-shortcodes' ) . '">' . esc_html__( 'Retrieve details', 'debug-bar-shortcodes' ) . '</a>';
 			}
 
-			$links[] = '<a href="#' . esc_attr( $shortcode ) . '" class="' . esc_attr( self::$name . '-find' ) . '" title="' . __( 'Find out where this shortcode is used (if at all)', self::$name ) . '">' . esc_html__( 'Find uses', self::$name ) . '</a>';
+			$links[] = '<a href="#' . esc_attr( $shortcode ) . '" class="' . esc_attr( self::$name . '-find' ) . '" title="' . esc_html__( 'Find out where this shortcode is used (if at all)', 'debug-bar-shortcodes' ) . '">' . esc_html__( 'Find uses', 'debug-bar-shortcodes' ) . '</a>';
 
-			if ( $has_details === true && $info['info_url'] !== '' ) {
+			if ( true === $has_details && '' !== $info->info_url ) {
 				$links[] = $this->render_view_online_link( $info['info_url'] );
 			}
 
@@ -255,8 +255,8 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 *
 		 * @return string
 		 */
-		public function render_view_online_link( $url ) {
-			return '<a href="' . esc_url( $url ) . '" target="_blank" title="' . __( 'View extended info about the shortcode on the web', self::$name ) . '" class="' . esc_attr( self::$name . '-external-link' ) . '" >' . esc_html__( 'View online', self::$name ) . '</a>';
+		private function render_view_online_link( $url ) {
+			return '<a href="' . esc_url( $url ) . '" target="_blank" title="' . __( 'View extended info about the shortcode on the web', 'debug-bar-shortcodes' ) . '" class="' . esc_attr( self::$name . '-external-link' ) . '" >' . esc_html__( 'View online', 'debug-bar-shortcodes' ) . '</a>';
 		}
 
 
@@ -284,11 +284,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				// Type 3 - closure within an array/object.
 				return '[<em>closure</em>]';
 			}
-			else if ( is_string( $callback ) && strpos( $callback, '::' ) === false ) {
+			else if ( is_string( $callback ) && false === strpos( $callback, '::' ) ) {
 				// Type 4 - simple string function (includes lambda's).
 				return sanitize_text_field( $callback ) . '()';
 			}
-			else if ( is_string( $callback ) && strpos( $callback, '::' ) !== false ) {
+			else if ( is_string( $callback ) && false !== strpos( $callback, '::' ) ) {
 				// Type 5 - static class method calls - string.
 				return '[<em>class</em>] ' . str_replace( '::', ' :: ', sanitize_text_field( $callback ) ) . '()';
 			}
@@ -325,7 +325,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			static $matches;
 
 			/* Have we got post content ? */
-			if ( ! is_object( $GLOBALS['post'] ) || ! isset( $GLOBALS['post']->post_content ) || $GLOBALS['post']->post_content === '' ) {
+			if ( ! is_object( $GLOBALS['post'] ) || ! isset( $GLOBALS['post']->post_content ) || '' === $GLOBALS['post']->post_content ) {
 				return false;
 			}
 
@@ -367,7 +367,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 * @return string
 		 */
 		public function find_shortcode_usage( $shortcode, $content = null ) {
-			$result = __( 'Not found', self::$name );
+			$result = __( 'Not found', 'debug-bar-shortcodes' );
 
 			if ( ! isset( $content ) && ( ! isset( $GLOBALS['post'] ) || ! is_object( $GLOBALS['post'] ) || ! isset( $GLOBALS['post']->post_content ) ) ) {
 				return $result;
@@ -384,9 +384,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			if ( is_int( $count ) && $count > 0 ) {
 				// Only one result, keep it simple.
-				if ( $count === 1 ) {
+				if ( 1 === $count ) {
 					$result = '<code>' . esc_html( $matches[0][1] );
-					if ( isset( $matches[0][2] ) && $matches[0][2] !== '' ) {
+					if ( isset( $matches[0][2] ) && '' !== $matches[0][2] ) {
 						$result .= '&hellip;'. esc_html( $matches[0][2] );
 					}
 					$result .= '</code>';
@@ -398,7 +398,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 					foreach ( $matches as $match ) {
 						$result .= '<li><code>' . esc_html( $match[1] );
 
-						if ( isset( $match[2] ) && $match[2] !== '' ) {
+						if ( isset( $match[2] ) && '' !== $match[2] ) {
 							$result .= '&hellip;'. esc_html( $match[2] );
 						}
 						$result .= '</code></li>';
@@ -436,23 +436,23 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 				);
 			}
 
-			$img = ( ( isset( $bool ) ) ? ( ( $bool === true ) ? $images['true'] : $images['false'] ) : $images['null'] );
+			$img = ( ( isset( $bool ) ) ? ( ( true === $bool ) ? $images['true'] : $images['false'] ) : $images['null'] );
 
 			$alt_tag = '';
-			if ( isset( $bool ) && ( $bool === true && isset( $alt['true'] ) ) ) {
+			if ( isset( $bool ) && ( true === $bool && isset( $alt['true'] ) ) ) {
 				$alt_tag = $alt['true'];
 			}
-			else if ( isset( $bool ) && ( $bool === false && isset( $alt['false'] ) ) ) {
+			else if ( isset( $bool ) && ( false === $bool && isset( $alt['false'] ) ) ) {
 				$alt_tag = $alt['false'];
 			}
 			else if ( ! isset( $bool ) && isset( $alt['null'] ) ) {
 				$alt_tag = $alt['null'];
 			}
-			$title_tag = ( $alt_tag !== '' ) ? ' title="' . esc_attr( $alt_tag ) . '"' : '';
-			$alt_tag   = ( $alt_tag !== '' ) ? ' alt="' . esc_attr( $alt_tag ) . '"' : '';
+			$title_tag = ( '' !== $alt_tag ) ? ' title="' . esc_attr( $alt_tag ) . '"' : '';
+			$alt_tag   = ( '' !== $alt_tag ) ? ' alt="' . esc_attr( $alt_tag ) . '"' : '';
 
 			$return = '';
-			if ( ( $bool === true || ( $bool === false && $show_false === true ) ) || ( $bool === null && $show_null === true ) ) {
+			if ( ( null === $bool && true === $show_null ) || ( true === $bool || ( false === $bool && true === $show_false ) ) ) {
 				$return = '<img src="' . esc_url( $img ) . '" width="16" height="16"' . $alt_tag . $title_tag . '/>';
 			}
 			return $return;
@@ -470,19 +470,19 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		public function render_details_table( $shortcode, $info ) {
 			$rows = array();
 
-			if ( $info['name'] !== '' ) {
+			if ( '' !== $info['name'] ) {
 				$rows['name'] = '
 								<tr>
-									<th colspan="2">' . esc_html__( 'Name', self::$name ) . '</th>
+									<th colspan="2">' . esc_html__( 'Name', 'debug-bar-shortcodes' ) . '</th>
 									<td>' . esc_html( $info['name'] ) . '</td>
 								</tr>';
 			}
 
 
-			if ( $info['description'] !== '' ) {
+			if ( '' !== $info['description'] ) {
 				$rows['description'] = '
 								<tr>
-									<th colspan="2">' . esc_html__( 'Description', self::$name ) . '</th>
+									<th colspan="2">' . esc_html__( 'Description', 'debug-bar-shortcodes' ) . '</th>
 									<td>' . $info['description'] . '</td>
 								</tr>';
 			}
@@ -510,10 +510,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 								</tr>';
 
 
-			if ( $info['info_url'] !== '' ) {
+			if ( '' !== $info['info_url'] ) {
 				$rows['info_url'] = '
 								<tr>
-									<th colspan="2">' . esc_html__( 'Info Url', self::$name ) . '</th>
+									<th colspan="2">' . esc_html__( 'Info Url', 'debug-bar-shortcodes' ) . '</th>
 									<td><a href="' . esc_url( $info['info_url'] ) . '" target="_blank" class="' . esc_attr( self::$name . '-external-link' ) . '">' . esc_html( $info['info_url'] ) . '</a></td>
 								</tr>';
 			}
@@ -569,7 +569,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			}
 			else {
 				$output = '
-								<h4>' . __( 'Shortcode details', self::$name ) . '</h4>
+								<h4>' . esc_html__( 'Shortcode details', 'debug-bar-shortcodes' ) . '</h4>
 								<table>' . implode( $rows ) . '
 								</table>';
 			}
@@ -1080,7 +1080,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 
 			/* Do we have posts ? */
-			if ( $GLOBALS['wpdb']->num_rows === 0 ) {
+			if ( 0 === $GLOBALS['wpdb']->num_rows ) {
 				$response = array(
 					'id'    => 0,
 					'data'  => '',
@@ -1092,18 +1092,19 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			/* Ok, we've found some posts using the shortcode. */
 			$output = '
-						<h4>' . __( 'Shortcode found in the following posts/pages/etc:', self::$name ) . '</h4>
+						<h4>' . __( 'Shortcode found in the following posts/pages/etc:', 'debug-bar-shortcodes' ) . '</h4>
 						<table>
 							<thead>
 								<tr>
 									<th>#</th>' .
 									/* TRANSLATORS: no need to translate, WP standard translation will be used. */ '
 									<th>' . esc_html__( 'Title' ) . '</th>
-									<th>' . esc_html__( 'Post Type', self::$name ) . '</th>
+									<th>' . esc_html__( 'Post Type', 'debug-bar-shortcodes' ) . '</th>' .
+									/* TRANSLATORS: no need to translate, WP standard translation will be used. */ '
 									<th>' . esc_html__( 'Status' ) . '</th>' .
 									/* TRANSLATORS: no need to translate, WP standard translation will be used. */ '
 									<th>' . esc_html__( 'Author' ) . '</th>
-									<th>' . esc_html__( 'Shortcode usage(s)', self::$name ) . '</th>
+									<th>' . esc_html__( 'Shortcode usage(s)', 'debug-bar-shortcodes' ) . '</th>
 								</tr>
 							</thead>
 							<tbody>';
@@ -1148,7 +1149,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 						break;
 
 					default:
-						$post_status = __( 'Unknown', self::$name );
+						$post_status = __( 'Unknown', 'debug-bar-shortcodes' );
 						break;
 				}
 
@@ -1184,7 +1185,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 									<td>' . ( $i + 1 ) . '</td>
 									<td class="column-title"><strong>' . $title . '</strong>';
 
-				if ( $actions !== array() ) {
+				if ( ! empty( $actions ) ) {
 					$output .= '<div class="row-actions">' . implode( ' | ', $actions ) . '</div>';
 				}
 
@@ -1226,12 +1227,12 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 */
 		public function send_ajax_response( $response ) {
 			$tr_class = '';
-			if ( isset( $response['tr_class'] ) && $response['tr_class'] !== '' ) {
+			if ( isset( $response['tr_class'] ) && '' !== $response['tr_class'] ) {
 				$tr_class = ' class="' . esc_attr( $response['tr_class'] ) . '"';
 			}
 
 			$data = '';
-			if ( $response['data'] !== '' ) {
+			if ( '' !== $response['data'] ) {
 				$data = '<tr' . $tr_class . '>
 							<td>&nbsp;</td>
 							<td colspan="{colspan}">
@@ -1242,7 +1243,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 
 			$supplemental = array();
 			// Only accounts for the expected new view online link, everything else will be buggered.
-			if ( isset( $response['supplemental'] ) && $response['supplemental'] !== '' ) {
+			if ( isset( $response['supplemental'] ) && '' !== $response['supplemental'] ) {
 				$supplemental['url_link'] = ' | ' . $response['supplemental'];
 			}
 
