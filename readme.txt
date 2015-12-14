@@ -104,17 +104,19 @@ Just add a filter to enrich the information this plugin has about your shortcode
 `
 add_filter( 'db_shortcodes_info_{your_shortcode}', 'filter_my_shortcode_info' );
 function filter_my_shortcode_info( $info ) {
-	// enrich the array
+	// enrich the object
 	return $info;
 }
 `
 
-The $info array expects to receive (a selection of) the following information:
-`array(
-	'name'			=> (string) 'Friendly name for your shortcode',
-	'description'	=> (string) 'Description of your shortcode',
-	'self_closing'	=> (bool) true/bool, // whether the shortcode is self-closing
-	'parameters'	=> array(
+The `$info` object you receive and are expected to return will contain the currently know information about the shortcode.
+
+`$info` is expected to contain (a selection of) the following parameters:
+`stdClass(
+	$name         = (string) 'Friendly name for your shortcode',
+	$description  = (string) 'Description of your shortcode',
+	$self_closing = (bool) true/bool, // whether the shortcode is self-closing
+	$parameters   = array(
 		'required'		=> array(
 			(string) 'attribute_name'		=> (string) 'attribute description',
 		),
@@ -122,11 +124,39 @@ The $info array expects to receive (a selection of) the following information:
 			(string) 'attribute_name'		=> (string) 'attribute description',
 		),
 	),
-	'info_url'		=> '',
+	$info_url     = '',
 )
 `
 
-If you happen to already provide similar information for the [LHR-Shortcode list](http://wordpress.org/plugins/lrh-shortcode-list/) plugin, no need to do anything extra, that information will be picked up by this plugin.
+If you happen to already provide similar information using the `sim_{shortcode}` filter for the [LHR-Shortcode list](http://wordpress.org/plugins/lrh-shortcode-list/) plugin, no need to do anything extra, that information will be picked up by this plugin.
+
+
+= Hang on - the filter behaviour has changed ?!? =
+In version 1.0 of the plugin `$info` variable passed to the filter was an array. This has changed in version 2.0.
+
+I'm aware that this is a backward compatibility break, but I've done some quite extensive searches and considering I did not find any plugin using the filter (yet), I decided this backward compatibility break would have little to no effect and therefore would be safe to implement.
+
+If you *did* already have a filter in place, sorry I didn't find your plugin/theme! Not to worry though, I've tried to make it really easy to upgrade your code.
+First off, you'll need to change the `add_filter()` hook in code and your function signature to now received two variables. The first variable will be the new object, but the second variable will still be an array in the format which was passed in 1.0 so you can continue to use that in your function to enrich the information.
+Secondly, as all this plugin uses are the properties of the object, you can just cast your array to an object in the return and it'll work again.
+
+Old code for v1.0:
+`
+add_filter( 'db_shortcodes_info_{your_shortcode}', 'filter_my_shortcode_info' );
+function filter_my_shortcode_info( $info ) {
+	// enrich the array
+	return $info;
+}
+`
+
+Updated code for v2.0:
+`
+add_filter( 'db_shortcodes_info_{your_shortcode}', 'filter_my_shortcode_info', 10, 2 );
+function filter_my_shortcode_info( $info_object, $info ) {
+	// enrich the array
+	return (object) $info;
+}
+`
 
 
 = Why won't the plugin activate ? =
@@ -134,6 +164,9 @@ Have you read what it says in the beautifully red bar at the top of your plugins
 
 
 == Changelog ==
+
+= 2.0 (2015-12-xx) =
+IMPORTANT: if you are a plugin/theme developer and you were using the `'db_shortcodes_info_{your_shortcode}'` filter: the behaviour of this filter has changed from passing an array to passing an object. Please read the [FAQ](http://wordpress.org/plugins/debug-bar-shortcodes/faq/) for information on how to deal with this change !
 
 = 1.0.3 (2014-12-18) =
 * Added: more detailed information about the WP native `playlist` shortcode
@@ -153,6 +186,9 @@ Have you read what it says in the beautifully red bar at the top of your plugins
 
 
 == Upgrade Notice ==
+
+= 2.0 =
+* Added ShortCake support.
 
 = 1.0 =
 * Initial release

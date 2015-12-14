@@ -23,7 +23,7 @@ if ( ! function_exists( 'add_action' ) ) {
 /**
  * The classes in this file extend the functionality provided by the parent plugin "Debug Bar".
  */
-if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel' ) ) {
+if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel' ) ) :
 
 	/**
 	 * Debug Bar Shortcodes - Debug Bar Panel.
@@ -116,11 +116,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 		 * Render the panel.
 		 */
 		public function render() {
-			include_once plugin_dir_path( __FILE__ ) . 'class-debug-bar-shortcodes-info.php';
-			$info = new Debug_Bar_Shortcodes_Info();
-			$info->display();
+			$output_rendering = new Debug_Bar_Shortcodes_Render();
+			$output_rendering->display();
 		}
 	} // End of class Debug_Bar_Shortcodes.
 
-} // End of if class_exists wrapper.
-
+endif; // End of if class_exists wrapper.

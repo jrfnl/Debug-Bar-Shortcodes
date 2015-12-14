@@ -50,6 +50,46 @@ if ( ! function_exists( 'debug_bar_shortcodes_has_parent_plugin' ) ) {
 }
 
 
+if ( ! function_exists( 'debug_bar_shortcodes_autoload' ) ) {
+	/**
+	 * Auto load our class files.
+	 *
+	 * @param string $class Class name.
+	 *
+	 * @return void
+	 */
+	function debug_bar_shortcodes_autoload( $class ) {
+		static $classes = null;
+
+		if ( null === $classes ) {
+			$classes = array(
+				'debug_bar_shortcodes'                => 'class-debug-bar-shortcodes.php',
+				'debug_bar_shortcodes_render'         => 'class-debug-bar-shortcodes-render.php',
+				'debug_bar_shortcode_info'            => 'shortcode-info/class-shortcode-info.php',
+				'debug_bar_shortcode_info_defaults'   => 'shortcode-info/class-shortcode-info-defaults.php',
+				'debug_bar_shortcode_info_audio'      => 'shortcode-info/class-shortcode-info-audio.php',
+				'debug_bar_shortcode_info_caption'    => 'shortcode-info/class-shortcode-info-caption.php',
+				'debug_bar_shortcode_info_embed'      => 'shortcode-info/class-shortcode-info-embed.php',
+				'debug_bar_shortcode_info_gallery'    => 'shortcode-info/class-shortcode-info-gallery.php',
+				'debug_bar_shortcode_info_playlist'   => 'shortcode-info/class-shortcode-info-playlist.php',
+				'debug_bar_shortcode_info_video'      => 'shortcode-info/class-shortcode-info-video.php',
+				'debug_bar_shortcode_info_wp_caption' => 'shortcode-info/class-shortcode-info-wp-caption.php',
+				'debug_bar_shortcode_info_lhr'        => 'shortcode-info/class-shortcode-info-lhr.php',
+				'debug_bar_shortcode_info_reflection' => 'shortcode-info/class-shortcode-info-reflection.php',
+				'debug_bar_shortcode_info_from_file'  => 'shortcode-info/class-shortcode-info-from-file.php',
+				'debug_bar_shortcode_info_validator'  => 'shortcode-info/class-shortcode-info-validator.php',
+			);
+		}
+
+		$cn = strtolower( $class );
+
+		if ( isset( $classes[ $cn ] ) ) {
+			include_once plugin_dir_path( __FILE__ ) . $classes[ $cn ];
+		}
+	}
+	spl_autoload_register( 'debug_bar_shortcodes_autoload' );
+}
+
 
 if ( ! function_exists( 'debug_bar_shortcodes_panel' ) ) {
 	/**
@@ -60,9 +100,6 @@ if ( ! function_exists( 'debug_bar_shortcodes_panel' ) ) {
 	 * @return array
 	 */
 	function debug_bar_shortcodes_panel( $panels ) {
-		if ( ! class_exists( 'Debug_Bar_Shortcodes' ) ) {
-			require_once 'class-debug-bar-shortcodes.php';
-		}
 		$panels[] = new Debug_Bar_Shortcodes();
 		return $panels;
 	}
@@ -87,10 +124,8 @@ if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
 		}
 
 
-		include_once plugin_dir_path( __FILE__ ) . 'class-debug-bar-shortcodes-info.php';
-		$info = new Debug_Bar_Shortcodes_Info();
-
-		$shortcode = trim( $_POST['shortcode'] );
+		$output_rendering = new Debug_Bar_Shortcodes_Render();
+		$shortcode        = trim( $_POST['shortcode'] );
 
 		// Exit early if this is a non-existent shortcode - shouldn't happen, but hack knows ;-).
 		if ( false === shortcode_exists( $shortcode ) ) {
@@ -98,18 +133,18 @@ if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
 				'id'    => 0,
 				'data'  => '',
 			);
-			$info->send_ajax_response( $response );
+			$output_rendering->send_ajax_response( $response );
 			exit;
 		}
 
 		// Send the request to our handler.
 		switch ( $_POST['action'] ) {
 			case 'debug-bar-shortcodes-find':
-				$info->ajax_find_shortcode_uses( $shortcode );
+				$output_rendering->ajax_find_shortcode_uses( $shortcode );
 				break;
 
 			case 'debug-bar-shortcodes-retrieve':
-				$info->ajax_retrieve_details( $shortcode );
+				$output_rendering->ajax_retrieve_details( $shortcode );
 				break;
 
 			default:
