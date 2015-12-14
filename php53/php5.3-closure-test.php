@@ -16,8 +16,9 @@ if ( ! function_exists( 'debug_bar_shortcodes_is_closure' ) ) {
 	/**
 	 * Check if a callback is a closure.
 	 *
-	 * @param   mixed	$arg	Function name
-	 * @return  boolean
+	 * @param mixed $arg Function name.
+	 *
+	 * @return bool
 	 */
 	function debug_bar_shortcodes_is_closure( $arg ) {
 		$test       = function() {
