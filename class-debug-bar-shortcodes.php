@@ -6,7 +6,7 @@
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link        https://github.com/jrfnl/Debug-Bar-Shortcodes
  * @since       1.0
- * @version     1.0.3
+ * @version     2.0
  *
  * @copyright   2013-2015 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
@@ -30,9 +30,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 	 */
 	class Debug_Bar_Shortcodes extends Debug_Bar_Panel {
 
-		const DBS_STYLES_VERSION = '1.0';
+		const DBS_STYLES_VERSION = '2.0';
 
-		const DBS_SCRIPT_VERSION = '1.0.1';
+		const DBS_SCRIPT_VERSION = '2.0';
 
 		const DBS_NAME = 'debug-bar-shortcodes';
 
