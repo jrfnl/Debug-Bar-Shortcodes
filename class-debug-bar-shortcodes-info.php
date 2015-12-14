@@ -312,6 +312,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 *
 		 * Freely based on WP native implementation:
 		 * Source	http://core.trac.wordpress.org/browser/trunk/src/wp-includes/shortcodes.php#L144
+		 * Last compared against source: 2015-12-14.
 		 *
 		 * @global object $post Current post object.
 		 *
@@ -319,7 +320,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 		 *
 		 * @param string $shortcode The shortcode to check for.
 		 *
-		 * @return boolean
+		 * @return bool
 		 */
 		public function has_shortcode( $shortcode ) {
 			static $matches;
@@ -350,6 +351,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Info' ) && class_exists( 'Debug_Bar_S
 			}
 			foreach ( $matches[ $post_id ] as $found ) {
 				if ( $shortcode === $found[2] ) {
+					return true;
+				}
+				elseif ( ! empty( $shortcode[5] ) && has_shortcode( $shortcode[5], $tag ) ) {
 					return true;
 				}
 			}
