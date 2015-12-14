@@ -73,10 +73,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Reflection' ) ) :
 
 
 			/* Set up reflection. */
-			if ( ( is_string( $callback ) && strpos( $callback, '::' ) === false ) || ( is_object( $callback ) && Debug_Bar_Shortcodes_Render::is_closure( $callback ) ) ) {
+			if ( ( is_string( $callback ) && false === strpos( $callback, '::' ) ) || ( is_object( $callback ) && Debug_Bar_Shortcodes_Render::is_closure( $callback ) ) ) {
 				$this->reflection_object = new ReflectionFunction( $callback );
 			}
-			else if ( is_string( $callback ) && strpos( $callback, '::' ) !== false ) {
+			else if ( is_string( $callback ) && false !== strpos( $callback, '::' ) ) {
 				$this->reflection_object = new ReflectionMethod( $callback );
 			}
 			else if ( is_array( $callback ) ) {
@@ -84,7 +84,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Reflection' ) ) :
 			}
 
 
-			if ( isset( $this->reflection_object ) && $this->reflection_object->isUserDefined() === false ) {
+			if ( isset( $this->reflection_object ) && false === $this->reflection_object->isUserDefined() ) {
 				// Not a user defined callback, i.e. native PHP, nothing to find out about it (shouldn't ever happen).
 				$this->reflection_object = null;
 			}

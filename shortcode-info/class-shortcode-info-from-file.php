@@ -295,21 +295,21 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_From_File' ) ) :
 		 *
 		 * @since 3.0
 		 *
-		 * @param string $a Key of the value you want to get.
+		 * @param string $ini_key Key of the value you want to get.
 		 *
 		 * @return bool
 		 */
-		private function ini_get_bool( $a ) {
-			$b = ini_get( $a );
+		private function ini_get_bool( $ini_key ) {
+			$value = ini_get( $ini_key );
 
-			switch ( strtolower( $b ) ) {
+			switch ( strtolower( $value ) ) {
 				case 'on':
 				case 'yes':
 				case 'true':
-					return 'assert.active' !== $a;
+					return 'assert.active' !== $ini_key;
 
 				default:
-					return (bool) (int) $b;
+					return (bool) (int) $value;
 			}
 		}
 	} // End of class.

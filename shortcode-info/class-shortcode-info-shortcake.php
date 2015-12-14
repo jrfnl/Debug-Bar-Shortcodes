@@ -109,12 +109,12 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Shortcake' ) ) :
 					}
 
 					$text = '';
-					if ( ! empty( $attr_array['label'] ) && is_string( $attr_array['label'] ) ) {
-						$text .= $attr_array['label'] . '. ';
+					foreach ( array( 'label', 'description' ) as $key ) {
+						if ( ! empty( $attr_array[ $key ] ) && is_string( $attr_array[ $key ] ) ) {
+							$text .= $attr_array[ $key ] . '. ';
+						}
 					}
-					if ( ! empty( $attr_array['description'] ) && is_string( $attr_array['description'] ) ) {
-						$text .= $attr_array['description'] . '. ';
-					}
+					unset( $key );
 
 
 					// Does not exist yet - issue https://github.com/wp-shortcake/Shortcake/issues/132 .

@@ -160,7 +160,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		 *
 		 * @param string $shortcode   Current shortcode.
 		 * @param bool   $has_details Whether or not the $info is equal to the defaults.
-		 * @param array  $info        Shortcode info.
+		 * @param object $info        Shortcode info.
 		 *
 		 * @return string
 		 */
@@ -291,7 +291,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				if ( $shortcode === $found[2] ) {
 					return true;
 				}
-				elseif ( ! empty( $shortcode[5] ) && has_shortcode( $shortcode[5], $tag ) ) {
+				elseif ( ! empty( $shortcode[5] ) && has_shortcode( $shortcode[5], $shortcode ) ) {
 					return true;
 				}
 			}
@@ -380,18 +380,25 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 
 			$img = ( ( isset( $bool ) ) ? ( ( true === $bool ) ? $images['true'] : $images['false'] ) : $images['null'] );
 
-			$alt_tag = '';
-			if ( isset( $bool ) && ( true === $bool && isset( $alt['true'] ) ) ) {
-				$alt_tag = $alt['true'];
+			$alt_value = '';
+			if ( isset( $bool ) ) {
+				if ( true === $bool && isset( $alt['true'] ) ) {
+					$alt_value = $alt['true'];
+				}
+				else if ( false === $bool && isset( $alt['false'] ) ) {
+					$alt_value = $alt['false'];
+				}
 			}
-			else if ( isset( $bool ) && ( false === $bool && isset( $alt['false'] ) ) ) {
-				$alt_tag = $alt['false'];
+			else if ( isset( $alt['null'] ) ) {
+				$alt_value = $alt['null'];
 			}
-			else if ( ! isset( $bool ) && isset( $alt['null'] ) ) {
-				$alt_tag = $alt['null'];
+
+			$title_tag = '';
+			$alt_tag   = '';
+			if ( '' !== $alt_value ) {
+				$title_tag = ' title="' . esc_attr( $alt_value ) . '"';
+				$alt_tag   = ' alt="' . esc_attr( $alt_value ) . '"';
 			}
-			$title_tag = ( '' !== $alt_tag ) ? ' title="' . esc_attr( $alt_tag ) . '"' : '';
-			$alt_tag   = ( '' !== $alt_tag ) ? ' alt="' . esc_attr( $alt_tag ) . '"' : '';
 
 			$return = '';
 			if ( ( null === $bool && true === $show_null ) || ( true === $bool || ( false === $bool && true === $show_false ) ) ) {
@@ -444,7 +451,6 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 
 			if ( ! empty( $info->parameters['required'] ) ) {
 				$rows['rp'] = $this->render_details_parameter_row(
-					$shortcode,
 					$info,
 					'required',
 					__( 'Required parameters', 'debug-bar-shortcodes' )
@@ -454,7 +460,6 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 
 			if ( ! empty( $info->parameters['optional'] ) ) {
 				$rows['op'] = $this->render_details_parameter_row(
-					$shortcode,
 					$info,
 					'optional',
 					__( 'Optional parameters', 'debug-bar-shortcodes' )
@@ -513,14 +518,13 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		/**
 		 * Generate the html for a shortcode detailed info table parameter row.
 		 *
-		 * @param string $shortcode Current shortcode.
 		 * @param object $info      Shortcode info.
 		 * @param string $type      Parameter type: 'required' or 'optional'.
 		 * @param string $label     Parameter label.
 		 *
 		 * @return string
 		 */
-		private function render_details_parameter_row( $shortcode, $info, $type, $label ) {
+		private function render_details_parameter_row( $info, $type, $label ) {
 			$row   = '
 							<tr class="' . esc_attr( self::$name . '-sc-parameters' ) . '">
 								<th rowspan="' . count( $info->parameters[ $type ] ) . '">' . esc_html( $label ) . '</th>';

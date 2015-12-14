@@ -58,8 +58,8 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_LHR' ) ) :
 			$this->set_name();
 			$this->set_description();
 			$this->set_self_closing();
-			$this->set_parameters_required();
-			$this->set_parameters_optional();
+			$this->set_parameters( 'scReqP', 'required' );
+			$this->set_parameters( 'scOptP', 'optional' );
 		}
 
 
@@ -67,9 +67,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_LHR' ) ) :
 		 * Set the name property if the LHR filter provided us with usable information.
 		 */
 		private function set_name() {
-			if ( is_string( $this->lhr_info['scName'] ) && $this->lhr_info['scName'] !== $this->lhr_defaults['scName'] ) {
-				$this->name = $this->lhr_info['scName'];
-			}
+			$this->set_string_property( 'scName', 'name' );
 		}
 
 
@@ -77,9 +75,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_LHR' ) ) :
 		 * Set the description property if the LHR filter provided us with usable information.
 		 */
 		private function set_description() {
-			if ( is_string( $this->lhr_info['scDesc'] ) && $this->lhr_info['scDesc'] !== $this->lhr_defaults['scDesc'] ) {
-				$this->description = $this->lhr_info['scDesc'];
-			}
+			$this->set_string_property( 'scDesc', 'description' );
 		}
 
 
@@ -94,21 +90,27 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_LHR' ) ) :
 
 
 		/**
-		 * Set the required key of the parameter property if the LHR filter provided us with usable information.
+		 * Set the parameter property if the LHR filter provided us with usable information.
+		 *
+		 * @param string $lhr_key The array key for the LHR array.
+		 * @param string $type    The parameter type.
 		 */
-		private function set_parameters_required() {
-			if ( is_array( $this->lhr_info['scReqP'] ) && $this->lhr_info['scReqP'] !== array() ) {
-				$this->parameters['required'] = $this->lhr_info['scReqP'];
+		private function set_parameters( $lhr_key, $type ) {
+			if ( is_array( $this->lhr_info[ $lhr_key ] ) && ! empty( $this->lhr_info[ $lhr_key ] ) ) {
+				$this->parameters[ $type ] = $this->lhr_info[ $lhr_key ];
 			}
 		}
 
 
 		/**
-		 * Set the optional key of the parameter property if the LHR filter provided us with usable information.
+		 * Test and set a string property.
+		 *
+		 * @param string $key      The array key for the LHR array.
+		 * @param string $property The name of the property to set.
 		 */
-		private function set_parameters_optional() {
-			if ( is_array( $this->lhr_info['scOptP'] ) && $this->lhr_info['scOptP'] !== array() ) {
-				$this->parameters['optional'] = $this->lhr_info['scOptP'];
+		private function set_string_property( $key, $property ) {
+			if ( is_string( $this->lhr_info[ $key ] ) && $this->lhr_info[ $key ] !== $this->lhr_defaults[ $key ] ) {
+				$this->{$property} = $this->lhr_info[ $key ];
 			}
 		}
 	} // End of class.

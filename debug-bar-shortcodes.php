@@ -82,10 +82,10 @@ if ( ! function_exists( 'debug_bar_shortcodes_autoload' ) ) {
 			);
 		}
 
-		$cn = strtolower( $class );
+		$classname = strtolower( $class );
 
-		if ( isset( $classes[ $cn ] ) ) {
-			include_once plugin_dir_path( __FILE__ ) . $classes[ $cn ];
+		if ( isset( $classes[ $classname ] ) ) {
+			include_once plugin_dir_path( __FILE__ ) . $classes[ $classname ];
 		}
 	}
 	spl_autoload_register( 'debug_bar_shortcodes_autoload' );

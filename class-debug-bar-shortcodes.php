@@ -72,7 +72,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 			// Reminder for js @todo jquery-effects-highlight.
 			wp_localize_script(
 				self::DBS_NAME,
-				'i18n_db_shortcodes',
+				'i18nDbShortcodes',
 				$this->dbs_get_javascript_i18n()
 			);
 		}

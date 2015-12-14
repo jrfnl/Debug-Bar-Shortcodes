@@ -145,7 +145,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info' ) ) :
 		public function lhr_shortcode_info( $info ) {
 			// If the current shortcode is native to WP Core, don't use the lhr info as the info
 			// in this plugin is better.
-			if ( in_array( $this->shortcode, $this->wp_shortcodes, true ) || has_filter( 'sim_' . $this->shortcode ) === false ) {
+			if ( in_array( $this->shortcode, $this->wp_shortcodes, true ) || false === has_filter( 'sim_' . $this->shortcode ) ) {
 				return $info;
 			}
 
@@ -186,7 +186,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info' ) ) :
 			}
 
 			$class      = 'Debug_Bar_Shortcode_Info_' . $this->shortcode;
-			$additional = new $class; // @todo Check if this works in PHP 5.2. Possibly use reflection ? or call_user_func with __construct as the method ?
+			$additional = new $class;
 			return $this->merge_info_objects( $additional, $info );
 		}
 
