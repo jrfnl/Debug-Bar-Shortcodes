@@ -77,6 +77,7 @@ if ( ! function_exists( 'debug_bar_shortcodes_autoload' ) ) {
 				'debug_bar_shortcode_info_lhr'        => 'shortcode-info/class-shortcode-info-lhr.php',
 				'debug_bar_shortcode_info_reflection' => 'shortcode-info/class-shortcode-info-reflection.php',
 				'debug_bar_shortcode_info_from_file'  => 'shortcode-info/class-shortcode-info-from-file.php',
+				'debug_bar_shortcode_info_shortcake'  => 'shortcode-info/class-shortcode-info-shortcake.php',
 				'debug_bar_shortcode_info_validator'  => 'shortcode-info/class-shortcode-info-validator.php',
 			);
 		}

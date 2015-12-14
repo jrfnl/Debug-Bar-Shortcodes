@@ -97,7 +97,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_From_File' ) ) :
 		 *
 		 * @return string URL.
 		 */
-		private function get_plugin_url_from_file( $path_to_file ) {
+		protected function get_plugin_url_from_file( $path_to_file ) {
 
 			/* Make sure the paths use the same slashing to make them comparable. */
 			$path_to_file       = str_replace( array( '/', '\\' ), DIRECTORY_SEPARATOR, $path_to_file );

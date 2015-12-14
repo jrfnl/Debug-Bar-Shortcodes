@@ -80,7 +80,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info' ) ) :
 
 			// Low priority to allow override by better data.
 			add_filter( 'db_shortcodes_info_' . $this->shortcode, array( $this, 'lhr_shortcode_info' ), 8 );
+			add_filter( 'db_shortcodes_info_' . $this->shortcode, array( $this, 'shortcake_shortcode_info' ), 9 );
 			add_filter( 'db_shortcodes_info_' . $this->shortcode, array( $this, 'wp_shortcode_info' ), 10 );
+
 
 			if ( true === $use_reflection && true === $this->is_registered() ) {
 				add_filter( 'db_shortcodes_info_' . $this->shortcode, array( $this, 'shortcode_info_from_documentation' ), 12 );
@@ -148,6 +150,24 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info' ) ) :
 			}
 
 			$additional = new Debug_Bar_Shortcode_Info_LHR( $this->shortcode );
+			return $this->merge_info_objects( $additional, $info );
+		}
+
+
+		/**
+		 * Get potentially provided info for a shortcode based on the Shortcake UI registration.
+		 *
+		 * @param object $info Shortcode info.
+		 *
+		 * @return object Updated shortcode info.
+		 */
+		public function shortcake_shortcode_info( $info ) {
+			// Bail out if Shortcake is not available.
+			if ( ! function_exists( 'shortcode_ui_get_register_shortcode' ) ) {
+				return $info;
+			}
+
+			$additional = new Debug_Bar_Shortcode_Info_Shortcake( $this->shortcode );
 			return $this->merge_info_objects( $additional, $info );
 		}
 
