@@ -7,10 +7,12 @@ jQuery(document).ready(function () {
 
 
 	/* Show/hide action links */
-	dbsTable.on( 'mouseenter.dbs-action-links', 'td.column-title', function() {
+	/* @todo Keep the action links visible on associated debug-bar-shortcodes-details and
+	   debug-bar-shortcodes-uses rows */
+	dbsTable.on( 'mouseenter.dbs-action-links', 'tr', function() {
 			jQuery( this ).find( 'div.row-actions' ).css({ 'visibility': 'visible' });
 		})
-		.on( 'mouseleave.dbs-action-links', 'td.column-title', function() {
+		.on( 'mouseleave.dbs-action-links', 'tr', function() {
 			jQuery( this ).find( 'div.row-actions' ).css({ 'visibility': 'hidden' });
 		});
 
