@@ -6,7 +6,7 @@
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link        https://github.com/jrfnl/Debug-Bar-Shortcodes
  * @since       1.0
- * @version     2.0
+ * @version     2.0.1
  *
  * @copyright   2013-2015 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
@@ -15,7 +15,7 @@
  * Plugin Name:	Debug Bar Shortcodes
  * Plugin URI:	http://wordpress.org/extend/plugins/debug-bar-shortcodes/
  * Description:	Debug Bar Shortcodes adds a new panel to Debug Bar that displays all the registered shortcodes for the current request. Requires "Debug Bar" plugin.
- * Version:		2.0
+ * Version:		2.0.1
  * Author:		Juliette Reinders Folmer
  * Author URI:	http://www.adviesenzo.nl/
  * Depends:     Debug Bar

@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: debugbar, debug-bar, Debug Bar, Shortcodes, Debug Bar Shortcodes, shortcode list, list shortcodes, shortcodes reference
 Requires at least: 3.5
 Tested up to: 4.4
-Stable tag: 2.0
+Stable tag: 2.0.1
 Depends: Debug Bar
 License: GPLv2
 
