@@ -14,6 +14,7 @@ table#debug-bar-shortcodes {
     clear: both;
     line-height: 1.5;
 	font-size: 12px;
+	table-layout: auto;
 }
 table#debug-bar-shortcodes thead tr,
 table#debug-bar-shortcodes tfoot tr {

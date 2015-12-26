@@ -169,7 +169,10 @@ Have you read what it says in the beautifully red bar at the top of your plugins
 
 == Changelog ==
 
-= 2.0 (2015-12-xx) =
+= 2.0.1 (2015-12-26)
+* Fix weird table layout on front-end in combination with Twenty-Sixteen theme.
+
+= 2.0 (2015-12-14) =
 IMPORTANT: if you are a plugin/theme developer and you were using the `'db_shortcodes_info_{your_shortcode}'` filter: the behaviour of this filter has changed from passing an array, to passing an object. Please read the [FAQ](http://wordpress.org/plugins/debug-bar-shortcodes/faq/) for information on how to deal with this change !
 
 * Enhancement: Added support for shortcode information available through [Shortcake](https://wordpress.org/plugins/shortcode-ui/).
