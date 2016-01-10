@@ -63,7 +63,7 @@ jQuery( document ).ready( function() {
 		eventTarget     = jQuery( this );
 		targetShortcode = this.hash.substring( 1 );
 		spinner         = eventTarget.closest( 'td.column-title' ).find( 'span.spinner' );
-		spinner.show();
+		spinner.addClass( 'is-active' );
 
 		jQuery.ajax({
 			url:	( ajaxurl ) ? ajaxurl : i18nDbShortcodes.ajaxurl,
@@ -120,7 +120,7 @@ jQuery( document ).ready( function() {
 						}
 					}
 				}
-				spinner.hide();
+				spinner.removeClass( 'is-active' );
 			},
 			error: handleAjaxError
 		});
@@ -135,7 +135,7 @@ jQuery( document ).ready( function() {
 		eventTarget     = jQuery( this );
 		targetShortcode = this.hash.substring( 1 );
 		spinner         = eventTarget.closest( 'td.column-title' ).find( 'span.spinner' );
-		spinner.show();
+		spinner.addClass( 'is-active' );
 
 		jQuery.ajax({
 			url:	( ajaxurl ) ? ajaxurl : i18nDbShortcodes.ajaxurl,
@@ -194,7 +194,7 @@ jQuery( document ).ready( function() {
 					}
 				}
 
-				spinner.hide();
+				spinner.removeClass( 'is-active' );
 			},
 			error: handleAjaxError
 		});
@@ -209,7 +209,7 @@ jQuery( document ).ready( function() {
 		if ( 'undefined' !== typeof( response ) ) {
 			console.log( 'Received response: ' + response  );
 		}
-		dbsTable.find( 'span.spinner' ).hide();
+		dbsTable.find( 'span.spinner' ).removeClass( 'is-active' );
 		alert( i18nDbShortcodes.error );
 	}
 });
