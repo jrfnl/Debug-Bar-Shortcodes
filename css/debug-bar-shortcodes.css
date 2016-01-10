@@ -55,16 +55,18 @@ table#debug-bar-shortcodes div.row-actions {
 	visibility: hidden;
 }
 
-/*table#debug-bar-shortcodes div.row-actions .spinner {*/
 table#debug-bar-shortcodes td.column-title .spinner {
-/*    background: url("../images/wpspin_light.gif") no-repeat scroll 0 0 / 16px 16px rgba(0, 0, 0, 0);*/
-    background: no-repeat scroll 0 0 / 16px 16px rgba(0, 0, 0, 0);
-    display: none;
-    float: right;
-    height: 16px;
-    margin: 5px 5px 0;
-    opacity: 0.7;
-    width: 16px;
+	background: no-repeat scroll 0 0 / 16px 16px rgba(0, 0, 0, 0);
+	visibility: hidden;
+	float: right;
+	height: 16px;
+	margin: 2px 5px 0;
+	opacity: 0.7;
+	width: 16px;
+	padding-right: 15px;
+}
+table#debug-bar-shortcodes td.column-title .spinner.is-active {
+	visibility: visible;
 }
 
 
