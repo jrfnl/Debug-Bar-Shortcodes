@@ -169,10 +169,10 @@ Have you read what it says in the beautifully red bar at the top of your plugins
 
 == Changelog ==
 
-= 2.0.2 (2016-01-10)
+= 2.0.2 (2016-01-10) =
 * Fix spinner for ajax request which has stopped working since WP 4.2.
 
-= 2.0.1 (2015-12-26)
+= 2.0.1 (2015-12-26) =
 * Fix weird table layout on front-end in combination with Twenty-Sixteen theme.
 
 = 2.0 (2015-12-14) =
