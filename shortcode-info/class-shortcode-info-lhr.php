@@ -17,7 +17,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_LHR' ) ) :
 	/**
 	 * Information on a shortcode provided in the lhr shortcode plugin format.
 	 *
-	 * @see [LHR-Shortcode list](http://wordpress.org/plugins/lrh-shortcode-list/)
+	 * @see [LHR-Shortcode list](https://wordpress.org/plugins/lrh-shortcode-list/)
 	 */
 	class Debug_Bar_Shortcode_Info_LHR extends Debug_Bar_Shortcode_Info_Defaults {
 

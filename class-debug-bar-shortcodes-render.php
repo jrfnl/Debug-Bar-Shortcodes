@@ -591,7 +591,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		 * Find out if a shortcode is used anywhere.
 		 *
 		 * Liberally nicked from TR All Shortcodes plugin & adjusted based on WP posts-list-table code.
-		 * Source: http://wordpress.org/plugins/tr-all-shortcodes/
+		 * Source: https://wordpress.org/plugins/tr-all-shortcodes/
 		 * Source: http://core.trac.wordpress.org/browser/trunk/src/wp-admin/includes/class-wp-posts-list-table.php#L473
 		 *
 		 * @param string $shortcode Validated shortcode.
