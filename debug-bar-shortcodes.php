@@ -8,7 +8,7 @@
  * @since       1.0
  * @version     2.0.2
  *
- * @copyright   2013-2015 Juliette Reinders Folmer
+ * @copyright   2013-2016 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  *
  * @wordpress-plugin
@@ -21,7 +21,7 @@
  * Depends:     Debug Bar
  * Text Domain:	debug-bar-shortcodes
  * Domain Path:	/languages/
- * Copyright:	2013-2015 Juliette Reinders Folmer
+ * Copyright:	2013-2016 Juliette Reinders Folmer
  */
 
 // Avoid direct calls to this file.

@@ -8,7 +8,7 @@
  * @since       1.0 (renamed in 2.0 - was: Debug_Bar_Shortcodes_Info)
  * @version     2.0
  *
- * @copyright   2013-2015 Juliette Reinders Folmer
+ * @copyright   2013-2016 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  */
 
