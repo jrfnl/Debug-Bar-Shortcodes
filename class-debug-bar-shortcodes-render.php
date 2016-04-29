@@ -5,10 +5,10 @@
  * @package     WordPress\Plugins\Debug Bar Shortcodes
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link        https://github.com/jrfnl/Debug-Bar-Shortcodes
- * @since       1.0 (renamed in 2.0 - was: Debug_Bar_Shortcodes_Info)
- * @version     2.0
+ * @since       1.0
+ * @since       2.0 Class renamed - was: Debug_Bar_Shortcodes_Info
  *
- * @copyright   2013-2015 Juliette Reinders Folmer
+ * @copyright   2013-2016 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  */
 
@@ -70,7 +70,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				$output .= '
 				<table id="' . esc_attr( self::$name ) . '">
 					<thead>' . $header_row . '</thead>
-					'. ( ( true === $double ) ? '<tfoot>' . $header_row . '</tfoot>' : '' ) . '
+					' . ( ( true === $double ) ? '<tfoot>' . $header_row . '</tfoot>' : '' ) . '
 					<tbody>';
 
 
@@ -214,27 +214,27 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				// Type 1 - not a callback.
 				return '';
 			}
-			else if ( self::is_closure( $callback ) ) {
+			elseif ( self::is_closure( $callback ) ) {
 				// Type 2 - closure.
 				return '[<em>closure</em>]';
 			}
-			else if ( ( is_array( $callback ) || is_object( $callback ) ) && self::is_closure( $callback[0] ) ) {
+			elseif ( ( is_array( $callback ) || is_object( $callback ) ) && self::is_closure( $callback[0] ) ) {
 				// Type 3 - closure within an array/object.
 				return '[<em>closure</em>]';
 			}
-			else if ( is_string( $callback ) && false === strpos( $callback, '::' ) ) {
+			elseif ( is_string( $callback ) && false === strpos( $callback, '::' ) ) {
 				// Type 4 - simple string function (includes lambda's).
 				return sanitize_text_field( $callback ) . '()';
 			}
-			else if ( is_string( $callback ) && false !== strpos( $callback, '::' ) ) {
+			elseif ( is_string( $callback ) && false !== strpos( $callback, '::' ) ) {
 				// Type 5 - static class method calls - string.
 				return '[<em>class</em>] ' . str_replace( '::', ' :: ', sanitize_text_field( $callback ) ) . '()';
 			}
-			else if ( is_array( $callback ) && ( is_string( $callback[0] ) && is_string( $callback[1] ) ) ) {
+			elseif ( is_array( $callback ) && ( is_string( $callback[0] ) && is_string( $callback[1] ) ) ) {
 				// Type 6 - static class method calls - array.
 				return '[<em>class</em>] ' . sanitize_text_field( $callback[0] ) . ' :: ' . sanitize_text_field( $callback[1] ) . '()';
 			}
-			else if ( is_array( $callback ) && ( is_object( $callback[0] ) && is_string( $callback[1] ) ) ) {
+			elseif ( is_array( $callback ) && ( is_object( $callback[0] ) && is_string( $callback[1] ) ) ) {
 				// Type 7 - object method calls.
 				return '[<em>object</em>] ' . get_class( $callback[0] ) . ' -> ' . sanitize_text_field( $callback[1] ) . '()';
 			}
@@ -329,7 +329,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				if ( 1 === $count ) {
 					$result = '<code>' . esc_html( $matches[0][1] );
 					if ( isset( $matches[0][2] ) && '' !== $matches[0][2] ) {
-						$result .= '&hellip;'. esc_html( $matches[0][2] );
+						$result .= '&hellip;' . esc_html( $matches[0][2] );
 					}
 					$result .= '</code>';
 				}
@@ -341,7 +341,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 						$result .= '<li><code>' . esc_html( $match[1] );
 
 						if ( isset( $match[2] ) && '' !== $match[2] ) {
-							$result .= '&hellip;'. esc_html( $match[2] );
+							$result .= '&hellip;' . esc_html( $match[2] );
 						}
 						$result .= '</code></li>';
 					}
@@ -385,11 +385,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				if ( true === $bool && isset( $alt['true'] ) ) {
 					$alt_value = $alt['true'];
 				}
-				else if ( false === $bool && isset( $alt['false'] ) ) {
+				elseif ( false === $bool && isset( $alt['false'] ) ) {
 					$alt_value = $alt['false'];
 				}
 			}
-			else if ( isset( $alt['null'] ) ) {
+			elseif ( isset( $alt['null'] ) ) {
 				$alt_value = $alt['null'];
 			}
 
@@ -554,16 +554,18 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		 * Try and retrieve more information about the shortcode from the actual php code.
 		 *
 		 * @param string $shortcode Validated shortcode.
+		 * @param string $action    The AJAX action which led to this function being called.
 		 *
 		 * @return void
 		 */
-		public function ajax_retrieve_details( $shortcode ) {
+		public function ajax_retrieve_details( $shortcode, $action ) {
 			$sc_info = new Debug_Bar_Shortcode_Info( $shortcode, true );
 
 			if ( false === $sc_info->has_details() ) {
 				$response = array(
-					'id'    => 0,
-					'data'  => '',
+					'id'     => 0,
+					'data'   => '',
+					'action' => $action,
 				);
 				$this->send_ajax_response( $response );
 				exit;
@@ -573,6 +575,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			$response = array(
 				'id'        => 1,
 				'data'      => $this->render_details_table( $shortcode, $info ),
+				'action'    => $action,
 				'tr_class'  => self::$name . '-details',
 			);
 			if ( isset( $info->info_url ) && '' !== $info->info_url ) {
@@ -592,10 +595,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		 * Source: http://core.trac.wordpress.org/browser/trunk/src/wp-admin/includes/class-wp-posts-list-table.php#L473
 		 *
 		 * @param string $shortcode Validated shortcode.
+		 * @param string $action    The AJAX action which led to this function being called.
 		 *
 		 * @return void
 		 */
-		public function ajax_find_shortcode_uses( $shortcode ) {
+		public function ajax_find_shortcode_uses( $shortcode, $action ) {
 
 			// '_' is a wildcard in mysql, so escape it.
 			$query = $GLOBALS['wpdb']->prepare(
@@ -612,8 +616,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			/* Do we have posts ? */
 			if ( 0 === $GLOBALS['wpdb']->num_rows ) {
 				$response = array(
-					'id'    => 0,
-					'data'  => '',
+					'id'     => 0,
+					'data'   => '',
+					'action' => $action,
 				);
 				$this->send_ajax_response( $response );
 				exit;
@@ -626,14 +631,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 						<table>
 							<thead>
 								<tr>
-									<th>#</th>' .
-									/* TRANSLATORS: no need to translate, WP standard translation will be used. */ '
-									<th>' . esc_html__( 'Title' ) . '</th>
-									<th>' . esc_html__( 'Post Type', 'debug-bar-shortcodes' ) . '</th>' .
-									/* TRANSLATORS: no need to translate, WP standard translation will be used. */ '
-									<th>' . esc_html__( 'Status' ) . '</th>' .
-									/* TRANSLATORS: no need to translate, WP standard translation will be used. */ '
-									<th>' . esc_html__( 'Author' ) . '</th>
+									<th>#</th>
+									<th>' . esc_html__( 'Title', 'debug-bar-shortcodes' ) . '</th>
+									<th>' . esc_html__( 'Post Type', 'debug-bar-shortcodes' ) . '</th>
+									<th>' . esc_html__( 'Status', 'debug-bar-shortcodes' ) . '</th>
+									<th>' . esc_html__( 'Author', 'debug-bar-shortcodes' ) . '</th>
 									<th>' . esc_html__( 'Shortcode usage(s)', 'debug-bar-shortcodes' ) . '</th>
 								</tr>
 							</thead>
@@ -641,70 +643,34 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 
 
 			foreach ( $posts as $i => $post ) {
-				$edit_link        = get_edit_post_link( $post->ID );
-				$title            = _draft_or_post_title( $post->ID );
-				$post_type_object = get_post_type_object( $post->post_type );
-				$can_edit_post    = current_user_can( 'edit_post', $post->ID );
-
-				switch ( $post->post_status ) {
-					case 'publish':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
-						$post_status = __( 'Published' );
-						break;
-
-					case 'future':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
-						$post_status = __( 'Scheduled' );
-						break;
-
-					case 'private':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
-						$post_status = __( 'Private' );
-						break;
-
-					case 'pending':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
-						$post_status = __( 'Pending Review' );
-						break;
-
-					case 'draft':
-					case 'auto-draft':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
-						$post_status = __( 'Draft' );
-						break;
-
-					case 'trash':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
-						$post_status = __( 'Trash' );
-						break;
-
-					default:
-						$post_status = __( 'Unknown', 'debug-bar-shortcodes' );
-						break;
-				}
+				$edit_link          = get_edit_post_link( $post->ID );
+				$title              = _draft_or_post_title( $post->ID );
+				$post_type_object   = get_post_type_object( $post->post_type );
+				$can_edit_post      = current_user_can( 'edit_post', $post->ID );
+				$post_status_string = $this->get_post_status_string( $post->post_status );
 
 				$actions = array();
 				if ( $can_edit_post && 'trash' !== $post->post_status ) {
-					/* TRANSLATORS: no need to translate, WP standard translation will be used. */
+					/* translators: no need to translate, WP standard translation will be used. */
 					$actions['edit'] = '<a href="' . $edit_link . '" title="' . esc_attr( __( 'Edit this item' ) ) . '">';
-					/* TRANSLATORS: no need to translate, WP standard translation will be used. */
+					/* translators: no need to translate, WP standard translation will be used. */
 					$actions['edit'] .= __( 'Edit' ) . '</a>';
 				}
 				if ( $post_type_object->public ) {
 					if ( in_array( $post->post_status, array( 'pending', 'draft', 'future' ), true ) ) {
 						if ( $can_edit_post ) {
-							/* TRANSLATORS: no need to translate, WP standard translation will be used. */
+							/* translators: no need to translate, WP standard translation will be used. */
 							$actions['view'] = '<a href="' . esc_url( apply_filters( 'preview_post_link', set_url_scheme( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ) ) . '" title="' . esc_attr( sprintf( __( 'Preview &#8220;%s&#8221;' ), $title ) ) . '" rel="permalink">';
-							/* TRANSLATORS: no need to translate, WP standard translation will be used. */
+							/* translators: no need to translate, WP standard translation will be used. */
 
 							$actions['view'] .= __( 'Preview' ) . '</a>';
 
 						}
 					}
-					else if ( 'trash' !== $post->post_status ) {
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
+					elseif ( 'trash' !== $post->post_status ) {
+						/* translators: no need to translate, WP standard translation will be used. */
 						$actions['view'] = '<a href="' . get_permalink( $post->ID ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $title ) ) . '" rel="permalink">';
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
+						/* translators: no need to translate, WP standard translation will be used. */
 						$actions['view'] .= __( 'View' ) . '</a>';
 					}
 				}
@@ -722,7 +688,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				$output .= '
 									</td>
 									<td>' . esc_html( $post_type_object->labels->singular_name ) . '</td>
-									<td>' . esc_html( $post_status ) . '</td>
+									<td>' . esc_html( $post_status_string ) . '</td>
 									<td>' . esc_html( get_the_author_meta( 'display_name', $post->post_author ) ) . '</td>
 									<td>' . $this->find_shortcode_usage( $shortcode, $post->post_content ) . '</td>
 								</tr>';
@@ -737,10 +703,60 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			$response = array(
 				'id'        => 1,
 				'data'      => $output,
+				'action'    => $action,
 				'tr_class'  => self::$name . '-uses',
 			);
 			$this->send_ajax_response( $response );
 			exit;
+		}
+
+
+		/**
+		 * Translate a post status keyword to a human readable localized string.
+		 *
+		 * @param string $post_status The post status to translate.
+		 *
+		 * @return string
+		 */
+		private function get_post_status_string( $post_status ) {
+			switch ( $post_status ) {
+				case 'publish':
+					/* translators: no need to translate, WP standard translation will be used. */
+					$post_status_string = __( 'Published' );
+					break;
+
+				case 'future':
+					/* translators: no need to translate, WP standard translation will be used. */
+					$post_status_string = __( 'Scheduled' );
+					break;
+
+				case 'private':
+					/* translators: no need to translate, WP standard translation will be used. */
+					$post_status_string = __( 'Private' );
+					break;
+
+				case 'pending':
+					/* translators: no need to translate, WP standard translation will be used. */
+					$post_status_string = __( 'Pending Review' );
+					break;
+
+				case 'draft':
+				case 'auto-draft':
+					/* translators: no need to translate, WP standard translation will be used. */
+					$post_status_string = __( 'Draft' );
+					break;
+
+				case 'trash':
+					/* translators: no need to translate, WP standard translation will be used. */
+					$post_status_string = __( 'Trash' );
+					break;
+
+				default:
+					$post_status_string = __( 'Unknown', 'debug-bar-shortcodes' );
+					break;
+			}
+
+			return $post_status_string;
 		}
 
 
@@ -782,7 +798,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			$ajax_response->add(
 				array(
 					'what'			=> self::$name,
-					'action'		=> $_POST['action'], // WPCS: CSRF OK.
+					'action'		=> $response['action'],
 					'id'			=> $response['id'],
 					'data'			=> $data,
 					'supplemental'	=> $supplemental,

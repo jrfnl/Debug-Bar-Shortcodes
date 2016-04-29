@@ -7,9 +7,8 @@
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link        https://github.com/jrfnl/Debug-Bar-Shortcodes
  * @since       2.0
- * @version     2.0
  *
- * @copyright   2013-2015 Juliette Reinders Folmer
+ * @copyright   2013-2016 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  */
 
@@ -42,7 +41,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Audio' ) ) :
 			$this->name        = __( 'Audio Media', 'debug-bar-shortcodes' );
 			$this->description = __( 'The Audio feature allows you to embed audio files and play them back. This was added as of WordPress 3.6.', 'debug-bar-shortcodes' );
 
-			/* TRANSLATORS: %s = file format. */
+			/* translators: %s = file format. */
 			$string = __( 'Source of %s fallback file', 'debug-bar-shortcodes' );
 
 			$this->parameters['optional'] = array(

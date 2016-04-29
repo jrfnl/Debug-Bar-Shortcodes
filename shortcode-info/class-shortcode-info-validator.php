@@ -7,9 +7,8 @@
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link        https://github.com/jrfnl/Debug-Bar-Shortcodes
  * @since       2.0
- * @version     2.0
  *
- * @copyright   2013-2015 Juliette Reinders Folmer
+ * @copyright   2013-2016 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  */
 
@@ -39,7 +38,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Validator' ) ) :
 			if ( is_object( $info ) ) {
 				$this->dirty = $info;
 			}
-			else if ( is_array( $info ) && ! empty( $info ) ) {
+			elseif ( is_array( $info ) && ! empty( $info ) ) {
 				$this->dirty = (object) $info;
 			}
 			else {
@@ -86,7 +85,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Validator' ) ) :
 				if ( is_bool( $this->dirty->self_closing ) ) {
 					$this->self_closing = $this->dirty->self_closing;
 				}
-				else if ( function_exists( 'filter_var' ) ) {
+				elseif ( function_exists( 'filter_var' ) ) {
 					$this->self_closing = filter_var( $this->dirty->self_closing, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
 				}
 			}
@@ -97,9 +96,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Validator' ) ) :
 		 * Validate the shortcode parameters information.
 		 */
 		private function validate_parameters() {
-			if ( isset( $this->dirty->parameters ) && is_array( $this->dirty->parameters ) && $this->dirty->parameters !== array() ) {
+			if ( ! empty( $this->dirty->parameters ) && is_array( $this->dirty->parameters ) ) {
 				foreach ( $this->parameters as $k => $v ) {
-					if ( isset( $this->dirty->parameters[ $k ] ) && is_array( $this->dirty->parameters[ $k ] ) && ! empty( $this->dirty->parameters[ $k ] ) ) {
+					if ( ! empty( $this->dirty->parameters[ $k ] ) && is_array( $this->dirty->parameters[ $k ] ) ) {
 						foreach ( $this->dirty->parameters[ $k ] as $attr => $explanation ) {
 							if ( ( ( is_string( $attr ) && '' !== trim( $attr ) ) || ( is_int( $attr ) && $attr >= 0 ) ) && ( is_string( $explanation ) && '' !== trim( $explanation ) ) ) {
 								$this->parameters[ $k ][ sanitize_key( trim( $attr ) ) ] = sanitize_text_field( trim( $explanation ) );

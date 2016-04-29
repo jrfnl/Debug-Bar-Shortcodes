@@ -7,9 +7,8 @@
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link        https://github.com/jrfnl/Debug-Bar-Shortcodes
  * @since       2.0
- * @version     2.0
  *
- * @copyright   2013-2015 Juliette Reinders Folmer
+ * @copyright   2013-2016 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  */
 
@@ -76,10 +75,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Reflection' ) ) :
 			if ( ( is_string( $callback ) && false === strpos( $callback, '::' ) ) || ( is_object( $callback ) && Debug_Bar_Shortcodes_Render::is_closure( $callback ) ) ) {
 				$this->reflection_object = new ReflectionFunction( $callback );
 			}
-			else if ( is_string( $callback ) && false !== strpos( $callback, '::' ) ) {
+			elseif ( is_string( $callback ) && false !== strpos( $callback, '::' ) ) {
 				$this->reflection_object = new ReflectionMethod( $callback );
 			}
-			else if ( is_array( $callback ) ) {
+			elseif ( is_array( $callback ) ) {
 				$this->reflection_object = new ReflectionMethod( $callback[0], $callback[1] );
 			}
 

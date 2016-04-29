@@ -8,7 +8,7 @@
  * @since       1.0
  * @version     2.0.2
  *
- * @copyright   2013-2015 Juliette Reinders Folmer
+ * @copyright   2013-2016 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  *
  * @wordpress-plugin
@@ -21,7 +21,7 @@
  * Depends:     Debug Bar
  * Text Domain:	debug-bar-shortcodes
  * Domain Path:	/languages/
- * Copyright:	2013-2015 Juliette Reinders Folmer
+ * Copyright:	2013-2016 Juliette Reinders Folmer
  */
 
 // Avoid direct calls to this file.
@@ -46,6 +46,7 @@ if ( ! function_exists( 'debug_bar_shortcodes_has_parent_plugin' ) ) {
 			}
 		}
 	}
+
 	add_action( 'admin_init', 'debug_bar_shortcodes_has_parent_plugin' );
 }
 
@@ -88,6 +89,7 @@ if ( ! function_exists( 'debug_bar_shortcodes_autoload' ) ) {
 			include_once plugin_dir_path( __FILE__ ) . $classes[ $classname ];
 		}
 	}
+
 	spl_autoload_register( 'debug_bar_shortcodes_autoload' );
 }
 
@@ -104,6 +106,7 @@ if ( ! function_exists( 'debug_bar_shortcodes_panel' ) ) {
 		$panels[] = new Debug_Bar_Shortcodes();
 		return $panels;
 	}
+
 	add_filter( 'debug_bar_panels', 'debug_bar_shortcodes_panel' );
 }
 
@@ -120,32 +123,34 @@ if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
 		}
 
 		// Verify we have received the data needed to do anything.
-		if ( ! isset( $_POST['shortcode'] ) || '' === $_POST['shortcode'] ) {
+		if ( ! isset( $_POST['shortcode'] ) || '' === trim( wp_unslash( $_POST['shortcode'] ) ) ) {
 			exit( '-1' );
 		}
 
 
 		$output_rendering = new Debug_Bar_Shortcodes_Render();
-		$shortcode        = trim( $_POST['shortcode'] );
+		$shortcode        = trim( wp_unslash( $_POST['shortcode'] ) );
+		$action           = trim( wp_unslash( $_POST['action'] ) );
 
 		// Exit early if this is a non-existent shortcode - shouldn't happen, but hack knows ;-).
 		if ( false === shortcode_exists( $shortcode ) ) {
 			$response = array(
-				'id'    => 0,
-				'data'  => '',
+				'id'     => 0,
+				'data'   => '',
+				'action' => $action,
 			);
 			$output_rendering->send_ajax_response( $response );
 			exit;
 		}
 
 		// Send the request to our handler.
-		switch ( $_POST['action'] ) {
+		switch ( $action ) {
 			case 'debug-bar-shortcodes-find':
-				$output_rendering->ajax_find_shortcode_uses( $shortcode );
+				$output_rendering->ajax_find_shortcode_uses( $shortcode, $action );
 				break;
 
 			case 'debug-bar-shortcodes-retrieve':
-				$output_rendering->ajax_retrieve_details( $shortcode );
+				$output_rendering->ajax_retrieve_details( $shortcode, $action );
 				break;
 
 			default:

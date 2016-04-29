@@ -15,18 +15,12 @@ matrix:
   include:
     # aliased to 5.2.17
     - php: '5.2'
-    # aliased to 5.3.29
-    - php: '5.3'
-      env: CLOSURE=1
     # aliased to a recent 5.4.x version
     - php: '5.4'
       env: CLOSURE=1
-    # aliased to a recent 5.5.x version
-    - php: '5.5'
-      env: SNIFF=1 CLOSURE=1
     # aliased to a recent 5.6.x version
     - php: '5.6'
-      env: CLOSURE=1
+      env: SNIFF=1 CLOSURE=1
     # aliased to a recent 7.x version
     - php: '7.0'
       env: CLOSURE=1
@@ -75,7 +69,7 @@ script:
     # -n flag: Do not print warnings. (shortcut for --warning-severity=0)
     # --standard: Use WordPress as the standard.
     # --extensions: Only sniff PHP files.
-    - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/scripts/phpcs -p -s -v -n . --standard=./ruleset.xml --extensions=php; fi
+    - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/scripts/phpcs -p -s -v -n . --standard=./phpcs.xml --extensions=php; fi
 
 # Receive notifications for build results.
 # @link http://docs.travis-ci.com/user/notifications/#Email-notifications
