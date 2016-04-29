@@ -123,32 +123,34 @@ if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
 		}
 
 		// Verify we have received the data needed to do anything.
-		if ( ! isset( $_POST['shortcode'] ) || '' === $_POST['shortcode'] ) {
+		if ( ! isset( $_POST['shortcode'] ) || '' === trim( wp_unslash( $_POST['shortcode'] ) ) ) {
 			exit( '-1' );
 		}
 
 
 		$output_rendering = new Debug_Bar_Shortcodes_Render();
-		$shortcode        = trim( $_POST['shortcode'] );
+		$shortcode        = trim( wp_unslash( $_POST['shortcode'] ) );
+		$action           = trim( wp_unslash( $_POST['action'] ) );
 
 		// Exit early if this is a non-existent shortcode - shouldn't happen, but hack knows ;-).
 		if ( false === shortcode_exists( $shortcode ) ) {
 			$response = array(
-				'id'    => 0,
-				'data'  => '',
+				'id'     => 0,
+				'data'   => '',
+				'action' => $action,
 			);
 			$output_rendering->send_ajax_response( $response );
 			exit;
 		}
 
 		// Send the request to our handler.
-		switch ( $_POST['action'] ) {
+		switch ( $action ) {
 			case 'debug-bar-shortcodes-find':
-				$output_rendering->ajax_find_shortcode_uses( $shortcode );
+				$output_rendering->ajax_find_shortcode_uses( $shortcode, $action );
 				break;
 
 			case 'debug-bar-shortcodes-retrieve':
-				$output_rendering->ajax_retrieve_details( $shortcode );
+				$output_rendering->ajax_retrieve_details( $shortcode, $action );
 				break;
 
 			default:

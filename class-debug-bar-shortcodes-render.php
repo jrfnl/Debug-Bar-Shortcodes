@@ -553,16 +553,18 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		 * Try and retrieve more information about the shortcode from the actual php code.
 		 *
 		 * @param string $shortcode Validated shortcode.
+		 * @param string $action    The AJAX action which led to this function being called.
 		 *
 		 * @return void
 		 */
-		public function ajax_retrieve_details( $shortcode ) {
+		public function ajax_retrieve_details( $shortcode, $action ) {
 			$sc_info = new Debug_Bar_Shortcode_Info( $shortcode, true );
 
 			if ( false === $sc_info->has_details() ) {
 				$response = array(
-					'id'    => 0,
-					'data'  => '',
+					'id'     => 0,
+					'data'   => '',
+					'action' => $action,
 				);
 				$this->send_ajax_response( $response );
 				exit;
@@ -572,6 +574,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			$response = array(
 				'id'        => 1,
 				'data'      => $this->render_details_table( $shortcode, $info ),
+				'action'    => $action,
 				'tr_class'  => self::$name . '-details',
 			);
 			if ( isset( $info->info_url ) && '' !== $info->info_url ) {
@@ -591,10 +594,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		 * Source: http://core.trac.wordpress.org/browser/trunk/src/wp-admin/includes/class-wp-posts-list-table.php#L473
 		 *
 		 * @param string $shortcode Validated shortcode.
+		 * @param string $action    The AJAX action which led to this function being called.
 		 *
 		 * @return void
 		 */
-		public function ajax_find_shortcode_uses( $shortcode ) {
+		public function ajax_find_shortcode_uses( $shortcode, $action ) {
 
 			// '_' is a wildcard in mysql, so escape it.
 			$query = $GLOBALS['wpdb']->prepare(
@@ -611,8 +615,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			/* Do we have posts ? */
 			if ( 0 === $GLOBALS['wpdb']->num_rows ) {
 				$response = array(
-					'id'    => 0,
-					'data'  => '',
+					'id'     => 0,
+					'data'   => '',
+					'action' => $action,
 				);
 				$this->send_ajax_response( $response );
 				exit;
@@ -733,6 +738,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			$response = array(
 				'id'        => 1,
 				'data'      => $output,
+				'action'    => $action,
 				'tr_class'  => self::$name . '-uses',
 			);
 			$this->send_ajax_response( $response );
@@ -778,7 +784,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			$ajax_response->add(
 				array(
 					'what'			=> self::$name,
-					'action'		=> $_POST['action'], // WPCS: CSRF OK.
+					'action'		=> $response['action'],
 					'id'			=> $response['id'],
 					'data'			=> $data,
 					'supplemental'	=> $supplemental,
