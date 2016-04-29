@@ -3,14 +3,16 @@
 	<description>The code standard for Debug Bar Shortcodes is WordPress.</description>
 
 	<rule ref="WordPress">
-		<exclude name="WordPress.VIP" />
 		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines" />
 
 		<!-- else on new line is perfectly fine -->
 		<exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace" />
-
 	</rule>
 
+	<rule ref="WordPress.VIP.ValidatedSanitizedInput">
+		<!-- Let's not bother with the false positives this throws. The data *is* correctly handled. -->
+		<exclude-pattern>*/debug-bar-shortcodes.php</exclude-pattern>
+	</rule>
 
 	<!-- exclude the 'empty' index files from some documentation checks -->
 	<rule ref="Squiz.Commenting.FileComment.WrongStyle">

@@ -159,7 +159,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_From_File' ) ) :
 					}
 					unset( $plugins, $folder );
 				}
-				else if ( function_exists( 'get_plugin_data' ) ) {
+				elseif ( function_exists( 'get_plugin_data' ) ) {
 					// File directly in the plugins dir, just get straight plugin_data.
 					$plugin_basename = $relative_path;
 					$plugin_data     = get_plugin_data( $path_to_file, false, false );
@@ -167,7 +167,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_From_File' ) ) :
 				unset( $relative_path );
 			}
 			/* Is this a plugin in the mu plugin directory ? (`get_plugin_data()` only available on admin side.) */
-			else if ( function_exists( 'get_plugin_data' ) && false !== $is_mu_plugin ) {
+			elseif ( function_exists( 'get_plugin_data' ) && false !== $is_mu_plugin ) {
 				$relative_path = substr( $path_to_file, ( $is_mu_plugin + strlen( $wp_mu_plugins_path ) ) );
 
 				if ( false !== strpos( $relative_path, DIRECTORY_SEPARATOR ) ) {
@@ -184,7 +184,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_From_File' ) ) :
 				if ( isset( $plugin_data['PluginURI'] ) && trim( $plugin_data['PluginURI'] ) !== '' ) {
 					return trim( $plugin_data['PluginURI'] );
 				}
-				else if ( isset( $plugin_data['AuthorURI'] ) && trim( $plugin_data['AuthorURI'] ) !== '' ) {
+				elseif ( isset( $plugin_data['AuthorURI'] ) && trim( $plugin_data['AuthorURI'] ) !== '' ) {
 					return trim( $plugin_data['AuthorURI'] );
 				}
 			}

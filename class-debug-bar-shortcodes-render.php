@@ -69,7 +69,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				$output .= '
 				<table id="' . esc_attr( self::$name ) . '">
 					<thead>' . $header_row . '</thead>
-					'. ( ( true === $double ) ? '<tfoot>' . $header_row . '</tfoot>' : '' ) . '
+					' . ( ( true === $double ) ? '<tfoot>' . $header_row . '</tfoot>' : '' ) . '
 					<tbody>';
 
 
@@ -213,27 +213,27 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				// Type 1 - not a callback.
 				return '';
 			}
-			else if ( self::is_closure( $callback ) ) {
+			elseif ( self::is_closure( $callback ) ) {
 				// Type 2 - closure.
 				return '[<em>closure</em>]';
 			}
-			else if ( ( is_array( $callback ) || is_object( $callback ) ) && self::is_closure( $callback[0] ) ) {
+			elseif ( ( is_array( $callback ) || is_object( $callback ) ) && self::is_closure( $callback[0] ) ) {
 				// Type 3 - closure within an array/object.
 				return '[<em>closure</em>]';
 			}
-			else if ( is_string( $callback ) && false === strpos( $callback, '::' ) ) {
+			elseif ( is_string( $callback ) && false === strpos( $callback, '::' ) ) {
 				// Type 4 - simple string function (includes lambda's).
 				return sanitize_text_field( $callback ) . '()';
 			}
-			else if ( is_string( $callback ) && false !== strpos( $callback, '::' ) ) {
+			elseif ( is_string( $callback ) && false !== strpos( $callback, '::' ) ) {
 				// Type 5 - static class method calls - string.
 				return '[<em>class</em>] ' . str_replace( '::', ' :: ', sanitize_text_field( $callback ) ) . '()';
 			}
-			else if ( is_array( $callback ) && ( is_string( $callback[0] ) && is_string( $callback[1] ) ) ) {
+			elseif ( is_array( $callback ) && ( is_string( $callback[0] ) && is_string( $callback[1] ) ) ) {
 				// Type 6 - static class method calls - array.
 				return '[<em>class</em>] ' . sanitize_text_field( $callback[0] ) . ' :: ' . sanitize_text_field( $callback[1] ) . '()';
 			}
-			else if ( is_array( $callback ) && ( is_object( $callback[0] ) && is_string( $callback[1] ) ) ) {
+			elseif ( is_array( $callback ) && ( is_object( $callback[0] ) && is_string( $callback[1] ) ) ) {
 				// Type 7 - object method calls.
 				return '[<em>object</em>] ' . get_class( $callback[0] ) . ' -> ' . sanitize_text_field( $callback[1] ) . '()';
 			}
@@ -328,7 +328,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				if ( 1 === $count ) {
 					$result = '<code>' . esc_html( $matches[0][1] );
 					if ( isset( $matches[0][2] ) && '' !== $matches[0][2] ) {
-						$result .= '&hellip;'. esc_html( $matches[0][2] );
+						$result .= '&hellip;' . esc_html( $matches[0][2] );
 					}
 					$result .= '</code>';
 				}
@@ -340,7 +340,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 						$result .= '<li><code>' . esc_html( $match[1] );
 
 						if ( isset( $match[2] ) && '' !== $match[2] ) {
-							$result .= '&hellip;'. esc_html( $match[2] );
+							$result .= '&hellip;' . esc_html( $match[2] );
 						}
 						$result .= '</code></li>';
 					}
@@ -384,11 +384,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				if ( true === $bool && isset( $alt['true'] ) ) {
 					$alt_value = $alt['true'];
 				}
-				else if ( false === $bool && isset( $alt['false'] ) ) {
+				elseif ( false === $bool && isset( $alt['false'] ) ) {
 					$alt_value = $alt['false'];
 				}
 			}
-			else if ( isset( $alt['null'] ) ) {
+			elseif ( isset( $alt['null'] ) ) {
 				$alt_value = $alt['null'];
 			}
 
@@ -625,14 +625,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 						<table>
 							<thead>
 								<tr>
-									<th>#</th>' .
-									/* TRANSLATORS: no need to translate, WP standard translation will be used. */ '
-									<th>' . esc_html__( 'Title' ) . '</th>
-									<th>' . esc_html__( 'Post Type', 'debug-bar-shortcodes' ) . '</th>' .
-									/* TRANSLATORS: no need to translate, WP standard translation will be used. */ '
-									<th>' . esc_html__( 'Status' ) . '</th>' .
-									/* TRANSLATORS: no need to translate, WP standard translation will be used. */ '
-									<th>' . esc_html__( 'Author' ) . '</th>
+									<th>#</th>
+									<th>' . esc_html__( 'Title', 'debug-bar-shortcodes' ) . '</th>
+									<th>' . esc_html__( 'Post Type', 'debug-bar-shortcodes' ) . '</th>
+									<th>' . esc_html__( 'Status', 'debug-bar-shortcodes' ) . '</th>
+									<th>' . esc_html__( 'Author', 'debug-bar-shortcodes' ) . '</th>
 									<th>' . esc_html__( 'Shortcode usage(s)', 'debug-bar-shortcodes' ) . '</th>
 								</tr>
 							</thead>

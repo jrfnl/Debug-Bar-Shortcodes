@@ -46,6 +46,7 @@ if ( ! function_exists( 'debug_bar_shortcodes_has_parent_plugin' ) ) {
 			}
 		}
 	}
+
 	add_action( 'admin_init', 'debug_bar_shortcodes_has_parent_plugin' );
 }
 
@@ -88,6 +89,7 @@ if ( ! function_exists( 'debug_bar_shortcodes_autoload' ) ) {
 			include_once plugin_dir_path( __FILE__ ) . $classes[ $classname ];
 		}
 	}
+
 	spl_autoload_register( 'debug_bar_shortcodes_autoload' );
 }
 
@@ -104,6 +106,7 @@ if ( ! function_exists( 'debug_bar_shortcodes_panel' ) ) {
 		$panels[] = new Debug_Bar_Shortcodes();
 		return $panels;
 	}
+
 	add_filter( 'debug_bar_panels', 'debug_bar_shortcodes_panel' );
 }
 

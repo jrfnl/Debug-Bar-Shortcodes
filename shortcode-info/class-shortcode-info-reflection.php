@@ -75,10 +75,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Reflection' ) ) :
 			if ( ( is_string( $callback ) && false === strpos( $callback, '::' ) ) || ( is_object( $callback ) && Debug_Bar_Shortcodes_Render::is_closure( $callback ) ) ) {
 				$this->reflection_object = new ReflectionFunction( $callback );
 			}
-			else if ( is_string( $callback ) && false !== strpos( $callback, '::' ) ) {
+			elseif ( is_string( $callback ) && false !== strpos( $callback, '::' ) ) {
 				$this->reflection_object = new ReflectionMethod( $callback );
 			}
-			else if ( is_array( $callback ) ) {
+			elseif ( is_array( $callback ) ) {
 				$this->reflection_object = new ReflectionMethod( $callback[0], $callback[1] );
 			}
 

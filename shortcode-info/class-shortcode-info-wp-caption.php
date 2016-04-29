@@ -17,6 +17,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_WP_Caption' ) ) :
 	/**
 	 * Information on the standard WP [wp_caption] shortcode.
 	 */
-	class Debug_Bar_Shortcode_Info_WP_Caption extends Debug_Bar_Shortcode_Info_Caption {}
+	class Debug_Bar_Shortcode_Info_WP_Caption extends Debug_Bar_Shortcode_Info_Caption {
+	}
 
 endif; // End of if class_exists.
