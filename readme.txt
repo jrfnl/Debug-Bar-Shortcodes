@@ -12,17 +12,17 @@ Debug Bar Shortcodes adds a new panel to the Debug Bar that displays the registe
 
 == Description ==
 
-Debug Bar Shortcodes adds a new panel to the [Debug Bar](http://wordpress.org/extend/plugins/debug-bar/) that displays the registered shortcodes for the current request.
+Debug Bar Shortcodes adds a new panel to the [Debug Bar](https://wordpress.org/plugins/debug-bar/) that displays the registered shortcodes for the current request.
 
 Additionally it will show you:
 
 * Which function/method is called by the shortcode
 * Whether the shortcode is used on the current post/page/post type and how (only when on singular)
 * Any additional information available about the shortcode, such as a description, which parameters it takes, whether or not it is self-closing.
-  _Want to control the additional information displayed about your own shortcodes ? You can! See the [FAQ](http://wordpress.org/plugins/debug-bar-shortcodes/faq/) for more info._
+  _Want to control the additional information displayed about your own shortcodes ? You can! See the [FAQ](https://wordpress.org/plugins/debug-bar-shortcodes/faq/) for more info._
 * Find out all pages/posts/etc on which a shortcode is used
 
-This plugin is compatible with the [LRH-Shortcode list](http://wordpress.org/plugins/lrh-shortcode-list/) and the [Shortcake/Shortcode UI](https://wordpress.org/plugins/shortcode-ui/) plugins. Additional information about a shortcode provided to these plugins will be taken into account and made available through this plugin too.
+This plugin is compatible with the [LRH-Shortcode list](https://wordpress.org/plugins/lrh-shortcode-list/) and the [Shortcake/Shortcode UI](https://wordpress.org/plugins/shortcode-ui/) plugins. Additional information about a shortcode provided to these plugins will be taken into account and made available through this plugin too.
 
 
 = Why is it useful to have insight into the shortcodes ? =
@@ -45,16 +45,16 @@ There are a number of typical uses I can think of:
 
 = Important =
 
-This plugin requires the [Debug Bar](http://wordpress.org/extend/plugins/debug-bar/) plugin to be installed and activated.
+This plugin requires the [Debug Bar](https://wordpress.org/plugins/debug-bar/) plugin to be installed and activated.
 
 = Credits =
-* The additional information functionality is inspired by [LRH-Shortcode list](http://wordpress.org/plugins/lrh-shortcode-list/) and [Shortcode reference](http://wordpress.org/plugins/shortcode-reference/).
-* The finding of shortcode uses throughout the site is inspired by [TR All Shortcodes](http://wordpress.org/plugins/tr-all-shortcodes/)
+* The additional information functionality is inspired by [LRH-Shortcode list](https://wordpress.org/plugins/lrh-shortcode-list/) and [Shortcode reference](https://wordpress.org/plugins/shortcode-reference/).
+* The finding of shortcode uses throughout the site is inspired by [TR All Shortcodes](https://wordpress.org/plugins/tr-all-shortcodes/)
 
 
 ------------------
 
-If you like this plugin, please [rate and/or review](http://wordpress.org/support/view/plugin-reviews/debug-bar-shortcodes) it. If you have ideas on how to make the plugin even better or if you have found any bugs, please report these in the [Support Forum](http://wordpress.org/support/plugin/debug-bar-shortcodes) or in the [GitHub repository](https://github.com/jrfnl/Debug-Bar-Shortcodes/issues).
+If you like this plugin, please [rate and/or review](https://wordpress.org/support/view/plugin-reviews/debug-bar-shortcodes) it. If you have ideas on how to make the plugin even better or if you have found any bugs, please report these in the [Support Forum](https://wordpress.org/support/plugin/debug-bar-shortcodes) or in the [GitHub repository](https://github.com/jrfnl/Debug-Bar-Shortcodes/issues).
 
 
 
@@ -130,7 +130,7 @@ The `$info` object you receive and are expected to return will contain the curre
 )
 `
 
-If you happen to already provide similar information using the `sim_{shortcode}` filter for the [LHR-Shortcode list](http://wordpress.org/plugins/lrh-shortcode-list/) plugin, no need to do anything extra, that information will be picked up by this plugin.
+If you happen to already provide similar information using the `sim_{shortcode}` filter for the [LHR-Shortcode list](https://wordpress.org/plugins/lrh-shortcode-list/) plugin, no need to do anything extra, that information will be picked up by this plugin.
 
 Similarly, if you provide information for the [Shortcake/Shortcode UI](https://wordpress.org/plugins/shortcode-ui/) feature plugin, that information will be used automatically to enrich the available information.
 
@@ -176,7 +176,7 @@ Have you read what it says in the beautifully red bar at the top of your plugins
 * Fix weird table layout on front-end in combination with Twenty-Sixteen theme.
 
 = 2.0 (2015-12-14) =
-IMPORTANT: if you are a plugin/theme developer and you were using the `'db_shortcodes_info_{your_shortcode}'` filter: the behaviour of this filter has changed from passing an array, to passing an object. Please read the [FAQ](http://wordpress.org/plugins/debug-bar-shortcodes/faq/) for information on how to deal with this change !
+IMPORTANT: if you are a plugin/theme developer and you were using the `'db_shortcodes_info_{your_shortcode}'` filter: the behaviour of this filter has changed from passing an array, to passing an object. Please read the [FAQ](https://wordpress.org/plugins/debug-bar-shortcodes/faq/) for information on how to deal with this change !
 
 * Enhancement: Added support for shortcode information available through [Shortcake](https://wordpress.org/plugins/shortcode-ui/).
 * Enhancement: At least try and detect the plugin url if more than one plugin was found in the same directory.
@@ -193,7 +193,7 @@ IMPORTANT: if you are a plugin/theme developer and you were using the `'db_short
 * Tested & found compatible WP 4.1.
 
 = 1.0.2 (2014-09-05) =
-* Fix compatibility with the [Plugin Dependencies](http://wordpress.org/plugins/plugin-dependencies/) plugin.
+* Fix compatibility with the [Plugin Dependencies](https://wordpress.org/plugins/plugin-dependencies/) plugin.
 * Tested & found compatible WP 4.0.
 
 = 1.0.1 (2014-04-19) =
@@ -216,7 +216,7 @@ IMPORTANT: if you are a plugin/theme developer and you were using the `'db_short
 
 == Installation ==
 
-1. Install Debug Bar if not already installed (http://wordpress.org/extend/plugins/debug-bar/)
+1. Install Debug Bar if not already installed (https://wordpress.org/plugins/debug-bar/)
 1. Extract the .zip file for this plugin and upload its contents to the `/wp-content/plugins/` directory. Alternatively, you can install directly from the Plugin directory within your WordPress Install.
 1. Activate the plugin through the "Plugins" menu in WordPress.
 

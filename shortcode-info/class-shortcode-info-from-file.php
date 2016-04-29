@@ -90,7 +90,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_From_File' ) ) :
 		 * Get the URL where you can find more information about the shortcode.
 		 *
 		 * Inspired by Shortcode reference, heavily adjusted to work more accurately.
-		 * Source: http://wordpress.org/plugins/shortcode-reference/
+		 * Source: https://wordpress.org/plugins/shortcode-reference/
 		 *
 		 * @param string $path_to_file Path to file containing the callback function.
 		 *
@@ -259,7 +259,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_From_File' ) ) :
 
 			/* Check if it exists. */
 			if ( '' !== $plugin_basename ) {
-				$plugin_uri = 'http://wordpress.org/plugins/' . urlencode( $plugin_basename );
+				$plugin_uri = 'https://wordpress.org/plugins/' . urlencode( $plugin_basename );
 
 				/* Get the http headers for the given url. */
 				curl_setopt( $curl, CURLOPT_URL, $plugin_uri );

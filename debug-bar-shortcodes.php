@@ -13,7 +13,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:	Debug Bar Shortcodes
- * Plugin URI:	http://wordpress.org/extend/plugins/debug-bar-shortcodes/
+ * Plugin URI:	https://wordpress.org/plugins/debug-bar-shortcodes/
  * Description:	Debug Bar Shortcodes adds a new panel to Debug Bar that displays all the registered shortcodes for the current request. Requires "Debug Bar" plugin.
  * Version:		2.0.2
  * Author:		Juliette Reinders Folmer
