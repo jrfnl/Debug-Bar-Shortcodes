@@ -642,47 +642,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 
 
 			foreach ( $posts as $i => $post ) {
-				$edit_link        = get_edit_post_link( $post->ID );
-				$title            = _draft_or_post_title( $post->ID );
-				$post_type_object = get_post_type_object( $post->post_type );
-				$can_edit_post    = current_user_can( 'edit_post', $post->ID );
-
-				switch ( $post->post_status ) {
-					case 'publish':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
-						$post_status = __( 'Published' );
-						break;
-
-					case 'future':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
-						$post_status = __( 'Scheduled' );
-						break;
-
-					case 'private':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
-						$post_status = __( 'Private' );
-						break;
-
-					case 'pending':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
-						$post_status = __( 'Pending Review' );
-						break;
-
-					case 'draft':
-					case 'auto-draft':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
-						$post_status = __( 'Draft' );
-						break;
-
-					case 'trash':
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
-						$post_status = __( 'Trash' );
-						break;
-
-					default:
-						$post_status = __( 'Unknown', 'debug-bar-shortcodes' );
-						break;
-				}
+				$edit_link          = get_edit_post_link( $post->ID );
+				$title              = _draft_or_post_title( $post->ID );
+				$post_type_object   = get_post_type_object( $post->post_type );
+				$can_edit_post      = current_user_can( 'edit_post', $post->ID );
+				$post_status_string = $this->get_post_status_string( $post->post_status );
 
 				$actions = array();
 				if ( $can_edit_post && 'trash' !== $post->post_status ) {
@@ -723,7 +687,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				$output .= '
 									</td>
 									<td>' . esc_html( $post_type_object->labels->singular_name ) . '</td>
-									<td>' . esc_html( $post_status ) . '</td>
+									<td>' . esc_html( $post_status_string ) . '</td>
 									<td>' . esc_html( get_the_author_meta( 'display_name', $post->post_author ) ) . '</td>
 									<td>' . $this->find_shortcode_usage( $shortcode, $post->post_content ) . '</td>
 								</tr>';
@@ -743,6 +707,55 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			);
 			$this->send_ajax_response( $response );
 			exit;
+		}
+
+
+		/**
+		 * Translate a post status keyword to a human readable localized string.
+		 *
+		 * @param string $post_status The post status to translate.
+		 *
+		 * @return string
+		 */
+		private function get_post_status_string( $post_status ) {
+			switch ( $post_status ) {
+				case 'publish':
+					/* translators: no need to translate, WP standard translation will be used. */
+					$post_status_string = __( 'Published' );
+					break;
+
+				case 'future':
+					/* translators: no need to translate, WP standard translation will be used. */
+					$post_status_string = __( 'Scheduled' );
+					break;
+
+				case 'private':
+					/* translators: no need to translate, WP standard translation will be used. */
+					$post_status_string = __( 'Private' );
+					break;
+
+				case 'pending':
+					/* translators: no need to translate, WP standard translation will be used. */
+					$post_status_string = __( 'Pending Review' );
+					break;
+
+				case 'draft':
+				case 'auto-draft':
+					/* translators: no need to translate, WP standard translation will be used. */
+					$post_status_string = __( 'Draft' );
+					break;
+
+				case 'trash':
+					/* translators: no need to translate, WP standard translation will be used. */
+					$post_status_string = __( 'Trash' );
+					break;
+
+				default:
+					$post_status_string = __( 'Unknown', 'debug-bar-shortcodes' );
+					break;
+			}
+
+			return $post_status_string;
 		}
 
 
