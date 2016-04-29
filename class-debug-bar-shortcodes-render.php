@@ -5,7 +5,8 @@
  * @package     WordPress\Plugins\Debug Bar Shortcodes
  * @author      Juliette Reinders Folmer <wpplugins_nospam@adviesenzo.nl>
  * @link        https://github.com/jrfnl/Debug-Bar-Shortcodes
- * @since       1.0 (renamed in 2.0 - was: Debug_Bar_Shortcodes_Info)
+ * @since       1.0
+ * @since       2.0 Class renamed - was: Debug_Bar_Shortcodes_Info
  *
  * @copyright   2013-2016 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
@@ -650,26 +651,26 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 
 				$actions = array();
 				if ( $can_edit_post && 'trash' !== $post->post_status ) {
-					/* TRANSLATORS: no need to translate, WP standard translation will be used. */
+					/* translators: no need to translate, WP standard translation will be used. */
 					$actions['edit'] = '<a href="' . $edit_link . '" title="' . esc_attr( __( 'Edit this item' ) ) . '">';
-					/* TRANSLATORS: no need to translate, WP standard translation will be used. */
+					/* translators: no need to translate, WP standard translation will be used. */
 					$actions['edit'] .= __( 'Edit' ) . '</a>';
 				}
 				if ( $post_type_object->public ) {
 					if ( in_array( $post->post_status, array( 'pending', 'draft', 'future' ), true ) ) {
 						if ( $can_edit_post ) {
-							/* TRANSLATORS: no need to translate, WP standard translation will be used. */
+							/* translators: no need to translate, WP standard translation will be used. */
 							$actions['view'] = '<a href="' . esc_url( apply_filters( 'preview_post_link', set_url_scheme( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ) ) . '" title="' . esc_attr( sprintf( __( 'Preview &#8220;%s&#8221;' ), $title ) ) . '" rel="permalink">';
-							/* TRANSLATORS: no need to translate, WP standard translation will be used. */
+							/* translators: no need to translate, WP standard translation will be used. */
 
 							$actions['view'] .= __( 'Preview' ) . '</a>';
 
 						}
 					}
-					else if ( 'trash' !== $post->post_status ) {
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
+					elseif ( 'trash' !== $post->post_status ) {
+						/* translators: no need to translate, WP standard translation will be used. */
 						$actions['view'] = '<a href="' . get_permalink( $post->ID ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $title ) ) . '" rel="permalink">';
-						/* TRANSLATORS: no need to translate, WP standard translation will be used. */
+						/* translators: no need to translate, WP standard translation will be used. */
 						$actions['view'] .= __( 'View' ) . '</a>';
 					}
 				}
