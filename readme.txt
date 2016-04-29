@@ -169,6 +169,9 @@ Have you read what it says in the beautifully red bar at the top of your plugins
 
 == Changelog ==
 
+= Trunk =
+* Make loading of text-domain compatible with use of the plugin in the `must-use` plugins directory.
+
 = 2.0.2 (2016-01-10) =
 * Fix spinner for ajax request which has stopped working since WP 4.2.
 
