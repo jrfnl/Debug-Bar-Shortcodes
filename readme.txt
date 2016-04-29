@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: debugbar, debug-bar, Debug Bar, Shortcodes, Debug Bar Shortcodes, shortcode list, list shortcodes, shortcodes reference
 Requires at least: 3.6
 Tested up to: 4.4
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 Depends: Debug Bar
 License: GPLv2
 
@@ -169,8 +169,10 @@ Have you read what it says in the beautifully red bar at the top of your plugins
 
 == Changelog ==
 
-= Trunk =
+= 2.0.3 (2016-04-29) =
 * Make loading of text-domain compatible with use of the plugin in the `must-use` plugins directory.
+* Minor housekeeping.
+* Tested & found compatible WP 4.5.
 
 = 2.0.2 (2016-01-10) =
 * Fix spinner for ajax request which had stopped working since WP 4.2.
@@ -189,7 +191,7 @@ IMPORTANT: if you are a plugin/theme developer and you were using the `'db_short
 * Usability: Row actions now visible on hover over row, not just title.
 * Usability: Improved compatibility with Glotpress / WP translations.
 * Minor housekeeping.
-* Tested & found compatible WP 4.4
+* Tested & found compatible WP 4.4.
 
 = 1.0.3 (2014-12-18) =
 * Added: more detailed information about the WP native `playlist` shortcode.
