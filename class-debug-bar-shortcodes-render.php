@@ -158,9 +158,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		/**
 		 * Generate the action links for a shortcode.
 		 *
-		 * @param string $shortcode   Current shortcode.
-		 * @param bool   $has_details Whether or not the $info is equal to the defaults.
-		 * @param object $info        Shortcode info.
+		 * @param string                             $shortcode   Current shortcode.
+		 * @param bool                               $has_details Whether or not the $info is equal to the defaults.
+		 * @param \Debug_Bar_Shortcode_Info_Defaults $info        Shortcode info.
 		 *
 		 * @return string
 		 */
@@ -411,8 +411,8 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		/**
 		 * Generate the html for a shortcode detailed info table.
 		 *
-		 * @param string $shortcode Current shortcode.
-		 * @param object $info      Shortcode info.
+		 * @param string                             $shortcode Current shortcode.
+		 * @param \Debug_Bar_Shortcode_Info_Defaults $info      Shortcode info.
 		 *
 		 * @return string
 		 */
@@ -484,8 +484,8 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		/**
 		 * Generate the html for a shortcode detailed info table syntax row.
 		 *
-		 * @param string $shortcode Current shortcode.
-		 * @param object $info      Shortcode info.
+		 * @param string                             $shortcode Current shortcode.
+		 * @param \Debug_Bar_Shortcode_Info_Defaults $info      Shortcode info.
 		 *
 		 * @return string
 		 */
@@ -518,9 +518,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		/**
 		 * Generate the html for a shortcode detailed info table parameter row.
 		 *
-		 * @param object $info      Shortcode info.
-		 * @param string $type      Parameter type: 'required' or 'optional'.
-		 * @param string $label     Parameter label.
+		 * @param \Debug_Bar_Shortcode_Info_Defaults $info      Shortcode info.
+		 * @param string                             $type      Parameter type: 'required' or 'optional'.
+		 * @param string                             $label     Parameter label.
 		 *
 		 * @return string
 		 */
