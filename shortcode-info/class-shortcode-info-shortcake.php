@@ -88,8 +88,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Shortcake' ) ) :
 		private function set_self_closing() {
 			if ( ! empty( $this->shortcake['inner_content'] ) && is_array( $this->shortcake['inner_content'] ) ) {
 				$this->self_closing = false;
-			}
-			else {
+			} else {
 				$this->self_closing = true;
 			}
 		}
@@ -119,8 +118,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Shortcake' ) ) :
 					// Does not exist yet - issue https://github.com/wp-shortcake/Shortcake/issues/132 .
 					if ( isset( $attr_array['required'] ) && true === $attr_array['required'] ) {
 						$this->parameters['required'][ $attr_array['attr'] ] = $text;
-					}
-					else {
+					} else {
 						$this->parameters['optional'][ $attr_array['attr'] ] = $text;
 					}
 				}

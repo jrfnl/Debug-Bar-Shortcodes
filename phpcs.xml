@@ -2,17 +2,21 @@
 <ruleset name="Debug Bar Shortcodes">
 	<description>The code standard for Debug Bar Shortcodes is WordPress.</description>
 
+	<!-- ##### PHP cross-version compatibility ##### -->
+	<config name="testVersion" value="5.2-99.0"/>
+	<rule ref="PHPCompatibility"/>
+	
+	<rule ref="PHPCompatibility.PHP.NewClosure">
+		<exclude-pattern>*/php53/php5.3-closure-test.php</exclude-pattern>
+	</rule>
+
+
+	<!-- ##### WordPress sniffs #####-->
 	<rule ref="WordPress">
+		<exclude name="WordPress.VIP" />
 		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines" />
-
-		<!-- else on new line is perfectly fine -->
-		<exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace" />
 	</rule>
 
-	<rule ref="WordPress.VIP.ValidatedSanitizedInput">
-		<!-- Let's not bother with the false positives this throws. The data *is* correctly handled. -->
-		<exclude-pattern>*/debug-bar-shortcodes.php</exclude-pattern>
-	</rule>
 
 	<!-- exclude the 'empty' index files from some documentation checks -->
 	<rule ref="Squiz.Commenting.FileComment.WrongStyle">

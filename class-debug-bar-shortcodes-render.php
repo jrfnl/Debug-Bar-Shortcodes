@@ -121,8 +121,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 					</tbody>
 				</table>';
 
-			}
-			else {
+			} else {
 				$output = '<p>' . esc_html__( 'No shortcodes found.', 'debug-bar-shortcodes' ) . '</p>';
 			}
 
@@ -169,8 +168,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 
 			if ( true === $has_details ) {
 				$links[] = '<a href="#" class="' . esc_attr( self::$name . '-view-details' ) . '" title="' . esc_html__( 'View more detailed information about the shortcode.', 'debug-bar-shortcodes' ) . '">' . esc_html__( 'View details', 'debug-bar-shortcodes' ) . '</a>';
-			}
-			else {
+			} else {
 				$links[] = '<a href="#' . esc_attr( $shortcode ) . '" class="' . esc_attr( self::$name . '-get-details' ) . '" title="' . esc_html__( 'Try and retrieve more detailed information about the shortcode.', 'debug-bar-shortcodes' ) . '">' . esc_html__( 'Retrieve details', 'debug-bar-shortcodes' ) . '</a>';
 			}
 
@@ -213,32 +211,32 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			if ( ( ! is_string( $callback ) && ! is_object( $callback ) ) && ( ! is_array( $callback ) || ( is_array( $callback ) && ( ! is_string( $callback[0] ) && ! is_object( $callback[0] ) ) ) ) ) {
 				// Type 1 - not a callback.
 				return '';
-			}
-			elseif ( self::is_closure( $callback ) ) {
+
+			} elseif ( self::is_closure( $callback ) ) {
 				// Type 2 - closure.
 				return '[<em>closure</em>]';
-			}
-			elseif ( ( is_array( $callback ) || is_object( $callback ) ) && self::is_closure( $callback[0] ) ) {
+
+			} elseif ( ( is_array( $callback ) || is_object( $callback ) ) && self::is_closure( $callback[0] ) ) {
 				// Type 3 - closure within an array/object.
 				return '[<em>closure</em>]';
-			}
-			elseif ( is_string( $callback ) && false === strpos( $callback, '::' ) ) {
+
+			} elseif ( is_string( $callback ) && false === strpos( $callback, '::' ) ) {
 				// Type 4 - simple string function (includes lambda's).
 				return sanitize_text_field( $callback ) . '()';
-			}
-			elseif ( is_string( $callback ) && false !== strpos( $callback, '::' ) ) {
+
+			} elseif ( is_string( $callback ) && false !== strpos( $callback, '::' ) ) {
 				// Type 5 - static class method calls - string.
 				return '[<em>class</em>] ' . str_replace( '::', ' :: ', sanitize_text_field( $callback ) ) . '()';
-			}
-			elseif ( is_array( $callback ) && ( is_string( $callback[0] ) && is_string( $callback[1] ) ) ) {
+
+			} elseif ( is_array( $callback ) && ( is_string( $callback[0] ) && is_string( $callback[1] ) ) ) {
 				// Type 6 - static class method calls - array.
 				return '[<em>class</em>] ' . sanitize_text_field( $callback[0] ) . ' :: ' . sanitize_text_field( $callback[1] ) . '()';
-			}
-			elseif ( is_array( $callback ) && ( is_object( $callback[0] ) && is_string( $callback[1] ) ) ) {
+
+			} elseif ( is_array( $callback ) && ( is_object( $callback[0] ) && is_string( $callback[1] ) ) ) {
 				// Type 7 - object method calls.
 				return '[<em>object</em>] ' . get_class( $callback[0] ) . ' -> ' . sanitize_text_field( $callback[1] ) . '()';
-			}
-			else {
+
+			} else {
 				// Type 8 - undetermined.
 				return '<pre>' . var_export( $callback, true ) . '</pre>';
 			}
@@ -287,14 +285,15 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			if ( empty( $matches[ $post_id ] ) ) {
 				return false;
 			}
+
 			foreach ( $matches[ $post_id ] as $found ) {
 				if ( $shortcode === $found[2] ) {
 					return true;
-				}
-				elseif ( ! empty( $shortcode[5] ) && has_shortcode( $shortcode[5], $shortcode ) ) {
+				} elseif ( ! empty( $shortcode[5] ) && has_shortcode( $shortcode[5], $shortcode ) ) {
 					return true;
 				}
 			}
+
 			return false;
 		}
 
@@ -332,9 +331,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 						$result .= '&hellip;' . esc_html( $matches[0][2] );
 					}
 					$result .= '</code>';
-				}
-				// More results, let's make it a neat list.
-				else {
+
+				} else {
+					// More results, let's make it a neat list.
 					$result = '<ol>';
 
 					foreach ( $matches as $match ) {
@@ -384,12 +383,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			if ( isset( $bool ) ) {
 				if ( true === $bool && isset( $alt['true'] ) ) {
 					$alt_value = $alt['true'];
-				}
-				elseif ( false === $bool && isset( $alt['false'] ) ) {
+				} elseif ( false === $bool && isset( $alt['false'] ) ) {
 					$alt_value = $alt['false'];
 				}
-			}
-			elseif ( isset( $alt['null'] ) ) {
+			} elseif ( isset( $alt['null'] ) ) {
 				$alt_value = $alt['null'];
 			}
 
@@ -470,8 +467,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			/* Ignore the result if syntax is the only info row (as it's always there). */
 			if ( 1 >= count( $rows ) && isset( $rows['syntax'] ) ) {
 				$output = '';
-			}
-			else {
+			} else {
 				$output = '
 								<h4>' . esc_html__( 'Shortcode details', 'debug-bar-shortcodes' ) . '</h4>
 								<table>' . implode( $rows ) . '
@@ -499,12 +495,10 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				$param = ( ( ! empty( $info->parameters['required'] ) || ! empty( $info->parameters['optional'] ) ) ? ' <em>[parameters]</em> ' : '' );
 				if ( true === $info->self_closing ) {
 					$row .= '<code>[' . esc_html( $shortcode ) . $param . ' /]</code>';
-				}
-				else {
+				} else {
 					$row .= '<code>[' . esc_html( $shortcode ) . $param . '] &hellip; [/' . esc_html( $shortcode ) . ']</code>';
 				}
-			}
-			else {
+			} else {
 				$row .= '<em>' . esc_html__( 'Unknown', 'debug-bar-shortcodes' ) . '</em>';
 			}
 
@@ -533,8 +527,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 				if ( true !== $first ) {
 					$row .= '
 							<tr>';
-				}
-				else {
+				} else {
 					$first = false;
 				}
 				$row .= '
@@ -666,8 +659,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 							$actions['view'] .= __( 'Preview' ) . '</a>';
 
 						}
-					}
-					elseif ( 'trash' !== $post->post_status ) {
+					} elseif ( 'trash' !== $post->post_status ) {
 						/* translators: no need to translate, WP standard translation will be used. */
 						$actions['view'] = '<a href="' . get_permalink( $post->ID ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $title ) ) . '" rel="permalink">';
 						/* translators: no need to translate, WP standard translation will be used. */

@@ -137,14 +137,12 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_From_File' ) ) :
 						foreach ( $plugins as $plugin_basename => $plugin_data ) {
 							break;
 						}
-					}
-
-					/*
-					   So in the case of several plugins within a directory - check if the file containing
-					   the shortcode callback is one of the plugin main files. If so, accept.
-					   Otherwise, ignore altogether.
-					 */
-					else {
+					} else {
+						/*
+						   So in the case of several plugins within a directory - check if the file containing
+						   the shortcode callback is one of the plugin main files. If so, accept.
+						   Otherwise, ignore altogether.
+						 */
 						$found = false;
 						foreach ( $plugins as $plugin_basename => $plugin_data ) {
 							if ( false !== strpos( $relative_path, DIRECTORY_SEPARATOR . $plugin_basename ) ) {
@@ -158,16 +156,17 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_From_File' ) ) :
 						unset( $found );
 					}
 					unset( $plugins, $folder );
-				}
-				elseif ( function_exists( 'get_plugin_data' ) ) {
+
+				} elseif ( function_exists( 'get_plugin_data' ) ) {
 					// File directly in the plugins dir, just get straight plugin_data.
 					$plugin_basename = $relative_path;
 					$plugin_data     = get_plugin_data( $path_to_file, false, false );
 				}
 				unset( $relative_path );
-			}
-			/* Is this a plugin in the mu plugin directory ? (`get_plugin_data()` only available on admin side.) */
-			elseif ( function_exists( 'get_plugin_data' ) && false !== $is_mu_plugin ) {
+
+			} elseif ( function_exists( 'get_plugin_data' ) && false !== $is_mu_plugin ) {
+				/* Is this a plugin in the mu plugin directory ? (`get_plugin_data()` only available on admin side.) */
+
 				$relative_path = substr( $path_to_file, ( $is_mu_plugin + strlen( $wp_mu_plugins_path ) ) );
 
 				if ( false !== strpos( $relative_path, DIRECTORY_SEPARATOR ) ) {
@@ -183,8 +182,8 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_From_File' ) ) :
 			if ( is_array( $plugin_data ) && ! empty( $plugin_data ) ) {
 				if ( isset( $plugin_data['PluginURI'] ) && trim( $plugin_data['PluginURI'] ) !== '' ) {
 					return trim( $plugin_data['PluginURI'] );
-				}
-				elseif ( isset( $plugin_data['AuthorURI'] ) && trim( $plugin_data['AuthorURI'] ) !== '' ) {
+
+				} elseif ( isset( $plugin_data['AuthorURI'] ) && trim( $plugin_data['AuthorURI'] ) !== '' ) {
 					return trim( $plugin_data['AuthorURI'] );
 				}
 			}
@@ -194,8 +193,8 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_From_File' ) ) :
 				$uri = $this->wp_repo_exists( $plugin_basename );
 				if ( false !== $uri ) {
 					return $uri;
-				}
-				else {
+
+				} else {
 					return 'http://www.google.com/search?q=Wordpress+' . urlencode( '"' . $plugin_basename . '"' ) . '+shortcode+' . urlencode( '"' . $this->shortcode . '"' );
 				}
 			}

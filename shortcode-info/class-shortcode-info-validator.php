@@ -37,11 +37,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Validator' ) ) :
 		public function __construct( $info ) {
 			if ( is_object( $info ) ) {
 				$this->dirty = $info;
-			}
-			elseif ( is_array( $info ) && ! empty( $info ) ) {
+
+			} elseif ( is_array( $info ) && ! empty( $info ) ) {
 				$this->dirty = (object) $info;
-			}
-			else {
+
+			} else {
 				// No valid input received, will effectively return the default properties.
 				return;
 			}
@@ -84,8 +84,8 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Validator' ) ) :
 				// Work around flacky behaviour of PHP for the FILTER_NULL_ON_FAILURE flag.
 				if ( is_bool( $this->dirty->self_closing ) ) {
 					$this->self_closing = $this->dirty->self_closing;
-				}
-				elseif ( function_exists( 'filter_var' ) ) {
+
+				} elseif ( function_exists( 'filter_var' ) ) {
 					$this->self_closing = filter_var( $this->dirty->self_closing, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE );
 				}
 			}
