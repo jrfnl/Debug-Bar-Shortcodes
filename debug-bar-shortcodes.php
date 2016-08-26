@@ -124,7 +124,7 @@ if ( ! function_exists( 'debug_bar_shortcodes_panel' ) ) {
 
 
 
-if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
+if ( ! function_exists( 'debug_bar_shortcodes_do_ajax' ) ) {
 	/**
 	 * Verify validity of ajax request and pass it to the internal handler.
 	 */
