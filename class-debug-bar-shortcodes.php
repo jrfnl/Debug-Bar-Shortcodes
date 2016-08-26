@@ -64,8 +64,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes' ) && class_exists( 'Debug_Bar_Panel'
 			$lang_path = dirname( plugin_basename( __FILE__ ) ) . '/languages';
 			if ( false === strpos( __FILE__, basename( WPMU_PLUGIN_DIR ) ) ) {
 				load_plugin_textdomain( $domain, false, $lang_path );
-			}
-			else {
+			} else {
 				load_muplugin_textdomain( $domain, $lang_path );
 			}
 		}

@@ -248,8 +248,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info' ) ) :
 			if ( count( $arrays ) < 2 ) {
 				if ( empty( $arrays ) ) {
 					return array();
-				}
-				else {
+				} else {
 					return $arrays[0];
 				}
 			}
@@ -260,8 +259,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info' ) ) :
 				foreach ( $array as $key => $value ) {
 					if ( is_array( $value ) && ( isset( $merged[ $key ] ) && is_array( $merged[ $key ] ) ) ) {
 						$merged[ $key ] = self::array_merge_recursive_distinct( $merged[ $key ], $value );
-					}
-					else {
+					} else {
 						$merged[ $key ] = $value;
 					}
 				}

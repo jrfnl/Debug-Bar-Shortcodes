@@ -47,9 +47,9 @@ if ( ! function_exists( 'debug_bar_shortcodes_has_parent_plugin' ) ) {
 
 			// Add to recently active plugins list.
 			if ( ! is_network_admin() ) {
-				update_option( 'recently_activated', array( $file => time() ) + (array) get_option( 'recently_activated' ) );
+				update_option( 'recently_activated', ( array( $file => time() ) + (array) get_option( 'recently_activated' ) ) );
 			} else {
-				update_site_option( 'recently_activated', array( $file => time() ) + (array) get_site_option( 'recently_activated' ) );
+				update_site_option( 'recently_activated', ( array( $file => time() ) + (array) get_site_option( 'recently_activated' ) ) );
 			}
 
 			// Prevent trying again on page reload.
@@ -124,13 +124,13 @@ if ( ! function_exists( 'debug_bar_shortcodes_panel' ) ) {
 
 
 
-if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
+if ( ! function_exists( 'debug_bar_shortcodes_do_ajax' ) ) {
 	/**
 	 * Verify validity of ajax request and pass it to the internal handler.
 	 */
 	function debug_bar_shortcodes_do_ajax() {
 		// Verify this is a valid ajax request.
-		if ( ! isset( $_POST['dbs-nonce'] ) || false === wp_verify_nonce( $_POST['dbs-nonce'], 'debug-bar-shortcodes' ) ) {
+		if ( ! isset( $_POST['dbs-nonce'] ) || false === wp_verify_nonce( wp_unslash( $_POST['dbs-nonce'] ), 'debug-bar-shortcodes' ) ) {
 			exit( '-1' );
 		}
 
@@ -138,7 +138,6 @@ if ( ! function_exists( 'debug_bar_shortcodes_ajax' ) ) {
 		if ( ! isset( $_POST['shortcode'] ) || '' === trim( wp_unslash( $_POST['shortcode'] ) ) ) {
 			exit( '-1' );
 		}
-
 
 		$output_rendering = new Debug_Bar_Shortcodes_Render();
 		$shortcode        = trim( wp_unslash( $_POST['shortcode'] ) );
