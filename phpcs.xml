@@ -13,7 +13,7 @@
 	<!-- ##### PHP cross-version compatibility ##### -->
 	<config name="testVersion" value="5.2-99.0"/>
 	<rule ref="PHPCompatibility"/>
-	
+
 	<rule ref="PHPCompatibility.PHP.NewClosure">
 		<exclude-pattern>*/php53/php5.3-closure-test.php</exclude-pattern>
 	</rule>
@@ -21,12 +21,53 @@
 
 	<!-- ##### WordPress sniffs #####-->
 	<rule ref="WordPress">
-		<exclude name="WordPress.VIP" />
 		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines" />
+
+		<!-- Way too overzealous. -->
+		<exclude name="WordPress.VIP.ValidatedSanitizedInput"/>
+	</rule>
+
+	<!-- ##### Customizations #####-->
+
+	<!-- Verify that the text_domain is set to the desired text-domain.
+		 Multiple valid text domains can be provided as a comma-delimited list. -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array" value="debug-bar-shortcodes" />
+		</properties>
+	</rule>
+
+	<!-- Verify that everything in the global namespace is prefixed with a theme specific prefix.
+		 Multiple valid prefixes can be provided as a comma-delimited list. -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array" value="Debug_Bar_Shortcode,Debug_Bar_Shortcodes,db_shortcodes" />
+		</properties>
+	</rule>
+
+	<!-- Verify that no WP functions are used which are deprecated or have been removed.
+		 The minimum version set here should be in line with the minimum WP version
+		 supported by the Debug Bar extension. -->
+	<rule ref="WordPress.WP.DeprecatedFunctions">
+		<properties>
+			<property name="minimum_supported_version" value="3.6" />
+		</properties>
+	</rule>
+	<rule ref="WordPress.WP.DeprecatedClasses">
+		<properties>
+			<property name="minimum_supported_version" value="3.6" />
+		</properties>
 	</rule>
 
 
-	<!-- exclude the 'empty' index files from some documentation checks -->
+	<!-- ##### Exlusions #####-->
+
+	<!-- Exclude a number of files from the "file name must match class name" sniff. -->
+	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
+		<exclude-pattern>*/shortcode-info/class-shortcode-info*.php</exclude-pattern>
+	</rule>
+
+	<!-- Exclude the 'empty' index files from some documentation checks. -->
 	<rule ref="Squiz.Commenting.FileComment.WrongStyle">
 		<exclude-pattern>*/index.php</exclude-pattern>
 	</rule>
