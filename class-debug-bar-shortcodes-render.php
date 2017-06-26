@@ -33,7 +33,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		/**
 		 * Plugin name for use in localization, class names etc.
 		 *
-		 * @var	string $name
+		 * @var string $name
 		 */
 		public static $name = 'debug-bar-shortcodes';
 
@@ -92,9 +92,13 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 							<td>' . $this->determine_callback_type( $callback ) . '</td>';
 
 					if ( true === $is_singular ) {
-						$in_use  = $this->has_shortcode( $shortcode );
-						$output .= '
-							<td>' . $this->render_image_based_on_bool( array( 'true' => esc_html__( 'Shortcode is used', 'debug-bar-shortcodes' ), 'false' => esc_html__( 'Shortcode not used', 'debug-bar-shortcodes' ) ), $in_use, true ) . '</td>
+						$alt_texts = array(
+							'true'  => esc_html__( 'Shortcode is used', 'debug-bar-shortcodes' ),
+							'false' => esc_html__( 'Shortcode not used', 'debug-bar-shortcodes' ),
+						);
+						$in_use    = $this->has_shortcode( $shortcode );
+						$output   .= '
+							<td>' . $this->render_image_based_on_bool( $alt_texts, $in_use, true ) . '</td>
 							<td>' . ( ( true === $in_use ) ? $this->find_shortcode_usage( $shortcode ) : '&nbsp;' ) . '</td>';
 						unset( $in_use );
 					}
@@ -247,7 +251,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		 * Whether the current (singular) post contains the specified shortcode.
 		 *
 		 * Freely based on WP native implementation:
-		 * Source	http://core.trac.wordpress.org/browser/trunk/src/wp-includes/shortcodes.php#L144
+		 * Source: http://core.trac.wordpress.org/browser/trunk/src/wp-includes/shortcodes.php#L144
 		 * Last compared against source: 2015-12-14.
 		 *
 		 * @global object $post Current post object.
@@ -357,9 +361,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		 * Retrieve a html image tag based on a value.
 		 *
 		 * @param array     $alt        Array with only three allowed keys:
-		 *                                ['true']	=>	Alt value for true image.
-		 *                                ['false']	=>	Alt value for false image.
-		 *                                ['null']	=>	Alt value for null image (status unknown).
+		 *                                ['true']  => Alt value for true image.
+		 *                                ['false'] => Alt value for false image.
+		 *                                ['null']  => Alt value for null image (status unknown).
 		 * @param bool|null $bool       The value to base the output on, either boolean or null.
 		 * @param bool      $show_false Whether to show an image if false or to return an empty string.
 		 * @param bool      $show_null  Whether to show an image if null or to return an empty string.
@@ -371,9 +375,9 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 
 			if ( ! isset( $images ) ) {
 				$images = array(
-					'true'		=> plugins_url( 'images/badge-circle-check-16.png', __FILE__ ),
-					'false'		=> plugins_url( 'images/badge-circle-cross-16.png', __FILE__ ),
-					'null'		=> plugins_url( 'images/help.png', __FILE__ ),
+					'true'  => plugins_url( 'images/badge-circle-check-16.png', __FILE__ ),
+					'false' => plugins_url( 'images/badge-circle-cross-16.png', __FILE__ ),
+					'null'  => plugins_url( 'images/help.png', __FILE__ ),
 				);
 			}
 
@@ -644,26 +648,22 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 
 				$actions = array();
 				if ( $can_edit_post && 'trash' !== $post->post_status ) {
-					/* translators: no need to translate, WP standard translation will be used. */
-					$actions['edit'] = '<a href="' . $edit_link . '" title="' . esc_attr( __( 'Edit this item' ) ) . '">';
-					/* translators: no need to translate, WP standard translation will be used. */
-					$actions['edit'] .= __( 'Edit' ) . '</a>';
+					$actions['edit']  = '<a href="' . $edit_link . '" title="' . esc_attr( __( 'Edit this item', 'debug-bar-shortcodes' ) ) . '">';
+					$actions['edit'] .= __( 'Edit', 'debug-bar-shortcodes' ) . '</a>';
 				}
 				if ( $post_type_object->public ) {
 					if ( in_array( $post->post_status, array( 'pending', 'draft', 'future' ), true ) ) {
 						if ( $can_edit_post ) {
-							/* translators: no need to translate, WP standard translation will be used. */
-							$actions['view'] = '<a href="' . esc_url( apply_filters( 'preview_post_link', set_url_scheme( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ) ) . '" title="' . esc_attr( sprintf( __( 'Preview &#8220;%s&#8221;' ), $title ) ) . '" rel="permalink">';
-							/* translators: no need to translate, WP standard translation will be used. */
+							/* Translators: %s: post title for use in a link title attribute. */
+							$actions['view'] = '<a href="' . esc_url( apply_filters( 'preview_post_link', set_url_scheme( add_query_arg( 'preview', 'true', get_permalink( $post->ID ) ) ) ) ) . '" title="' . esc_attr( sprintf( __( 'Preview &#8220;%s&#8221;', 'debug-bar-shortcodes' ), $title ) ) . '" rel="permalink">'; // WPCS: prefix ok.
 
-							$actions['view'] .= __( 'Preview' ) . '</a>';
+							$actions['view'] .= __( 'Preview', 'debug-bar-shortcodes' ) . '</a>';
 
 						}
 					} elseif ( 'trash' !== $post->post_status ) {
-						/* translators: no need to translate, WP standard translation will be used. */
-						$actions['view'] = '<a href="' . get_permalink( $post->ID ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;' ), $title ) ) . '" rel="permalink">';
-						/* translators: no need to translate, WP standard translation will be used. */
-						$actions['view'] .= __( 'View' ) . '</a>';
+						/* Translators: %s: post title for use in a link title attribute. */
+						$actions['view']  = '<a href="' . get_permalink( $post->ID ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;', 'debug-bar-shortcodes' ), $title ) ) . '" rel="permalink">';
+						$actions['view'] .= __( 'View', 'debug-bar-shortcodes' ) . '</a>';
 					}
 				}
 
@@ -713,34 +713,28 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 		private function get_post_status_string( $post_status ) {
 			switch ( $post_status ) {
 				case 'publish':
-					/* translators: no need to translate, WP standard translation will be used. */
-					$post_status_string = __( 'Published' );
+					$post_status_string = __( 'Published', 'debug-bar-shortcodes' );
 					break;
 
 				case 'future':
-					/* translators: no need to translate, WP standard translation will be used. */
-					$post_status_string = __( 'Scheduled' );
+					$post_status_string = __( 'Scheduled', 'debug-bar-shortcodes' );
 					break;
 
 				case 'private':
-					/* translators: no need to translate, WP standard translation will be used. */
-					$post_status_string = __( 'Private' );
+					$post_status_string = __( 'Private', 'debug-bar-shortcodes' );
 					break;
 
 				case 'pending':
-					/* translators: no need to translate, WP standard translation will be used. */
-					$post_status_string = __( 'Pending Review' );
+					$post_status_string = __( 'Pending Review', 'debug-bar-shortcodes' );
 					break;
 
 				case 'draft':
 				case 'auto-draft':
-					/* translators: no need to translate, WP standard translation will be used. */
-					$post_status_string = __( 'Draft' );
+					$post_status_string = __( 'Draft', 'debug-bar-shortcodes' );
 					break;
 
 				case 'trash':
-					/* translators: no need to translate, WP standard translation will be used. */
-					$post_status_string = __( 'Trash' );
+					$post_status_string = __( 'Trash', 'debug-bar-shortcodes' );
 					break;
 
 				default:
@@ -789,11 +783,11 @@ if ( ! class_exists( 'Debug_Bar_Shortcodes_Render' ) ) :
 			$ajax_response = new WP_Ajax_Response();
 			$ajax_response->add(
 				array(
-					'what'			=> self::$name,
-					'action'		=> $response['action'],
-					'id'			=> $response['id'],
-					'data'			=> $data,
-					'supplemental'	=> $supplemental,
+					'what'         => self::$name,
+					'action'       => $response['action'],
+					'id'           => $response['id'],
+					'data'         => $data,
+					'supplemental' => $supplemental,
 				)
 			);
 			$ajax_response->send();
