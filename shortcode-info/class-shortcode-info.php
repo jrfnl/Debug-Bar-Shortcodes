@@ -29,7 +29,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info' ) ) :
 		/**
 		 * Defaults.
 		 *
-		 * @var	\Debug_Bar_Shortcode_Info_Defaults $defaults
+		 * @var \Debug_Bar_Shortcode_Info_Defaults $defaults
 		 */
 		protected $defaults;
 

@@ -12,16 +12,16 @@
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  *
  * @wordpress-plugin
- * Plugin Name:	Debug Bar Shortcodes
- * Plugin URI:	https://wordpress.org/plugins/debug-bar-shortcodes/
- * Description:	Debug Bar Shortcodes adds a new panel to Debug Bar that displays all the registered shortcodes for the current request. Requires "Debug Bar" plugin.
- * Version:		2.0.3
- * Author:		Juliette Reinders Folmer
- * Author URI:	http://www.adviesenzo.nl/
+ * Plugin Name: Debug Bar Shortcodes
+ * Plugin URI:  https://wordpress.org/plugins/debug-bar-shortcodes/
+ * Description: Debug Bar Shortcodes adds a new panel to Debug Bar that displays all the registered shortcodes for the current request. Requires "Debug Bar" plugin.
+ * Version:     2.0.3
+ * Author:      Juliette Reinders Folmer
+ * Author URI:  http://www.adviesenzo.nl/
  * Depends:     Debug Bar
- * Text Domain:	debug-bar-shortcodes
- * Domain Path:	/languages/
- * Copyright:	2013-2016 Juliette Reinders Folmer
+ * Text Domain: debug-bar-shortcodes
+ * Domain Path: /languages/
+ * Copyright:   2013-2016 Juliette Reinders Folmer
  */
 
 // Avoid direct calls to this file.
@@ -46,10 +46,14 @@ if ( ! function_exists( 'debug_bar_shortcodes_has_parent_plugin' ) ) {
 			deactivate_plugins( $file, false, is_network_admin() );
 
 			// Add to recently active plugins list.
+			$insert = array(
+				$file => time(),
+			);
+
 			if ( ! is_network_admin() ) {
-				update_option( 'recently_activated', ( array( $file => time() ) + (array) get_option( 'recently_activated' ) ) );
+				update_option( 'recently_activated', ( $insert + (array) get_option( 'recently_activated' ) ) );
 			} else {
-				update_site_option( 'recently_activated', ( array( $file => time() ) + (array) get_site_option( 'recently_activated' ) ) );
+				update_site_option( 'recently_activated', ( $insert + (array) get_site_option( 'recently_activated' ) ) );
 			}
 
 			// Prevent trying again on page reload.

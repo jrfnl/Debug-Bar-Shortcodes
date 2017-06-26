@@ -70,8 +70,12 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Validator' ) ) :
 		 * Validate a shortcode description.
 		 */
 		private function validate_description() {
+			$kses_allowed = array(
+				'br' => array(),
+			);
+
 			if ( isset( $this->dirty->description ) && is_string( $this->dirty->description ) && '' !== trim( $this->dirty->description ) ) {
-				$this->description = wp_kses( trim( $this->dirty->description ), array( 'br' => array() ) );
+				$this->description = wp_kses( trim( $this->dirty->description ), $kses_allowed );
 			}
 		}
 

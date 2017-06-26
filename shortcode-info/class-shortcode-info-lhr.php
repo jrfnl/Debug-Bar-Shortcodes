@@ -45,14 +45,14 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_LHR' ) ) :
 		 */
 		public function __construct( $shortcode = '' ) {
 			$this->lhr_defaults = array(
-				'scTag'		=> $shortcode,
-				'scName'	=> $shortcode,
-				'scDesc'	=> __( 'No information available', 'debug-bar-shortcodes' ),
-				'scSelfCls'	=> 'u', // Unknown.
-				'scReqP'	=> array(),
-				'scOptP'	=> array(),
+				'scTag'     => $shortcode,
+				'scName'    => $shortcode,
+				'scDesc'    => __( 'No information available', 'debug-bar-shortcodes' ),
+				'scSelfCls' => 'u', // Unknown.
+				'scReqP'    => array(),
+				'scOptP'    => array(),
 			);
-			$this->lhr_info     = apply_filters( 'sim_' . $shortcode, $this->lhr_defaults );
+			$this->lhr_info     = apply_filters( 'sim_' . $shortcode, $this->lhr_defaults ); // WPCS: prefix ok.
 
 			$this->set_name();
 			$this->set_description();

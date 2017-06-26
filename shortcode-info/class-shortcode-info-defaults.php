@@ -47,7 +47,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info_Defaults' ) ) :
 		 * Parameters which can be passed to the shortcode.
 		 *
 		 * Array format:
-		 * - [required]	=> array Required parameters.
+		 * - [required] => array Required parameters.
 		 *                       Array format:
 		 *                       - key   = name of the parameter.
 		 *                       - value = description of the parameter.
