@@ -169,6 +169,9 @@ Have you read what it says in the beautifully red bar at the top of your plugins
 
 == Changelog ==
 
+= Trunk =
+* Defer to just in time loading of translations for WP > 4.5.
+
 = 2.0.3 (2016-04-29) =
 * Make loading of text-domain compatible with use of the plugin in the `must-use` plugins directory.
 * Minor housekeeping.
