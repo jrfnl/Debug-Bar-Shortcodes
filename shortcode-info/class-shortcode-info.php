@@ -185,7 +185,7 @@ if ( ! class_exists( 'Debug_Bar_Shortcode_Info' ) ) :
 			}
 
 			$class      = 'Debug_Bar_Shortcode_Info_' . $this->shortcode;
-			$additional = new $class;
+			$additional = new $class();
 			return $this->merge_info_objects( $additional, $info );
 		}
 
