@@ -7,7 +7,7 @@
  * @link        https://github.com/jrfnl/Debug-Bar-Shortcodes
  * @since       1.0
  *
- * @copyright   2013-2016 Juliette Reinders Folmer
+ * @copyright   2013-2017 Juliette Reinders Folmer
  * @license     http://creativecommons.org/licenses/GPL/2.0/ GNU General Public License, version 2 or higher
  */
 
