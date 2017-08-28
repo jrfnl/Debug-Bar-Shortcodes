@@ -6,6 +6,7 @@ Requires at least: 3.6
 Tested up to: 4.4
 Stable tag: 2.0.3
 Depends: Debug Bar
+Requires PHP: 5.2.4
 License: GPLv2
 
 Debug Bar Shortcodes adds a new panel to the Debug Bar that displays the registered shortcodes for the current request.
