@@ -173,18 +173,26 @@ Have you read what it says in the beautifully red bar at the top of your plugins
 = Trunk =
 * Defer to just in time loading of translations for WP > 4.5.
 
-= 2.0.3 (2016-04-29) =
+= 2.0.3 =
+_Release date: 2016-04-29_
+
 * Make loading of text-domain compatible with use of the plugin in the `must-use` plugins directory.
 * Minor housekeeping.
 * Tested & found compatible WP 4.5.
 
-= 2.0.2 (2016-01-10) =
+= 2.0.2 =
+_Release date: 2016-01-10_
+
 * Fix spinner for ajax request which had stopped working since WP 4.2.
 
-= 2.0.1 (2015-12-26) =
+= 2.0.1 =
+_Release date: 2015-12-26_
+
 * Fix weird table layout on front-end in combination with Twenty-Sixteen theme.
 
-= 2.0 (2015-12-14) =
+= 2.0 =
+_Release date: 2015-12-14_
+
 IMPORTANT: if you are a plugin/theme developer and you were using the `'db_shortcodes_info_{your_shortcode}'` filter: the behaviour of this filter has changed from passing an array, to passing an object. Please read the [FAQ](https://wordpress.org/plugins/debug-bar-shortcodes/faq/) for information on how to deal with this change !
 
 * Enhancement: Added support for shortcode information available through [Shortcake](https://wordpress.org/plugins/shortcode-ui/).
@@ -197,20 +205,28 @@ IMPORTANT: if you are a plugin/theme developer and you were using the `'db_short
 * Minor housekeeping.
 * Tested & found compatible WP 4.4.
 
-= 1.0.3 (2014-12-18) =
+= 1.0.3 =
+_Release date: 2014-12-18_
+
 * Added: more detailed information about the WP native `playlist` shortcode.
 * Tested & found compatible WP 4.1.
 
-= 1.0.2 (2014-09-05) =
+= 1.0.2 =
+_Release date: 2014-09-05_
+
 * Fix compatibility with the [Plugin Dependencies](https://wordpress.org/plugins/plugin-dependencies/) plugin.
 * Tested & found compatible WP 4.0.
 
-= 1.0.1 (2014-04-19) =
+= 1.0.1 =
+_Release date: 2014-04-19_
+
 * Fixed: better finding of shortcodes within post content.
 * Fixed: minor html error.
 * Fixed: minor PHP error.
 
-= 1.0 (2013-12-22) =
+= 1.0 =
+_Release date: 2013-12-22_
+
 * Initial release.
 
 
