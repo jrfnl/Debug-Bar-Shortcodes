@@ -37,6 +37,9 @@ matrix:
     # aliased to a recent 7.1.x version
     - php: '7.1'
       env: CLOSURE=1
+    # aliased to a recent 7.2.x version
+    - php: '7.2'
+      env: CLOSURE=1
     # bleeding edge
     - php: 'nightly'
       env: CLOSURE=1
